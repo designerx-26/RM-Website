@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/*
+ * This site has one designed theme (red/white/black), not a toggle-able
+ * light/dark scheme. Scope `dark:` to an explicit `.dark` class (which we
+ * never apply) so it never activates automatically from the visitor's OS
+ * color-scheme preference — that was causing white-on-white / invisible-text
+ * bugs across the header, footer, and contact page.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Matches brand-black — every page opens with a dark hero/section, so this
+     is what shows through the gap and rounded corners around the floating
+     header, rather than a flash of white. */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+
+  --color-brand-red: #c8102e;
+  --color-brand-red-dark: #8f0b21;
+  --color-brand-black: #0a0a0a;
+  --color-brand-white: #ffffff;
+  --color-brand-grey-50: #f5f5f5;
+  --color-brand-grey-100: #e5e5e5;
+  --color-brand-grey-300: #b3b3b3;
+  --color-brand-grey-500: #737373;
+  --color-brand-grey-700: #404040;
+  --color-brand-grey-900: #1a1a1a;
+
+  --color-brand-blue: #0a3d91;
+  --color-brand-blue-dark: #062a66;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-brand-red: var(--color-brand-red);
+  --color-brand-red-dark: var(--color-brand-red-dark);
+  --color-brand-black: var(--color-brand-black);
+  --color-brand-white: var(--color-brand-white);
+  --color-brand-grey-50: var(--color-brand-grey-50);
+  --color-brand-grey-100: var(--color-brand-grey-100);
+  --color-brand-grey-300: var(--color-brand-grey-300);
+  --color-brand-grey-500: var(--color-brand-grey-500);
+  --color-brand-grey-700: var(--color-brand-grey-700);
+  --color-brand-grey-900: var(--color-brand-grey-900);
+
+  --color-brand-blue: var(--color-brand-blue);
+  --color-brand-blue-dark: var(--color-brand-blue-dark);
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
