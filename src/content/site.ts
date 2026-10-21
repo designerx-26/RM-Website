@@ -694,6 +694,10 @@ export const site = {
     },
   ] satisfies Car[],
 
+  upcomingCar: {
+    name: "RM30",
+  },
+
   sponsors: [
     {
       tier: "Title",
