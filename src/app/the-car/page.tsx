@@ -3,7 +3,6 @@ import { site } from "@/content/site";
 import { Section } from "@/components/ui/Section";
 import { SiteImage } from "@/components/ui/SiteImage";
 import { CarSpecCard } from "@/components/car/CarSpecCard";
-import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 
 export const metadata: Metadata = {
   title: `The Car | ${site.meta.name}`,
@@ -97,13 +96,6 @@ export default function TheCarPage() {
           </div>
         </Section>
       )}
-
-      <Section tone="black">
-        <h2 className="mb-8 text-2xl font-black uppercase tracking-tight text-brand-white">
-          In the Shop
-        </h2>
-        <GalleryGrid items={site.gallery.slice(0, 3)} />
-      </Section>
     </>
   );
 }
