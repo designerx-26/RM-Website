@@ -53,11 +53,9 @@ export default function SponsorsPage() {
               <Button href={site.sponsorPacket.url} variant="primary">
                 {site.sponsorPacket.label}
               </Button>
-              {site.social.email && (
-                <Button href={site.social.email} variant="outline">
-                  Contact Us
-                </Button>
-              )}
+              <Button href="#sponsor-contact-form" variant="outline">
+                Contact Us
+              </Button>
             </div>
           </div>
           <ul className="flex flex-col gap-3 rounded-xl border border-brand-grey-100 bg-brand-grey-50 p-6 dark:border-brand-grey-800 dark:bg-brand-grey-900">
@@ -88,7 +86,7 @@ export default function SponsorsPage() {
         <SponsorGrid tiers={site.sponsors} />
       </Section>
 
-      <Section tone="white">
+      <Section tone="white" id="sponsor-contact-form">
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-black uppercase tracking-tight text-brand-black sm:text-3xl dark:text-brand-white">
@@ -98,7 +96,7 @@ export default function SponsorsPage() {
               Tell us about your company and how you'd like to support the team.
             </p>
           </div>
-          <ContactForm defaultAudience="sponsor" />
+          <ContactForm defaultAudience="sponsor" lockAudience />
         </div>
       </Section>
     </>

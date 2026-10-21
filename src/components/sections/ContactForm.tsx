@@ -7,9 +7,10 @@ type Audience = "student" | "sponsor";
 
 interface ContactFormProps {
   defaultAudience?: Audience;
+  lockAudience?: boolean;
 }
 
-export function ContactForm({ defaultAudience = "student" }: ContactFormProps) {
+export function ContactForm({ defaultAudience = "student", lockAudience = false }: ContactFormProps) {
   const [audience, setAudience] = useState<Audience>(defaultAudience);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,22 +45,24 @@ export function ContactForm({ defaultAudience = "student" }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div className="inline-flex self-start rounded-full border border-brand-grey-200 p-1 dark:border-brand-grey-700">
-        {(["student", "sponsor"] as const).map((option) => (
-          <button
-            key={option}
-            type="button"
-            onClick={() => setAudience(option)}
-            className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors ${
-              audience === option
-                ? "bg-brand-red text-brand-white"
-                : "text-brand-grey-500 hover:text-brand-black dark:hover:text-brand-white"
-            }`}
-          >
-            {option === "student" ? "I'm a Student" : "I'm a Sponsor"}
-          </button>
-        ))}
-      </div>
+      {!lockAudience && (
+        <div className="inline-flex self-start rounded-full border border-brand-grey-200 p-1 dark:border-brand-grey-700">
+          {(["student", "sponsor"] as const).map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => setAudience(option)}
+              className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors ${
+                audience === option
+                  ? "bg-brand-red text-brand-white"
+                  : "text-brand-grey-500 hover:text-brand-black dark:hover:text-brand-white"
+              }`}
+            >
+              {option === "student" ? "I'm a Student" : "I'm a Sponsor"}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>

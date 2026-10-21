@@ -89,7 +89,7 @@ export default function JoinPage() {
               Tell us a bit about yourself and we'll follow up with next steps.
             </p>
           </div>
-          <ContactForm />
+          <ContactForm defaultAudience="student" lockAudience />
         </div>
       </Section>
     </>
