@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 export default function TeamPage() {
   return (
     <>
-      <div className="relative flex h-[50vh] min-h-[320px] items-end overflow-hidden bg-brand-black">
+      <div className="relative flex h-[calc(100vh-88px)] min-h-[480px] items-end overflow-hidden bg-brand-black">
         <SiteImage
           src="/team-pic.jpg"
           alt="The Rensselaer Motorsport team celebrating with the car"
           fill
-          className="object-cover"
+          className="object-cover object-[center_12%]"
           sizes="100vw"
           priority
           labelAlign="top"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-brand-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/30 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-12">
           <h1 className="text-4xl font-black uppercase tracking-tight text-brand-white sm:text-5xl">
             Our Team

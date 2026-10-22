@@ -54,7 +54,7 @@ export default function SponsorsPage() {
                 {site.sponsorPacket.label}
               </Button>
               <Button href="#sponsor-contact-form" variant="outline">
-                Contact Us
+                Sponsor Us
               </Button>
             </div>
           </div>

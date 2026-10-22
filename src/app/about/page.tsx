@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { StatBand } from "@/components/ui/StatBand";
 import { SiteImage } from "@/components/ui/SiteImage";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `About | ${site.meta.name}`,
@@ -26,7 +27,7 @@ export default function AboutPage() {
           src={site.about.heroImage.src}
           alt={site.about.heroImage.alt}
           fill
-          className="object-cover"
+          className="object-cover object-[center_88%]"
           sizes="100vw"
           priority
           labelAlign="top"
@@ -53,9 +54,6 @@ export default function AboutPage() {
       <Section tone="grey">
         <div className="mb-10 text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-brand-red">Our Team</p>
-          <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl dark:text-brand-white">
-            {site.about.memberCount} Students, One Car
-          </h2>
         </div>
         <StatBand stats={stats} />
         <div className="mt-10 text-center">
@@ -86,16 +84,15 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-3">
-          {site.about.values.map((value) => (
-            <div
-              key={value.title}
-              className="border-t-4 border-brand-red bg-brand-grey-50 p-6 dark:bg-brand-grey-900"
-            >
-              <h3 className="text-lg font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
-                {value.title}
-              </h3>
-              <p className="mt-2 text-sm text-brand-grey-500">{value.description}</p>
-            </div>
+          {site.about.values.map((value, index) => (
+            <Reveal key={value.title} delay={index * 75}>
+              <div className="rounded-sm border-t-4 border-brand-red bg-brand-grey-50 p-6 dark:bg-brand-grey-900">
+                <h3 className="text-lg font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
+                  {value.title}
+                </h3>
+                <p className="mt-2 text-sm text-brand-grey-500">{value.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -110,16 +107,15 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {site.about.subsystems.map((subsystem) => (
-            <div
-              key={subsystem.name}
-              className="rounded-xl border border-brand-grey-100 bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black"
-            >
-              <h3 className="text-base font-bold uppercase tracking-wide text-brand-red">
-                {subsystem.name}
-              </h3>
-              <p className="mt-2 text-sm text-brand-grey-700">{subsystem.description}</p>
-            </div>
+          {site.about.subsystems.map((subsystem, index) => (
+            <Reveal key={subsystem.name} delay={(index % 3) * 60}>
+              <div className="rounded-xl border border-brand-grey-100 bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">
+                <h3 className="text-base font-bold uppercase tracking-wide text-brand-red">
+                  {subsystem.name}
+                </h3>
+                <p className="mt-2 text-sm text-brand-grey-700">{subsystem.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>

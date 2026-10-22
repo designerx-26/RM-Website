@@ -65,8 +65,8 @@ export interface CarSystem {
 export interface CompetitionGoal {
   result: string;
   competition: string;
-  date: string;
-  location: string;
+  date?: string;
+  location?: string;
 }
 
 export interface Car {
@@ -97,6 +97,8 @@ export interface SponsorTier {
 
 export interface GalleryItem {
   caption: string;
+  /** Competition season the photo is from, as a paired school year (e.g. "25-26"). Powers the year picker on the Gallery page. */
+  year: string;
   photo: string;
   /** Intrinsic pixel dimensions — drive the masonry grid's aspect ratio for each tile. */
   width: number;
@@ -158,16 +160,16 @@ export const site = {
     { label: "Gallery", href: "/gallery" },
   ] satisfies NavLink[],
 
-  joinCta: { label: "Join the Team", href: "/join" } satisfies NavLink,
+  joinCta: { label: "Get Involved", href: "/join" } satisfies NavLink,
   donateCta: { label: "Donate", href: "/donate" } satisfies NavLink,
 
   social,
 
   hero: {
-    eyebrow: "Rensselaer Polytechnic Institute — Formula SAE",
+    eyebrow: "Rensselaer Polytechnic Institute - Formula SAE",
     headline: "RENSSELAER MOTORSPORT",
     subheadline:
-      "A student-run engineering team designing, building, and racing a formula-style car from scratch — every year, from the ground up.",
+      "A student-run engineering team designing, building, and racing a formula-style car from scratch - every year, from the ground up.",
     primaryCta: { label: "Join the Team", href: "/join" } satisfies NavLink,
     secondaryCta: { label: "Meet the Car", href: "/the-car" } satisfies NavLink,
     image: { src: "/background.png", alt: "Rensselaer Motorsport car on track, hero shot" },
@@ -177,7 +179,7 @@ export const site = {
     // Paste a YouTube/Vimeo embed URL here (e.g. "https://www.youtube.com/embed/VIDEO_ID").
     // Leave blank and the homepage will show a clearly labeled placeholder instead.
     url: "https://player.vimeo.com/video/1137944844",
-    title: "Rensselaer Motorsport — Season Recap",
+    title: "Rensselaer Motorsport - Season Recap",
   },
 
   homeCards: [
@@ -212,7 +214,7 @@ export const site = {
     {
       title: "Gallery",
       description:
-        "Moments from the shop, the track, and everywhere in between — see the build come together.",
+        "Moments from the shop, the track, and everywhere in between - see the build come together.",
       href: "/gallery",
       cta: "View Gallery",
     },
@@ -225,7 +227,7 @@ export const site = {
 
   whySponsor: {
     intro:
-      "Building a competition race car would not be possible without the generosity of sponsors and partners like you. We accept cash donations as well as in-kind parts, materials, and tools — all cash donations are tax-deductible, as we are a 501(c)3 organization.",
+      "Building a competition race car would not be possible without the generosity of sponsors and partners like you. We accept cash donations as well as in-kind parts, materials, and tools - all cash donations are tax-deductible, as we are a 501(c)3 organization.",
     benefits: [
       "Logo placement on our race car and website",
       "Invitations to team events and competitions",
@@ -238,7 +240,7 @@ export const site = {
 
   contact: {
     intro:
-      "Have a question, want to sponsor the team, or just want to say hello? Reach out — we'd love to hear from you.",
+      "Have a question, want to sponsor the team, or just want to say hello? Reach out - we'd love to hear from you.",
     email: "admin@rensselaermotorsport.com",
     address: "Rensselaer Polytechnic Institute, Troy, NY",
     meetings: [
@@ -271,7 +273,7 @@ export const site = {
 
   donate: {
     intro:
-      "Rensselaer Motorsport is a student-funded team — every donation goes directly toward materials, manufacturing, and competition travel.",
+      "Rensselaer Motorsport is a student-funded team - every donation goes directly toward materials, manufacturing, and competition travel.",
     // RPI's official giving portal. Verify this is still the correct fund/URL before relying on it.
     url: "https://giving.rpi.edu/",
     instructions:
@@ -283,18 +285,18 @@ export const site = {
     memberCount: "32+",
     intro: [
       "Rensselaer Motorsport is a student-run engineering team at Rensselaer Polytechnic Institute competing in Formula SAE, an international collegiate design competition where teams design, build, and race a small formula-style race car.",
-      "Beyond the car itself, members run every part of the operation — engineering, manufacturing, business, and sponsorship — giving students hands-on experience they can't get in a classroom.",
+      "Beyond the car itself, members run every part of the operation - engineering, manufacturing, business, and sponsorship - giving students hands-on experience they can't get in a classroom.",
     ],
     // Condensed synopsis for the About page hero/intro block.
     aboutUs:
-      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of 32+ undergraduate engineers and business students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup — every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone can't provide.",
+      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of 32+ undergraduate engineers and business students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone can't provide.",
     whatIsFsae: {
       title: "What is FSAE?",
-      body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, test, and race a small formula-style race car, then bring it to competition to be evaluated against other schools. Cars are judged on a mix of static events — cost, engineering design, and a business/sponsorship presentation — and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. It's a full product-development cycle compressed into a single school year: design, manufacture, validate, and race.",
+      body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, test, and race a small formula-style race car, then bring it to competition to be evaluated against other schools. Cars are judged on a mix of static events - cost, engineering design, and a business/sponsorship presentation - and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. It's a full product-development cycle compressed into a single school year: design, manufacture, validate, and race.",
     },
     ourWork: {
       title: "Our Work",
-      body: "Every year, Rensselaer Motorsport designs and manufactures a new competition car from a blank sheet — running the full engineering cycle of concept, CAD, analysis, manufacturing, and testing, while the business team secures sponsorship, manages budget, and prepares the cost and presentation events that are judged alongside the car itself.",
+      body: "Every year, Rensselaer Motorsport designs and manufactures a new competition car from a blank sheet - running the full engineering cycle of concept, CAD, analysis, manufacturing, and testing, while the business team secures sponsorship, manages budget, and prepares the cost and presentation events that are judged alongside the car itself.",
     },
     values: [
       {
@@ -305,7 +307,7 @@ export const site = {
       {
         title: "Hands-On Learning",
         description:
-          "Members machine parts, wire electronics, and turn wrenches — learning by building, testing, and racing.",
+          "Members machine parts, wire electronics, and turn wrenches - learning by building, testing, and racing.",
       },
       {
         title: "One Team",
@@ -338,7 +340,7 @@ export const site = {
     ] satisfies Subsystem[],
     foundingYear: 1992,
     history:
-      "Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1992, evolving over more than 30 years from an internal-combustion platform to today's electric race car. At the 2025 Formula Hybrid + Electric competition, the team placed 7th overall — 16th in design and 10th in business among static events, and 9th in acceleration, 6th in autocross, and 3rd in endurance among dynamic events. At FSAE Electric, the team finished 50th overall in 2025, 47th in 2024, and 42nd in 2023.",
+      "Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1992, evolving over more than 30 years from an internal-combustion platform to today's electric race car. At the 2025 Formula Hybrid + Electric competition, the team placed 7th overall - 16th in design and 10th in business among static events, and 9th in acceleration, 6th in autocross, and 3rd in endurance among dynamic events. At FSAE Electric, the team finished 50th overall in 2025, 47th in 2024, and 42nd in 2023.",
     majors: [
       "Aeronautical Engineering",
       "Computer Science",
@@ -366,9 +368,9 @@ export const site = {
 
   stats: [
     { label: "Cars Built", value: "29" },
-    { label: "Years Competing", value: "—" },
+    { label: "Years Competing", value: "-" },
     { label: "Active Members", value: "32+" },
-    { label: "Sponsors & Partners", value: "—" },
+    { label: "Sponsors & Partners", value: "-" },
   ] satisfies Stat[],
 
   team: [
@@ -628,10 +630,10 @@ export const site = {
     {
       id: "current-car",
       name: "RM29",
-      year: "2026",
+      year: "2025-2026",
       category: "Formula SAE Electric",
       tagline:
-        "RM29 is our most recent electric vehicle — built for the 2025–2026 competition season.",
+        "RM29 marks our third year competing as a rear-wheel-drive electric vehicle. The team placed 21st overall and won 2nd place in efficiency at FSAE Michigan.",
       photo: "/rollout.jpg",
       heroPhoto: "/Gallery/cardriving2.jpg",
       specs: [
@@ -642,7 +644,7 @@ export const site = {
         { label: "Chassis", value: "4130 steel tube-frame" },
       ],
       features: [
-        "Custom 80kW battery pack — 400V, 200A Li-Ion accumulator",
+        "Custom 80kW battery pack - 400V, 200A Li-Ion accumulator",
         "Carbon fiber aero package (Cl = 2.0, Cd = 1.5)",
         "Custom vehicle control unit built on an STM32F7 chip",
       ],
@@ -665,7 +667,7 @@ export const site = {
         {
           name: "Tractive Battery & High Voltage",
           description:
-            "A custom 80kW battery pack — a 400V, 200A Li-Ion accumulator designed and built in-house.",
+            "A custom 80kW battery pack - a 400V, 200A Li-Ion accumulator designed and built in-house.",
         },
         {
           name: "Aerodynamics",
@@ -679,16 +681,24 @@ export const site = {
       ] satisfies CarSystem[],
       goals: [
         {
-          result: "Top 5",
-          competition: "Formula Hybrid + Electric",
-          date: "April 2026",
-          location: "New Hampshire Motor Speedway",
+          result: "21st Overall, 2nd Place Efficiency",
+          competition: "FSAE Michigan",
         },
         {
-          result: "Top 20",
-          competition: "FSAE EV",
-          date: "June 2026",
-          location: "Michigan International Speedway",
+          result: "5th Place Overall",
+          competition: "Formula Hybrid + Electric",
+        },
+        {
+          result: "Scrutineer's Award",
+          competition: "Most prepared team for mechanical inspection",
+        },
+        {
+          result: "Test Equity Award",
+          competition: "Superior preparation during electrical inspection",
+        },
+        {
+          result: "IEEE Engineering the Future Award",
+          competition: "Recognized for excellence in engineering design and vehicle testing",
         },
       ] satisfies CompetitionGoal[],
     },
@@ -696,6 +706,7 @@ export const site = {
 
   upcomingCar: {
     name: "RM30",
+    year: "2026-2027",
   },
 
   sponsors: [
@@ -757,7 +768,7 @@ export const site = {
           url: "",
         },
         { name: "Boeing", logo: "/sponsors/boeing.webp", url: "https://www.boeing.com/" },
-        { name: "Atlas Copco", logo: "", url: "https://www.atlascopco.com/" },
+        { name: "Atlas Copco", logo: "/sponsors/atlascopco.png", url: "https://www.atlascopco.com/" },
       ],
     },
     {
@@ -814,7 +825,7 @@ export const site = {
           url: "https://www.solidworks.com/",
         },
         { name: "VI-Grade", logo: "/sponsors/vi-grade.webp", url: "https://www.vi-grade.com/" },
-        { name: "About Energy", logo: "", url: "" },
+        { name: "About Energy", logo: "/sponsors/aboutenergy.png", url: "" },
       ],
     },
     {
@@ -829,84 +840,89 @@ export const site = {
         { name: "Tilton", logo: "/sponsors/tilton.webp", url: "https://www.tiltonracing.com/" },
         {
           name: "HGSI Harold G. Schaevitz Industries",
-          logo: "/sponsors/hgsi.webp",
+          logo: "/sponsors/hgsi.png",
           url: "",
         },
       ],
     },
   ] satisfies SponsorTier[],
 
+  // Every school year shown in the Gallery page's year picker, oldest first.
+  // Add a year here before adding its photos below and it'll show up in the
+  // picker (even with no photos yet); years with photos get a populated section.
+  galleryYears: ["17-18", "22-23", "23-24", "24-25", "25-26"],
+
   gallery: [
-    { caption: "Car #86 on the RPI quad", photo: "/Gallery/car.jpg", width: 4897, height: 3266 },
+    { caption: "Car #86 on the RPI quad", year: "25-26", photo: "/Gallery/car.jpg", width: 4897, height: 3266 },
     {
-      caption: "Car #86 with the team's competition awards",
+      caption: "Car #86 with the team's competition awards", year: "25-26",
       photo: "/Gallery/car1.jpg",
       width: 8192,
       height: 5464,
     },
     {
-      caption: "Autocross in the rain",
+      caption: "Autocross in the rain", year: "25-26",
       photo: "/Gallery/cardriving.JPG",
       width: 6000,
       height: 4000,
     },
-    { caption: "On course", photo: "/Gallery/cardriving1.JPG", width: 6000, height: 4000 },
-    { caption: "On track", photo: "/Gallery/cardriving2.jpg", width: 4892, height: 3270 },
+    { caption: "On course", year: "25-26", photo: "/Gallery/cardriving1.JPG", width: 6000, height: 4000 },
+    { caption: "On track", year: "25-26", photo: "/Gallery/cardriving2.jpg", width: 4892, height: 3270 },
     {
-      caption: "Taking the corner",
+      caption: "Taking the corner", year: "25-26",
       photo: "/Gallery/cardriving3.jpg",
       width: 2048,
       height: 1366,
     },
-    { caption: "Trackside", photo: "/Gallery/DSC00834.JPG", width: 6000, height: 4000 },
-    { caption: "Competition weekend", photo: "/Gallery/DSC01951.JPG", width: 6000, height: 4000 },
-    { caption: "In the paddock", photo: "/Gallery/DSC02166.JPG", width: 6000, height: 4000 },
-    { caption: "Pit lane", photo: "/Gallery/DSC02384.JPG", width: 6000, height: 4000 },
-    { caption: "Tech inspection", photo: "/Gallery/DSC03563.JPG", width: 6000, height: 4000 },
-    { caption: "Race day", photo: "/Gallery/DSC03778.JPG", width: 6000, height: 4000 },
-    { caption: "The team at the track", photo: "/Gallery/DSC04827.JPG", width: 6000, height: 4000 },
-    { caption: "Getting ready to run", photo: "/Gallery/DSC04831.JPG", width: 6000, height: 4000 },
-    { caption: "On the grid", photo: "/Gallery/DSC04867.JPG", width: 6000, height: 4000 },
-    { caption: "Final checks", photo: "/Gallery/FD1A4349.jpg", width: 2048, height: 1366 },
+    { caption: "Trackside", year: "25-26", photo: "/Gallery/DSC00834.JPG", width: 6000, height: 4000 },
+    { caption: "Competition weekend", year: "25-26", photo: "/Gallery/DSC01951.JPG", width: 6000, height: 4000 },
+    { caption: "In the paddock", year: "25-26", photo: "/Gallery/DSC02166.JPG", width: 6000, height: 4000 },
+    { caption: "Pit lane", year: "25-26", photo: "/Gallery/DSC02384.JPG", width: 6000, height: 4000 },
+    { caption: "Tech inspection", year: "25-26", photo: "/Gallery/DSC03563.JPG", width: 6000, height: 4000 },
+    { caption: "Race day", year: "25-26", photo: "/Gallery/DSC03778.JPG", width: 6000, height: 4000 },
+    { caption: "The team at the track", year: "25-26", photo: "/Gallery/DSC04827.JPG", width: 6000, height: 4000 },
+    { caption: "Getting ready to run", year: "25-26", photo: "/Gallery/DSC04831.JPG", width: 6000, height: 4000 },
+    { caption: "On the grid", year: "25-26", photo: "/Gallery/DSC04867.JPG", width: 6000, height: 4000 },
+    { caption: "Final checks", year: "25-26", photo: "/Gallery/FD1A4349.jpg", width: 2048, height: 1366 },
     {
-      caption: "Pre-run safety check",
+      caption: "Pre-run safety check", year: "25-26",
       photo: "/Gallery/FD1A4452.jpg",
       width: 1366,
       height: 2048,
     },
-    { caption: "Setup in the paddock", photo: "/Gallery/FD1A4492.jpg", width: 2048, height: 1365 },
-    { caption: "Rolling to the grid", photo: "/Gallery/FD1A6523.jpg", width: 1366, height: 2048 },
+    { caption: "Setup in the paddock", year: "25-26", photo: "/Gallery/FD1A4492.jpg", width: 2048, height: 1365 },
+    { caption: "Rolling to the grid", year: "25-26", photo: "/Gallery/FD1A6523.jpg", width: 1366, height: 2048 },
     {
-      caption: "Buckled in and ready to drive",
+      caption: "Buckled in and ready to drive", year: "25-26",
       photo: "/Gallery/FD1A6543.jpg",
       width: 4897,
       height: 3266,
     },
-    { caption: "Working in the pits", photo: "/Gallery/FD1A6998.jpg", width: 2048, height: 1366 },
+    { caption: "Working in the pits", year: "25-26", photo: "/Gallery/FD1A6998.jpg", width: 2048, height: 1366 },
     {
-      caption: "Showcasing the car at an expo",
+      caption: "Showcasing the car at an expo", year: "25-26",
       photo: "/Gallery/FD1A9847.jpg",
       width: 2048,
       height: 1366,
     },
-    { caption: "Under the lights", photo: "/Gallery/IMG_0289.PNG", width: 2001, height: 3000 },
+    { caption: "Under the lights", year: "25-26", photo: "/Gallery/IMG_0289.PNG", width: 2001, height: 3000 },
     {
-      caption: "Pre-run checks in the paddock",
+      caption: "Pre-run checks in the paddock", year: "25-26",
       photo: "/Gallery/PHO00053.JPG",
       width: 4000,
       height: 2250,
     },
-    { caption: "The team in the paddock", photo: "/Gallery/team.jpg", width: 2048, height: 1366 },
+    { caption: "The team in the paddock", year: "25-26", photo: "/Gallery/team.jpg", width: 2048, height: 1366 },
   ] satisfies GalleryItem[],
 
   join: {
     intro:
-      "Rensselaer Motorsport is always looking for motivated students — no experience required. Whether your interest is engineering, business, or manufacturing, there's a place for you on the team.",
+      "Rensselaer Motorsport is always looking for motivated students - no experience required. Whether your interest is engineering, business, or manufacturing, there's a place for you on the team.",
     steps: [
       {
         title: "Come to a Meeting",
         description:
-          "Come to a weekly Tuesday engineering meeting, Wednesday general meeting, or stop by the shop on a Friday evening and chat with us — see the full schedule on our Contact page.",
+          "Come to a weekly Tuesday engineering meeting, Wednesday general meeting, or stop by the shop on a Friday evening and chat with us - see the full schedule on our Contact page.",
       },
       {
         title: "Fill Out Our Interest Form",

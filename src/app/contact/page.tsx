@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `Contact | ${site.meta.name}`,
@@ -71,23 +72,22 @@ export default function ContactPage() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-3">
-          {site.contact.meetings.map((meeting) => (
-            <div
-              key={meeting.title}
-              className="flex flex-col gap-2 border border-brand-grey-100 border-t-4 border-t-brand-red bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black"
-            >
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-red">
-                {meeting.day}
-              </p>
-              <h3 className="text-base font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
-                {meeting.title}
-              </h3>
-              <p className="text-sm text-brand-grey-500">{meeting.description}</p>
-              <div className="mt-1 flex flex-col gap-1 border-t border-brand-grey-100 pt-2 text-sm font-semibold text-brand-black dark:border-brand-grey-800 dark:text-brand-white">
-                <span>{meeting.time}</span>
-                <span className="text-brand-grey-500">{meeting.location}</span>
+          {site.contact.meetings.map((meeting, index) => (
+            <Reveal key={meeting.title} delay={index * 75}>
+              <div className="flex flex-col gap-2 rounded-sm border border-brand-grey-100 border-t-4 border-t-brand-red bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-red">
+                  {meeting.day}
+                </p>
+                <h3 className="text-base font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
+                  {meeting.title}
+                </h3>
+                <p className="text-sm text-brand-grey-500">{meeting.description}</p>
+                <div className="mt-1 flex flex-col gap-1 border-t border-brand-grey-100 pt-2 text-sm font-semibold text-brand-black dark:border-brand-grey-800 dark:text-brand-white">
+                  <span>{meeting.time}</span>
+                  <span className="text-brand-grey-500">{meeting.location}</span>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 

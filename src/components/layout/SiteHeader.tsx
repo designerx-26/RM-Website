@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/Button";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-brand-grey-900 bg-brand-black shadow-lg shadow-black/30">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
+        <Link href="/" className="flex shrink-0 items-center">
           <Image
             src={site.meta.logoDark}
             alt={site.meta.name}
             width={900}
             height={300}
-            className="h-12 w-auto sm:h-14"
+            className="h-9 w-auto sm:h-11"
             priority
           />
         </Link>
@@ -30,7 +30,10 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Button href={site.donateCta.href} className="text-xs sm:text-sm">
+        <Button
+          href={site.donateCta.href}
+          className="shrink-0 whitespace-nowrap px-4 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm"
+        >
           {site.donateCta.label}
         </Button>
       </div>

@@ -3,14 +3,14 @@ import { SiteImage } from "@/components/ui/SiteImage";
 
 export function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
   const content = (
-    <div className="group relative flex h-32 w-full items-center justify-center rounded-xl border border-brand-grey-300 bg-brand-grey-300 p-4 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-brand-grey-700 dark:bg-brand-grey-800">
+    <div className="group relative flex h-32 w-full items-center justify-center rounded-xl border border-brand-grey-300 bg-brand-grey-300 p-2 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-brand-grey-700 dark:bg-brand-grey-800">
       {sponsor.logo ? (
         <SiteImage
           src={sponsor.logo}
           alt={`${sponsor.name} logo`}
           width={200}
           height={100}
-          className="max-h-24 w-full object-contain"
+          className="h-full w-full object-contain"
         />
       ) : (
         <span className="text-sm font-bold leading-snug text-brand-black dark:text-brand-white">

@@ -22,8 +22,8 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
 
     const subject =
       audience === "student"
-        ? `Interested in joining — ${name}`
-        : `Sponsorship inquiry — ${organization || name}`;
+        ? `Interested in joining - ${name}`
+        : `Sponsorship inquiry - ${organization || name}`;
 
     const bodyLines = [
       `Name: ${name}`,
@@ -130,7 +130,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
 
       <button
         type="submit"
-        className="self-start bg-brand-red px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-white transition-colors hover:bg-brand-red-dark"
+        className="self-start rounded-sm bg-brand-red px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-white transition-colors hover:bg-brand-red-dark"
       >
         Send Message
       </button>

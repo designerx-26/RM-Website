@@ -3,6 +3,7 @@ import { site } from "@/content/site";
 import { Section } from "@/components/ui/Section";
 import { SiteImage } from "@/components/ui/SiteImage";
 import { CarCard } from "@/components/car/CarCard";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `The Car | ${site.meta.name}`,
@@ -38,17 +39,30 @@ export default function TheCarPage() {
 
       <Section tone="grey">
         <div className="flex flex-col gap-10">
-          <div className="flex min-h-[200px] flex-col items-center justify-center rounded-2xl border border-brand-grey-100 bg-brand-black p-10 text-center dark:border-brand-grey-800">
-            <h2 className="text-4xl font-black uppercase tracking-tight text-brand-white sm:text-5xl">
-              {site.upcomingCar.name}
-            </h2>
-            <p className="mt-2 text-sm font-bold uppercase tracking-widest text-brand-red">
-              Coming Soon
-            </p>
-          </div>
+          <Reveal>
+            <div className="overflow-hidden rounded-2xl border border-brand-grey-100 bg-brand-white shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">
+              <div className="grid gap-8 md:grid-cols-2 md:min-h-[480px]">
+                <div className="aspect-video bg-brand-black md:aspect-auto" />
+
+                <div className="flex flex-col justify-start gap-6 p-8">
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-widest text-brand-red">
+                      Next Up &middot; {site.upcomingCar.year}
+                    </p>
+                    <h3 className="mt-2 text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl dark:text-brand-white">
+                      {site.upcomingCar.name}
+                    </h3>
+                    <p className="mt-3 text-brand-grey-500">Coming Soon</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
 
           {previousCars.map((previousCar) => (
-            <CarCard key={previousCar.id} car={previousCar} />
+            <Reveal key={previousCar.id}>
+              <CarCard car={previousCar} />
+            </Reveal>
           ))}
         </div>
       </Section>
