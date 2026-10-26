@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 
 type Audience = "student" | "sponsor";
+type Status = "idle" | "submitting" | "success" | "error";
 
 interface ContactFormProps {
   defaultAudience?: Audience;
@@ -16,8 +17,9 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
   const [email, setEmail] = useState("");
   const [organization, setOrganization] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const subject =
@@ -25,23 +27,70 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
         ? `Interested in joining - ${name}`
         : `Sponsorship inquiry - ${organization || name}`;
 
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      audience === "sponsor" ? `Organization: ${organization}` : null,
-      "",
-      message,
-    ].filter((line): line is string => line !== null);
+    if (!site.contact.web3FormsAccessKey) {
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        audience === "sponsor" ? `Organization: ${organization}` : null,
+        "",
+        message,
+      ].filter((line): line is string => line !== null);
 
-    const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
-    window.location.href = mailto;
+      window.location.href = mailto;
+      return;
+    }
+
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: site.contact.web3FormsAccessKey,
+          subject,
+          from_name: site.meta.name,
+          audience,
+          name,
+          email,
+          organization: audience === "sponsor" ? organization : undefined,
+          message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        setName("");
+        setEmail("");
+        setOrganization("");
+        setMessage("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   const inputClasses =
     "w-full rounded-lg border border-brand-grey-200 bg-brand-white px-4 py-2.5 text-sm text-brand-black outline-none transition-colors focus:border-brand-red dark:border-brand-grey-700 dark:bg-brand-black dark:text-brand-white";
+
+  if (status === "success") {
+    return (
+      <div className="flex flex-col items-center gap-2 rounded-lg border border-brand-grey-200 bg-brand-white p-8 text-center dark:border-brand-grey-700 dark:bg-brand-black">
+        <h3 className="text-lg font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
+          Message Sent
+        </h3>
+        <p className="text-sm text-brand-grey-500">Thanks for reaching out - we'll get back to you soon.</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -128,11 +177,19 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
         />
       </div>
 
+      {status === "error" && (
+        <p className="text-sm font-medium text-brand-red">
+          Something went wrong sending your message. Please try again, or email us directly at{" "}
+          {site.contact.email}.
+        </p>
+      )}
+
       <button
         type="submit"
-        className="self-start rounded-sm bg-brand-red px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-white transition-colors hover:bg-brand-red-dark"
+        disabled={status === "submitting"}
+        className="self-start rounded-sm bg-brand-red px-6 py-3 text-sm font-bold uppercase tracking-wide text-brand-white transition-colors hover:bg-brand-red-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Send Message
+        {status === "submitting" ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

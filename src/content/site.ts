@@ -243,6 +243,11 @@ export const site = {
       "Have a question, want to sponsor the team, or just want to say hello? Reach out - we'd love to hear from you.",
     email: "admin@rensselaermotorsport.com",
     address: "Rensselaer Polytechnic Institute, Troy, NY",
+    // Web3Forms access key (from web3forms.com, confirmed to the email above).
+    // The contact form POSTs directly to Web3Forms with this key, so submissions
+    // land in that inbox without opening the visitor's email client. Paste the
+    // key here once you have it; leave blank and the form falls back to mailto.
+    web3FormsAccessKey: "",
     meetings: [
       {
         day: "Every Tuesday",
