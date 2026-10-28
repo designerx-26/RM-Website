@@ -74,6 +74,13 @@ export default function DonatePage() {
             </a>
           </Reveal>
         </div>
+
+        {site.donate.instructions && (
+          <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-brand-grey-400">
+            <span className="font-bold text-brand-red">Note: </span>
+            {site.donate.instructions}
+          </p>
+        )}
       </Section>
 
       <Section tone="white">
@@ -98,16 +105,6 @@ export default function DonatePage() {
           ))}
         </div>
       </Section>
-
-      {site.donate.instructions && (
-        <Section tone="grey">
-          <div className="mx-auto max-w-xl text-center">
-            <p className="rounded-lg border border-brand-grey-200 bg-brand-white p-4 text-sm text-brand-grey-700 dark:border-brand-grey-800 dark:bg-brand-black dark:text-brand-grey-300">
-              {site.donate.instructions}
-            </p>
-          </div>
-        </Section>
-      )}
 
       <Section tone="red">
         <div className="flex flex-col items-center gap-3 text-center">

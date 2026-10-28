@@ -247,7 +247,7 @@ export const site = {
     // The contact form POSTs directly to Web3Forms with this key, so submissions
     // land in that inbox without opening the visitor's email client. Paste the
     // key here once you have it; leave blank and the form falls back to mailto.
-    web3FormsAccessKey: "",
+    web3FormsAccessKey: "f5040e48-ab2a-4882-8713-0e145d7e6b41",
     meetings: [
       {
         day: "Every Tuesday",
