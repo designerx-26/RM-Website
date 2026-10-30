@@ -6,7 +6,10 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
   return (
     <div className="flex flex-col gap-16">
       {subteams.map((subteam) => {
-        const isFullMembers = subteam.name === "Full Members";
+        const useFourColumns =
+          subteam.name === "Full Members" ||
+          subteam.name === "Team Leadership" ||
+          subteam.name === "Vehicle Dynamics Team";
 
         return (
           <Reveal key={subteam.name}>
@@ -18,7 +21,7 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
               </div>
               <div
                 className={
-                  isFullMembers
+                  useFourColumns
                     ? "flex flex-wrap justify-center gap-6"
                     : "flex flex-wrap justify-center gap-6 lg:mx-auto lg:w-[calc(75%-0.375rem)]"
                 }
@@ -27,7 +30,7 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
                   <div
                     key={`${subteam.name}-${member.name}`}
                     className={
-                      isFullMembers
+                      useFourColumns
                         ? "flex-[0_0_calc(50%-0.75rem)] sm:flex-[0_0_calc(33.333%-1rem)] lg:flex-[0_0_calc(25%-1.125rem)]"
                         : "flex-[0_0_calc(50%-0.75rem)] sm:flex-[0_0_calc(33.333%-1rem)]"
                     }

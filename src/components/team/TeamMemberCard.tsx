@@ -59,11 +59,11 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
           </div>
         )}
         <p className="text-sm leading-tight text-brand-grey-500">
-          {member.major} Class of {member.gradYear}
+          {member.major} &apos;{member.gradYear.slice(-2)}
           {member.additionalDegrees?.map((degree) => (
             <span key={degree.major}>
               <br />
-              {degree.major} Class of {degree.gradYear}
+              {degree.major} &apos;{degree.gradYear.slice(-2)}
             </span>
           ))}
         </p>

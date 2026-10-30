@@ -50,7 +50,7 @@ export default function SponsorsPage() {
               {site.whySponsor.intro}
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button href={site.sponsorPacket.url} variant="primary">
+              <Button href={site.sponsorPacket.url} variant="primary" external>
                 {site.sponsorPacket.label}
               </Button>
               <Button href="#sponsor-contact-form" variant="outline">
