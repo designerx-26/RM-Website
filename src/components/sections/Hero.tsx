@@ -6,7 +6,7 @@ export function Hero() {
   const { hero } = site;
 
   return (
-    <div className="relative flex h-[85svh] min-h-[520px] items-start justify-center overflow-hidden bg-brand-black sm:h-[90svh] lg:h-[100svh]">
+    <div className="relative flex h-[72svh] min-h-[480px] items-start justify-center overflow-hidden bg-brand-black sm:h-[80svh] md:h-[88svh] lg:h-[100svh]">
       <SiteImage
         src={hero.image.src}
         alt={hero.image.alt}
@@ -18,7 +18,7 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/55 to-brand-black/25" />
 
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-24 text-center sm:pt-28">
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-16 text-center sm:pt-24">
         {hero.eyebrow && (
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">
             {hero.eyebrow}

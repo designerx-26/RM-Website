@@ -71,7 +71,7 @@ export default function ContactPage() {
           </h2>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {site.contact.meetings.map((meeting, index) => (
             <Reveal key={meeting.title} delay={index * 75}>
               <div className="flex flex-col gap-2 rounded-sm border border-brand-grey-100 border-t-4 border-t-brand-red bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">

@@ -92,7 +92,7 @@ export default function DonatePage() {
             Where Your Gift Goes
           </h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {impact.map((item, index) => (
             <Reveal key={item.title} delay={index * 75}>
               <div className="rounded-sm border border-brand-grey-100 border-t-4 border-t-brand-red bg-brand-white p-6 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">

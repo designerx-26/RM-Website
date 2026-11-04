@@ -83,7 +83,7 @@ export default function AboutPage() {
             {site.about.ourWork.body}
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {site.about.values.map((value, index) => (
             <Reveal key={value.title} delay={index * 75}>
               <div className="rounded-sm border-t-4 border-brand-red bg-brand-grey-50 p-6 dark:bg-brand-grey-900">
