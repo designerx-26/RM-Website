@@ -54,11 +54,16 @@
 
 html {
   overflow-x: hidden;
+  /* Stops Safari's elastic rubber-band bounce on horizontal swipes, which
+     briefly reveals the page background at the edges of full-bleed sections
+     like the homepage hero (looks like the image getting "cut off" on mobile). */
+  overscroll-behavior-x: none;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  overscroll-behavior-x: none;
 }
 
 @keyframes marquee {
