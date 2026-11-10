@@ -6,7 +6,7 @@ import { HomeCards } from "@/components/sections/HomeCards";
 import { SponsorMarquee } from "@/components/sponsors/SponsorMarquee";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SiteImage } from "@/components/ui/SiteImage";
+import { DeferredImage } from "@/components/ui/DeferredImage";
 import { StatBand } from "@/components/ui/StatBand";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -30,7 +30,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute -bottom-3 -right-3 h-full w-full rounded-lg border-2 border-brand-red" aria-hidden="true" />
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
-                <SiteImage
+                <DeferredImage
                   src="/RM29/FD1A8003.jpg"
                   alt="The team with car #86 at FSAE Michigan"
                   fill

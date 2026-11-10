@@ -8,7 +8,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `The Car | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "The current Rensselaer Motorsport Formula SAE car: specs, systems, and goals for the season.",
+  alternates: { canonical: "/the-car" },
 };
 
 export default function TheCarPage() {

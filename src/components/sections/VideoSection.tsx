@@ -74,7 +74,7 @@ export function VideoSection() {
     <div ref={containerRef} className="relative aspect-video w-full overflow-hidden bg-brand-grey-900">
       {video.url ? (
         <>
-          <Image src={video.poster} alt="" fill sizes="100vw" className="object-cover" />
+          {inView && <Image src={video.poster} alt="" fill sizes="100vw" className="object-cover" />}
           {inView && (
             <iframe
               key={embedUrl}

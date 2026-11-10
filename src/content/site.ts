@@ -148,6 +148,11 @@ export const site = {
     // "dark" = light wordmark (as shipped) for use on black/dark backgrounds (footer, dark sections)
     logo: "/rm-logo-light.png",
     logoDark: "/rm-logo.png",
+    // Public address of the live site, used for the sitemap, robots.txt, canonical URLs and
+    // link previews. Update this if the site moves to a custom domain.
+    url: "https://rensselaermotorsport.vercel.app",
+    // Image shown when a page link is shared (iMessage, Slack, social posts).
+    shareImage: "/RM29/car.jpg",
   },
 
   nav: [

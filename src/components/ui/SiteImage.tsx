@@ -59,6 +59,7 @@ export function SiteImage({
         sizes={sizes}
         loading={priority ? "eager" : loading}
         fetchPriority={priority ? "high" : undefined}
+        quality={priority ? 60 : undefined}
         className={className}
         style={imgStyle}
       />
@@ -74,6 +75,7 @@ export function SiteImage({
       sizes={sizes}
       loading={priority ? "eager" : loading}
       fetchPriority={priority ? "high" : undefined}
+      quality={priority ? 60 : undefined}
       className={className}
       style={imgStyle}
     />

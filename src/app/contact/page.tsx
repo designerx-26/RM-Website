@@ -10,7 +10,9 @@ import { MeetingCards } from "@/components/sections/MeetingCards";
 
 export const metadata: Metadata = {
   title: `Contact | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Get in touch with Rensselaer Motorsport: email the team, visit the shop at 2368 Burdett Ave in Troy, NY, or come by a weekly meeting.",
+  alternates: { canonical: "/contact" },
 };
 
 const socialLinks = [

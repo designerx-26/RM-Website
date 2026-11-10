@@ -5,7 +5,9 @@ import { YearlyGallery } from "@/components/gallery/YearlyGallery";
 
 export const metadata: Metadata = {
   title: `Gallery | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Photos of Rensselaer Motorsport from the shop, the track, and competition, season by season.",
+  alternates: { canonical: "/gallery" },
 };
 
 // "2025-2026" -> "25-26", matching the gallery's year keys.

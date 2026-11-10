@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Reveal } from "@/components/ui/Reveal";
-import { SiteImage } from "@/components/ui/SiteImage";
+import { DeferredImage } from "@/components/ui/DeferredImage";
 
 export function HomeCards() {
   return (
@@ -21,7 +21,7 @@ export function HomeCards() {
                 featured ? "min-h-[300px] sm:min-h-[340px]" : "min-h-[280px]"
               }`}
             >
-              <SiteImage
+              <DeferredImage
                 src={card.image}
                 alt=""
                 fill

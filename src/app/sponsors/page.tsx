@@ -9,7 +9,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 
 export const metadata: Metadata = {
   title: `Sponsors | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "The companies and organizations that sponsor Rensselaer Motorsport, and how to partner with RPI's Formula SAE team.",
+  alternates: { canonical: "/sponsors" },
 };
 
 const totalPartners = site.sponsors.reduce((sum, tier) => sum + tier.sponsors.length, 0);

@@ -11,7 +11,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `About | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Who Rensselaer Motorsport is: RPI's student-run Formula SAE team, how we're organized into subsystems, and what drives us.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

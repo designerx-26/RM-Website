@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -10,14 +10,19 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
+  metadataBase: new URL(site.meta.url),
   title: `${site.meta.name} | ${site.meta.tagline}`,
   description: site.meta.description,
+  alternates: { canonical: "/" },
+  // No og:title/description here: those would override every page's own title and
+  // description in link previews; crawlers fall back to <title> and meta description.
+  openGraph: {
+    type: "website",
+    siteName: site.meta.name,
+    images: [{ url: site.meta.shareImage, alt: "Rensselaer Motorsport car #86" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -28,14 +33,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} h-full antialiased`}
     >
-      <head>
-        <link rel="preconnect" href="https://player.vimeo.com" />
-        <link rel="preconnect" href="https://i.vimeocdn.com" crossOrigin="" />
-        <link rel="preconnect" href="https://f.vimeocdn.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://player.vimeo.com" />
-      </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>

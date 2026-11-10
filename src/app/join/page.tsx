@@ -12,7 +12,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `Get Involved | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Join Rensselaer Motorsport, no experience required. Whether your interest is engineering, business, or manufacturing, there's a place for you on the team.",
+  alternates: { canonical: "/join" },
 };
 
 const paths = [

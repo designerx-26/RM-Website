@@ -9,7 +9,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: `Donate | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Support Rensselaer Motorsport. Individual gifts and company partnerships fund the parts, tools, and travel behind every car we build.",
+  alternates: { canonical: "/donate" },
 };
 
 const impact = [

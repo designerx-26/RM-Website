@@ -6,7 +6,9 @@ import { TeamGrid } from "@/components/team/TeamGrid";
 
 export const metadata: Metadata = {
   title: `Team | ${site.meta.name}`,
-  description: site.meta.description,
+  description:
+    "Meet the Rensselaer Motorsport team: the RPI students who design, build, and race our Formula SAE car.",
+  alternates: { canonical: "/team" },
 };
 
 export default function TeamPage() {
