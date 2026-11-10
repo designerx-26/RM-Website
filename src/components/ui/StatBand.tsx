@@ -54,7 +54,7 @@ export function StatBand({ stats }: { stats: Stat[] }) {
       {stats.map((stat) => (
         <div key={stat.label} className="text-center">
           <AnimatedStat value={stat.value} />
-          <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-brand-grey-500">
+          <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-brand-grey-600">
             {stat.label}
           </div>
         </div>

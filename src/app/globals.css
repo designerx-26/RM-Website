@@ -18,6 +18,8 @@
 
   --color-brand-red: #c8102e;
   --color-brand-red-dark: #8f0b21;
+  /* Lighter red for small text on black: #c8102e only reaches 3.4:1 there, this is 5.4:1 (WCAG AA). */
+  --color-brand-red-light: #f0475b;
   --color-brand-black: #0a0a0a;
   --color-brand-white: #ffffff;
   --color-brand-grey-50: #f5f5f5;
@@ -43,6 +45,7 @@
 
   --color-brand-red: var(--color-brand-red);
   --color-brand-red-dark: var(--color-brand-red-dark);
+  --color-brand-red-light: var(--color-brand-red-light);
   --color-brand-black: var(--color-brand-black);
   --color-brand-white: var(--color-brand-white);
   --color-brand-grey-50: var(--color-brand-grey-50);

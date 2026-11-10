@@ -161,7 +161,7 @@ export function YearlyGallery({ items, years: allYears, labels = {} }: YearlyGal
         {/* Desktop: sticky sidebar with a progress rail and sliding marker */}
         <nav aria-label="Seasons" className="hidden w-28 shrink-0 sm:block">
           <div className="sticky top-[calc(var(--header-h)+2.5rem)]">
-            <p className="mb-4 pl-6 text-xs font-bold uppercase tracking-[0.25em] text-brand-grey-500">Season</p>
+            <p className="mb-4 pl-6 text-xs font-bold uppercase tracking-[0.25em] text-brand-grey-400">Season</p>
             <div className="relative pl-6">
               <div className="absolute bottom-0 left-0 top-0 w-0.5 rounded-full bg-brand-grey-800" />
               <div
@@ -189,10 +189,10 @@ export function YearlyGallery({ items, years: allYears, labels = {} }: YearlyGal
                     <span
                       className={`block origin-left text-sm font-black tracking-tight transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isActive
-                          ? "scale-[1.6] text-brand-red"
+                          ? "scale-[1.6] text-brand-red-light"
                           : isEmpty
                             ? "text-brand-grey-700"
-                            : "text-brand-grey-500 group-hover:text-brand-white"
+                            : "text-brand-grey-400 group-hover:text-brand-white"
                       }`}
                     >
                       {year}
@@ -222,7 +222,7 @@ export function YearlyGallery({ items, years: allYears, labels = {} }: YearlyGal
               <div className="mb-6 flex items-end gap-4">
                 <h2 className="text-4xl font-black uppercase tracking-tight text-brand-white sm:text-5xl">{year}</h2>
                 {labels[year] && (
-                  <span className="mb-1.5 rounded-full border border-brand-red px-3 py-0.5 text-xs font-bold uppercase tracking-widest text-brand-red">
+                  <span className="mb-1.5 rounded-full border border-brand-red px-3 py-0.5 text-xs font-bold uppercase tracking-widest text-brand-red-light">
                     {labels[year]}
                   </span>
                 )}
@@ -253,7 +253,8 @@ export function YearlyGallery({ items, years: allYears, labels = {} }: YearlyGal
                         alt={item.caption}
                         fill
                         className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                        sizes="(min-width: 1024px) 35vw, (min-width: 640px) 45vw, 70vw"
+                        // Justified rows: tiles are ~half the width on phones and at most ~400px on desktop.
+                        sizes="(min-width: 1024px) 400px, (min-width: 640px) 40vw, 50vw"
                       />
                     </button>
                   );

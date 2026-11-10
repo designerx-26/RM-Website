@@ -25,7 +25,7 @@ export function Hero() {
 
       <div className="relative order-1 mx-auto flex w-full max-w-5xl flex-col items-center px-6 pb-6 pt-12 text-center sm:pt-16 lg:pb-0 lg:pt-24">
         {hero.eyebrow && (
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red [text-shadow:0_1px_6px_rgb(0_0_0/0.8)]">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red-light [text-shadow:0_1px_6px_rgb(0_0_0/0.8)]">
             {hero.eyebrow}
           </p>
         )}

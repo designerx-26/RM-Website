@@ -16,10 +16,11 @@ export function SiteHeader() {
           <Image
             src={site.meta.logoDark}
             alt={site.meta.name}
-            width={900}
-            height={300}
+            // Intrinsic size matches the rendered h-11 so the srcset stays logo-sized, not 1920px.
+            width={132}
+            height={44}
             className="h-9 w-auto sm:h-11"
-            priority
+            loading="eager"
           />
         </Link>
 

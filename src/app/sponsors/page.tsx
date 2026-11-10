@@ -42,7 +42,7 @@ export default function SponsorsPage() {
             </div>
           </div>
           <div className="rounded-xl bg-brand-black p-7 shadow-xl sm:p-8">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">What Sponsors Get</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red-light">What Sponsors Get</p>
             <ul className="mt-5 flex flex-col gap-4">
               {site.whySponsor.benefits.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3 text-sm text-brand-grey-100">

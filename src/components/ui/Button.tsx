@@ -29,13 +29,18 @@ export function Button({
   className = "",
   external = false,
 }: ButtonProps) {
+  const classes = `inline-flex items-center justify-center rounded-sm px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors ${variantClasses[variant]} ${className}`;
+  // External links and files (e.g. the sponsor packet PDF) use a plain <a>: next/link would
+  // prefetch the target as soon as the button scrolls into view, which for the PDF is ~8 MB.
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      className={`inline-flex items-center justify-center rounded-sm px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors ${variantClasses[variant]} ${className}`}
-    >
+    <Link href={href} className={classes}>
       {children}
     </Link>
   );

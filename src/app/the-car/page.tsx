@@ -37,7 +37,7 @@ export default function TheCarPage() {
               </span>
               <div className="absolute inset-y-0 left-0 w-1.5 bg-brand-red" aria-hidden="true" />
               <div className="relative max-w-lg">
-                <p className="flex items-center gap-3 text-sm font-bold uppercase tracking-[0.25em] text-brand-red">
+                <p className="flex items-center gap-3 text-sm font-bold uppercase tracking-[0.25em] text-brand-red-light">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-red opacity-75 motion-reduce:animate-none" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand-red" />

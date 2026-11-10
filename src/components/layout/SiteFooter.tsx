@@ -49,8 +49,8 @@ export function SiteFooter() {
             <Image
               src={site.meta.logoDark}
               alt={site.meta.name}
-              width={900}
-              height={300}
+              width={108}
+              height={36}
               className="h-9 w-auto"
             />
             <p className="mt-4 max-w-xs text-sm text-brand-grey-300">{site.meta.tagline}</p>
@@ -86,7 +86,7 @@ export function SiteFooter() {
               key={column.heading}
               className={column.heading === "Contact" ? "col-span-2 sm:col-span-1" : undefined}
             >
-              <h3 className="text-xs font-bold uppercase tracking-widest text-brand-grey-500">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-brand-grey-400">
                 {column.heading}
               </h3>
               <ul className="mt-4 flex flex-col gap-3">
@@ -101,7 +101,7 @@ export function SiteFooter() {
                       </Link>
                     </li>
                   ) : (
-                    <li key={link.label} className="text-sm text-brand-grey-500">
+                    <li key={link.label} className="text-sm text-brand-grey-400">
                       {link.label}
                     </li>
                   ),
@@ -112,7 +112,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col items-center border-t border-brand-grey-900 pt-6">
-          <p className="text-xs text-brand-grey-500">
+          <p className="text-xs text-brand-grey-400">
             &copy; {new Date().getFullYear()} {site.meta.name}. All rights reserved.
           </p>
         </div>

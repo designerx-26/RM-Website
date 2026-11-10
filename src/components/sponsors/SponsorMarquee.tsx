@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { site } from "@/content/site";
 import { SponsorCard } from "@/components/sponsors/SponsorCard";
 
@@ -19,7 +18,8 @@ export function SponsorMarquee() {
       </div>
 
       <div className="text-center">
-        <Link
+        {/* Plain <a>, not next/link, so the ~8 MB PDF isn't prefetched. */}
+        <a
           href={site.sponsorPacket.url}
           target="_blank"
           rel="noopener noreferrer"
@@ -35,7 +35,7 @@ export function SponsorMarquee() {
               strokeLinejoin="round"
             />
           </svg>
-        </Link>
+        </a>
       </div>
     </div>
   );

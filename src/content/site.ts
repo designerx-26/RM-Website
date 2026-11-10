@@ -181,6 +181,8 @@ export const site = {
     // Leave blank and the homepage will show a clearly labeled placeholder instead.
     url: "https://player.vimeo.com/video/1137944844",
     title: "Rensselaer Motorsport - Season Recap",
+    // Still frame shown until the player loads (it only loads once scrolled near).
+    poster: "/video-poster.jpg",
   },
 
   homeCards: [

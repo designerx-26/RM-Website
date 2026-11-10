@@ -23,7 +23,7 @@ export default function Home() {
               <p className="text-lg">{site.about.intro[0]}</p>
             </SectionHeading>
             <Button href="/about" variant="outline" className="mt-8">
-              Learn More
+              More About Us
             </Button>
           </div>
           <Reveal>

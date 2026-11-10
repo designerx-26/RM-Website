@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { site } from "@/content/site";
 
 // How long after the player reports "ready" before a still-paused video counts as blocked.
@@ -8,7 +9,11 @@ const AUTOPLAY_GRACE_MS = 3000;
 
 export function VideoSection() {
   const { video } = site;
+  const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  // The Vimeo player pulls ~20 MB of video plus its own scripts/cookies, so only mount it
+  // once the section is about to scroll into view; until then a local poster frame shows.
+  const [inView, setInView] = useState(false);
   // iOS (e.g. Low Power Mode) can refuse muted autoplay; background mode has no play
   // button, so fall back to the regular player with controls when that happens.
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
@@ -16,11 +21,27 @@ export function VideoSection() {
   const embedUrl = !video.url
     ? ""
     : autoplayBlocked
-      ? `${video.url}?muted=1&loop=1&playsinline=1&title=0&byline=0&portrait=0`
-      : `${video.url}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&controls=0&title=0&byline=0&portrait=0`;
+      ? `${video.url}?muted=1&loop=1&playsinline=1&title=0&byline=0&portrait=0&dnt=1`
+      : `${video.url}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&controls=0&title=0&byline=0&portrait=0&dnt=1`;
 
   useEffect(() => {
-    if (!video.url || autoplayBlocked) return;
+    const el = containerRef.current;
+    if (!el || inView) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [inView]);
+
+  useEffect(() => {
+    if (!video.url || autoplayBlocked || !inView) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     const send = (method: string) =>
@@ -47,19 +68,24 @@ export function VideoSection() {
       window.removeEventListener("message", onMessage);
       clearTimeout(timer);
     };
-  }, [video.url, autoplayBlocked]);
+  }, [video.url, autoplayBlocked, inView]);
 
   return (
-    <div className="aspect-video w-full overflow-hidden bg-brand-grey-900">
+    <div ref={containerRef} className="relative aspect-video w-full overflow-hidden bg-brand-grey-900">
       {video.url ? (
-        <iframe
-          key={embedUrl}
-          ref={iframeRef}
-          src={embedUrl}
-          title={video.title}
-          className="h-full w-full"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        />
+        <>
+          <Image src={video.poster} alt="" fill sizes="100vw" className="object-cover" />
+          {inView && (
+            <iframe
+              key={embedUrl}
+              ref={iframeRef}
+              src={embedUrl}
+              title={video.title}
+              className="relative h-full w-full"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            />
+          )}
+        </>
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center gap-3 border-2 border-dashed border-brand-grey-700 text-center">
           <svg viewBox="0 0 24 24" fill="none" className="h-12 w-12 text-brand-grey-500" aria-hidden="true">

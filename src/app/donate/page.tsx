@@ -58,7 +58,7 @@ export default function DonatePage() {
             <Reveal className="h-full">
               {site.donate.url ? (
                 <a href={site.donate.url} target="_blank" rel="noopener noreferrer" className={cardClasses}>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Individuals</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red-light">Individuals</span>
                   <h2 className="flex items-center gap-2 text-2xl font-black uppercase tracking-tight text-brand-white">
                     Give Now <Arrow />
                   </h2>
@@ -74,7 +74,7 @@ export default function DonatePage() {
 
             <Reveal delay={75} className="h-full">
               <Link href="/sponsors" className={cardClasses}>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Companies</span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red-light">Companies</span>
                 <h2 className="flex items-center gap-2 text-2xl font-black uppercase tracking-tight text-brand-white">
                   Become a Sponsor <Arrow />
                 </h2>
