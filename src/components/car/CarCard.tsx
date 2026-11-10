@@ -1,45 +1,77 @@
 import type { Car } from "@/content/site";
 import { SiteImage } from "@/components/ui/SiteImage";
 
-export function CarCard({ car }: { car: Car }) {
+/**
+ * Dark "livery" card for the car lineup: photo with a diagonal cut into the details panel,
+ * an oversized outlined car name behind the text, and a red sweep along the bottom on hover.
+ * `reverse` puts the photo on the right (desktop only) so stacked cards alternate.
+ * The photo column is wide and the details compact so the panel stays close to the photos'
+ * 3:2 shape; pick card photos with some room around the car so nothing gets cropped.
+ */
+export function CarCard({ car, reverse = false }: { car: Car; reverse?: boolean }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-brand-grey-100 bg-brand-white shadow-sm">
-      <div className="grid md:grid-cols-2 md:min-h-[480px]">
-        <div className="group relative aspect-video overflow-hidden bg-brand-grey-900 md:aspect-auto">
+    <article className="group relative overflow-hidden rounded-2xl bg-brand-grey-900 ring-1 ring-brand-grey-800 transition-shadow duration-500 hover:shadow-2xl hover:shadow-brand-red/10 hover:ring-brand-red/50">
+      <div
+        className={`grid md:min-h-[420px] ${reverse ? "md:grid-cols-[1fr_1.35fr]" : "md:grid-cols-[1.35fr_1fr]"}`}
+      >
+        <div
+          className={`relative aspect-[3/2] overflow-hidden bg-brand-black md:aspect-auto ${
+            reverse
+              ? "md:order-2 md:[clip-path:polygon(8%_0,100%_0,100%_100%,0_100%)]"
+              : "md:[clip-path:polygon(0_0,100%_0,92%_100%,0_100%)]"
+          }`}
+        >
           <SiteImage
             src={car.photo}
             alt={`Photo of ${car.name}`}
             fill
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            sizes="(min-width: 768px) 60vw, 100vw"
+            imgStyle={car.photoPosition ? { objectPosition: car.photoPosition } : undefined}
           />
-          <span className="absolute left-4 top-4 rounded-full bg-brand-red px-3 py-1 text-xs font-bold uppercase tracking-widest text-brand-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-transparent md:from-brand-black/30" />
+          <span
+            className={`absolute top-5 rounded-full bg-brand-red px-3 py-1 text-xs font-bold uppercase tracking-widest text-brand-white shadow-lg ${
+              reverse ? "left-5 md:left-auto md:right-5" : "left-5"
+            }`}
+          >
             {car.year}
           </span>
         </div>
 
-        <div className="flex flex-col justify-start gap-6 p-8 sm:p-10">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-brand-red">{car.category}</p>
-            <h3 className="mt-2 text-4xl font-black uppercase tracking-tight text-brand-black sm:text-5xl">
+        <div className="relative flex flex-col justify-center gap-5 overflow-hidden p-7 sm:p-9">
+          {/* Oversized outlined name as a backdrop, matching the "Next Up" teaser. */}
+          <span
+            className="pointer-events-none absolute -bottom-6 -right-3 select-none text-[7rem] font-black leading-none tracking-tighter text-transparent sm:text-[8.5rem]"
+            style={{ WebkitTextStroke: "1.5px rgba(200, 16, 46, 0.3)" }}
+            aria-hidden="true"
+          >
+            {car.name}
+          </span>
+
+          <div className="relative">
+            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-red-light sm:text-sm">
+              <span className="h-0.5 w-6 bg-brand-red" aria-hidden="true" />
+              {car.category}
+            </p>
+            <h3 className="mt-2 text-5xl font-black uppercase tracking-tight text-brand-white sm:text-6xl">
               {car.name}
             </h3>
-            {car.tagline && <p className="mt-3 text-lg leading-relaxed text-brand-grey-700">{car.tagline}</p>}
+            {car.tagline && <p className="mt-3 text-lg leading-relaxed text-brand-grey-200">{car.tagline}</p>}
           </div>
 
           {car.goals && car.goals.length > 0 && (
-            <div className="border-t border-brand-grey-100 pt-6">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-grey-500">
+            <div className="relative border-t border-brand-grey-800 pt-5">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-grey-400">
                 Notable Achievements
               </h4>
-              <ul className="mt-4 flex flex-col gap-3">
+              <ul className="mt-3 flex flex-col gap-2">
                 {car.goals.map((goal) => (
-                  <li key={goal.competition} className="flex items-start gap-3 text-sm text-brand-grey-700">
-                    <svg viewBox="0 0 24 24" fill="none" className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true">
-                      <path d="M5 12l5 5L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                  <li key={goal.competition} className="flex items-baseline gap-3 text-sm leading-snug">
+                    <span className="h-3 w-1 shrink-0 -skew-x-12 self-center bg-brand-red" aria-hidden="true" />
                     <span>
-                      <span className="font-bold text-brand-black">{goal.result}</span> - {goal.competition}
+                      <span className="font-bold text-brand-white">{goal.result}</span>
+                      <span className="text-brand-grey-300"> &middot; {goal.competition}</span>
                     </span>
                   </li>
                 ))}
@@ -49,16 +81,10 @@ export function CarCard({ car }: { car: Car }) {
         </div>
       </div>
 
-      {car.specs.length > 0 && (
-        <dl className="grid grid-cols-2 border-t border-brand-grey-100 bg-brand-black sm:grid-cols-3 lg:grid-cols-5">
-          {car.specs.map((spec) => (
-            <div key={spec.label} className="border-b border-r border-brand-grey-800 px-6 py-5 lg:border-b-0">
-              <dt className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">{spec.label}</dt>
-              <dd className="mt-1.5 text-sm font-semibold text-brand-white">{spec.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
-    </div>
+      <div
+        className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-brand-red transition-transform duration-500 group-hover:scale-x-100"
+        aria-hidden="true"
+      />
+    </article>
   );
 }

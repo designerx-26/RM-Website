@@ -77,6 +77,8 @@ export interface Car {
   tagline?: string;
   photo: string;
   heroPhoto?: string;
+  /** CSS object-position for the lineup card photo, e.g. "left center" when the car runs to one edge. */
+  photoPosition?: string;
   specs: CarSpec[];
   features: string[];
   systems?: CarSystem[];
@@ -264,18 +266,18 @@ export const site = {
     meetings: [
       {
         day: "Every Tuesday",
-        title: "Engineering Meeting",
+        title: "General Team Meeting",
         description:
-          "Our weekly engineering meetings go in depth about the car's development and allow the team to participate in design reviews.",
+          "Our weekly meeting, where we update the entire team about admin, business, and engineering updates.",
         time: "7:00 PM – 8:00 PM",
         location: "Sage 3101",
       },
       {
         day: "Every Wednesday",
-        title: "General Team Meeting",
+        title: "Engineering Meeting",
         description:
-          "Our weekly meeting, where we update the entire team about admin, business, and engineering updates.",
-        time: "7:00 PM – 7:30 PM",
+          "Our weekly engineering meetings go in depth about the car's development and allow the team to participate in design reviews.",
+        time: "7:00 PM – 8:00 PM",
         location: "Ricketts 203",
       },
       {
@@ -698,7 +700,7 @@ export const site = {
       year: "2025-2026",
       category: "Formula SAE Electric",
       tagline:
-        "RM29 marks our third year competing as a rear-wheel-drive electric vehicle. The team placed 21st overall and won 2nd place in efficiency at FSAE Michigan.",
+        "RM29 is our fourth electric car, and the first to finish every dynamic event at FSAE Michigan, including the 22 km endurance race, since 2018.",
       photo: "/RM29/rollout.jpg",
       heroPhoto: "/RM29/cardriving2.jpg",
       specs: [
@@ -772,8 +774,8 @@ export const site = {
       name: "RM28",
       year: "2024-2025",
       category: "Formula SAE Electric",
-      tagline: "RM28 was our second year competing as a rear-wheel-drive electric vehicle.",
-      photo: "/RM28/DSCF9921.JPG",
+      tagline: "RM28 was our third electric car, built around a new battery pack assembled from prepackaged power modules.",
+      photo: "/RM28/_G5D8407.jpg",
       specs: [
         { label: "Motor", value: "EMRAX 228, combined-cooled" },
         { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
@@ -790,6 +792,56 @@ export const site = {
         {
           result: "3rd in Endurance, 6th in Autocross",
           competition: "Formula Hybrid + Electric 2025 dynamic events",
+        },
+      ] satisfies CompetitionGoal[],
+    },
+    {
+      id: "rm27",
+      name: "RM27",
+      year: "2023-2024",
+      category: "Formula SAE Electric",
+      tagline: "RM27, our second electric car, raced as car #251 at Formula SAE Electric at Michigan International Speedway in June 2024.",
+      photo: "/RM27/DSC_0654.jpg",
+      // The car runs to the photo's left edge; anchor there so any crop comes off the nose side.
+      photoPosition: "left center",
+      specs: [{ label: "Car Number", value: "#251" }],
+      features: [],
+      // Only results we could verify. Official per-event placings for 2024 weren't publicly
+      // reachable; add them here (e.g. overall place, endurance) once confirmed by the team.
+      goals: [
+        {
+          result: "47th Overall",
+          competition: "FSAE Electric, Michigan, June 2024",
+        },
+        {
+          result: "Entered Formula Hybrid + Electric",
+          competition: "Electric class, 2024",
+        },
+      ] satisfies CompetitionGoal[],
+    },
+    {
+      id: "rm26",
+      name: "RM26",
+      year: "2022-2023",
+      category: "Formula SAE Electric",
+      tagline:
+        "RM26 was our first electric car, taking the team from combustion to EV and racing as car #226 at Formula SAE Electric in June 2023.",
+      photo: "/RM26/IMG_1640.JPG",
+      specs: [],
+      features: [],
+      // Results from the "Recent Formula SAE Michigan Competition Results" table in the RM28 sponsor packet.
+      goals: [
+        {
+          result: "42nd Overall",
+          competition: "FSAE Electric, Michigan, June 2023",
+        },
+        {
+          result: "22nd in Cost, Tied 35th in Design",
+          competition: "FSAE Electric 2023 static events",
+        },
+        {
+          result: "Entered Formula Hybrid + Electric",
+          competition: "Electric class, 2023",
         },
       ] satisfies CompetitionGoal[],
     },
@@ -1021,6 +1073,31 @@ export const site = {
     { caption: "Rolling out of the trailer", year: "24-25", photo: "/RM28/IMG_9016.jpg", width: 2048, height: 1365 },
     { caption: "Working by the trailer", year: "24-25", photo: "/RM28/P9071610.JPG", width: 5184, height: 2920 },
     { caption: "RM28 with Rensselaer Public Safety", year: "24-25", photo: "/RM28/DSCF0037.JPG", width: 4896, height: 3264 },
+    { caption: "RM27 unveiled at rollout", year: "23-24", photo: "/RM27/DSC_0654.jpg", width: 6016, height: 4016 },
+    { caption: "The RM27 team at rollout", year: "23-24", photo: "/RM27/DSC_0597.jpg", width: 6016, height: 4016 },
+    { caption: "RM27 team photo at Michigan International Speedway", year: "23-24", photo: "/RM27/RMeditedmore.png", width: 2048, height: 1365 },
+    { caption: "Car #251 in the paddock at FSAE Michigan", year: "23-24", photo: "/RM27/20240613_152554.jpg", width: 4000, height: 1848 },
+    { caption: "RM27 in technical inspection", year: "23-24", photo: "/RM27/OCT05979.jpg", width: 2048, height: 1365 },
+    { caption: "Car #251 heading out with the crew", year: "23-24", photo: "/RM27/OCT05917.jpg", width: 1365, height: 2048 },
+    { caption: "The team gathered around car #251", year: "23-24", photo: "/RM27/OCT06026.jpg", width: 2048, height: 1365 },
+    { caption: "Final prep under the tent", year: "23-24", photo: "/RM27/OCT06097.jpg", width: 1365, height: 2048 },
+    { caption: "Working on the car outside the team tent", year: "23-24", photo: "/RM27/OCT05716.jpg", width: 2048, height: 1365 },
+    { caption: "Our pit at competition", year: "23-24", photo: "/RM27/DSC_0884.jpg", width: 5670, height: 3785 },
+    { caption: "Talking through the plan in the pits", year: "23-24", photo: "/RM27/DSC_0888.jpg", width: 6016, height: 4016 },
+    { caption: "Wrenching on RM27 in the shop", year: "23-24", photo: "/RM27/DSC_0298.jpg", width: 6016, height: 4016 },
+    { caption: "The RM26 team at rollout", year: "22-23", photo: "/RM26/IMG_1659.jpg", width: 6000, height: 4000 },
+    { caption: "Car #226 on display outside", year: "22-23", photo: "/RM26/IMG_1640.JPG", width: 4032, height: 3024 },
+    { caption: "RM26 on display in an aircraft hangar", year: "22-23", photo: "/RM26/20231104_161105.jpg", width: 4000, height: 1848 },
+    { caption: "Car #226 on track", year: "22-23", photo: "/RM26/IMG_4654.jpg", width: 3024, height: 4032 },
+    { caption: "Team photo on the start/finish line", year: "22-23", photo: "/RM26/IMG_3186.jpg", width: 3830, height: 2950 },
+    { caption: "Rolling car #226 through the paddock", year: "22-23", photo: "/RM26/IMG_2092.JPG", width: 6000, height: 4000 },
+    { caption: "Car #226 in the paddock", year: "22-23", photo: "/RM26/IMG_3092.jpg", width: 4032, height: 3024 },
+    { caption: "RM26 under the Rensselaer Motorsport tent", year: "22-23", photo: "/RM26/IMG_2524.JPG", width: 6000, height: 4000 },
+    { caption: "The team at our tent on campus", year: "22-23", photo: "/RM26/IMG_2138.jpg", width: 4032, height: 3024 },
+    { caption: "Our booth at a campus event", year: "22-23", photo: "/RM26/IMG_2541.JPG", width: 6000, height: 4000 },
+    { caption: "Showing off RM26 at a campus event", year: "22-23", photo: "/RM26/IMG_1347.JPG", width: 3024, height: 4032 },
+    { caption: "RM26 with visitors at an outreach event", year: "22-23", photo: "/RM26/IMG_3775.jpg", width: 3024, height: 4032 },
+    { caption: "RM26 on the RPI campus", year: "22-23", photo: "/RM26/IMG_6130.jpg", width: 3024, height: 4032 },
   ] satisfies GalleryItem[],
 
   join: {
@@ -1030,7 +1107,7 @@ export const site = {
       {
         title: "Come to a Meeting",
         description:
-          "Come to a weekly Tuesday engineering meeting, Wednesday general meeting, or stop by the shop on a Friday evening and chat with us - see the full schedule on our Contact page.",
+          "Come to a weekly Tuesday general meeting, Wednesday engineering meeting, or stop by the shop on a Friday evening and chat with us - see the full schedule on our Contact page.",
       },
       {
         title: "Fill Out Our Interest Form",
