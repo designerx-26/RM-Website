@@ -3,7 +3,7 @@ import { SiteImage } from "@/components/ui/SiteImage";
 
 export function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
   const content = (
-    <div className="group relative flex h-32 w-full items-center justify-center rounded-xl border border-brand-grey-300 bg-brand-grey-300 p-2 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-brand-grey-700 dark:bg-brand-grey-800">
+    <div className="group relative flex h-32 w-full items-center justify-center rounded-xl border border-brand-grey-100 bg-brand-white px-6 py-5 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-brand-red/40 hover:shadow-md">
       {sponsor.logo ? (
         <SiteImage
           src={sponsor.logo}
@@ -13,12 +13,12 @@ export function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
           className="h-full w-full object-contain"
         />
       ) : (
-        <span className="text-sm font-bold leading-snug text-brand-black dark:text-brand-white">
+        <span className="text-lg font-black uppercase leading-tight tracking-tight text-brand-black">
           {sponsor.name}
         </span>
       )}
       {sponsor.url && (
-        <span className="absolute right-2 top-2 text-brand-grey-300 opacity-0 transition-opacity group-hover:opacity-100 dark:text-brand-grey-600">
+        <span className="absolute right-2 top-2 text-brand-red opacity-0 transition-opacity group-hover:opacity-100">
           <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
             <path
               d="M7 17L17 7M17 7H9M17 7V15"

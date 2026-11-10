@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { getStats, memberCount } from "@/content/stats";
 import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { StatBand } from "@/components/ui/StatBand";
 import { SiteImage } from "@/components/ui/SiteImage";
@@ -12,51 +15,26 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const sponsorCount = site.sponsors.reduce((sum, tier) => sum + tier.sponsors.length, 0);
-  const yearsCompeting = new Date().getFullYear() - site.about.foundingYear;
-  const stats = site.stats.map((stat) => {
-    if (stat.label === "Sponsors & Partners") return { ...stat, value: `${sponsorCount}+` };
-    if (stat.label === "Years Competing") return { ...stat, value: `${yearsCompeting}+` };
-    return stat;
-  });
-
   return (
     <>
-      <div className="relative flex h-[70vh] min-h-[420px] items-end overflow-hidden bg-brand-black">
-        <SiteImage
-          src={site.about.heroImage.src}
-          alt={site.about.heroImage.alt}
-          fill
-          className="object-cover object-[center_88%]"
-          sizes="100vw"
-          priority
-          labelAlign="top"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-brand-black/10" />
-        <div className="relative mx-auto w-full max-w-6xl px-6 pb-16">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">
-            {site.meta.name}
-          </p>
-          <h1 className="mt-2 text-4xl font-black uppercase tracking-tight text-brand-white sm:text-6xl">
-            About Us
-          </h1>
-        </div>
-      </div>
+      <PageHero
+        image={site.about.heroImage}
+        eyebrow={site.meta.name}
+        title="About Us"
+        className="h-[clamp(420px,38vw,80vh)]"
+        imageClassName="object-[center_88%]"
+      />
 
       <Section tone="white">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-lg leading-relaxed text-brand-grey-700 dark:text-brand-grey-300">
-            {site.about.aboutUs}
-          </p>
+          <p className="text-lg leading-relaxed text-brand-grey-700 sm:text-xl">{site.about.aboutUs.replace("{members}", `${memberCount}+`)}</p>
         </div>
       </Section>
 
       <Section tone="grey">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">Our Team</p>
-        </div>
-        <StatBand stats={stats} />
-        <div className="mt-10 text-center">
+        <SectionHeading eyebrow="Our Team" title="By the Numbers" />
+        <StatBand stats={getStats()} />
+        <div className="mt-12 text-center">
           <Button href="/team" variant="outline">
             Meet the Team
           </Button>
@@ -64,33 +42,39 @@ export default function AboutPage() {
       </Section>
 
       <Section tone="black">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">
-            {site.about.whatIsFsae.title}
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-brand-grey-300">
-            {site.about.whatIsFsae.body}
-          </p>
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
+              <SiteImage
+                src="/RM29/FD1A6514.jpg"
+                alt="Rolling the car out at FSAE Michigan"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 45vw, 100vw"
+              />
+            </div>
+          </Reveal>
+          <SectionHeading eyebrow="The Competition" title={site.about.whatIsFsae.title} align="left" tone="dark" className="">
+            <p>{site.about.whatIsFsae.body}</p>
+          </SectionHeading>
         </div>
       </Section>
 
       <Section tone="white">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">
-            {site.about.ourWork.title}
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-brand-grey-700 dark:text-brand-grey-300">
-            {site.about.ourWork.body}
-          </p>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <SectionHeading eyebrow="What Drives Us" title={site.about.ourWork.title}>
+          <p>{site.about.ourWork.body}</p>
+        </SectionHeading>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {site.about.values.map((value, index) => (
-            <Reveal key={value.title} delay={index * 75}>
-              <div className="rounded-sm border-t-4 border-brand-red bg-brand-grey-50 p-6 dark:bg-brand-grey-900">
-                <h3 className="text-lg font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
+            <Reveal key={value.title} delay={index * 75} className="h-full">
+              <div className="group h-full rounded-lg border border-brand-grey-100 bg-brand-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-red hover:shadow-lg">
+                <span className="text-4xl font-black text-brand-red/25 transition-colors group-hover:text-brand-red">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 text-lg font-black uppercase tracking-tight text-brand-black">
                   {value.title}
                 </h3>
-                <p className="mt-2 text-sm text-brand-grey-500">{value.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-brand-grey-500">{value.description}</p>
               </div>
             </Reveal>
           ))}
@@ -98,22 +82,17 @@ export default function AboutPage() {
       </Section>
 
       <Section tone="grey">
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl dark:text-brand-white">
-            Our Subsystems
-          </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-brand-grey-500">
-            Every part of the car is owned by a dedicated subsystem team.
-          </p>
-        </div>
+        <SectionHeading eyebrow="How We're Organized" title="Our Subsystems">
+          <p>Every part of the car is owned by a dedicated subsystem team.</p>
+        </SectionHeading>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {site.about.subsystems.map((subsystem, index) => (
-            <Reveal key={subsystem.name} delay={(index % 3) * 60}>
-              <div className="rounded-xl border border-brand-grey-100 bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">
-                <h3 className="text-base font-bold uppercase tracking-wide text-brand-red">
+            <Reveal key={subsystem.name} delay={(index % 3) * 60} className="h-full">
+              <div className="h-full rounded-lg border-l-4 border-brand-red bg-brand-white p-5 shadow-sm transition duration-300 hover:shadow-md">
+                <h3 className="text-base font-black uppercase tracking-tight text-brand-black">
                   {subsystem.name}
                 </h3>
-                <p className="mt-2 text-sm text-brand-grey-700">{subsystem.description}</p>
+                <p className="mt-2 text-sm text-brand-grey-500">{subsystem.description}</p>
               </div>
             </Reveal>
           ))}
@@ -121,38 +100,52 @@ export default function AboutPage() {
       </Section>
 
       <Section tone="white">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-black uppercase tracking-tight text-brand-black dark:text-brand-white">
-            Our History
-          </h2>
-          <p className="mt-4 text-brand-grey-700 dark:text-brand-grey-300">
-            {site.about.history}
-          </p>
+        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+          <SectionHeading eyebrow={`Since ${site.about.foundingYear}`} title="Our History" align="left" className="">
+            <p>{site.about.history}</p>
+          </SectionHeading>
+          <Reveal>
+            <div className="relative">
+              <div className="absolute -bottom-3 -left-3 h-full w-full rounded-lg border-2 border-brand-red" aria-hidden="true" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
+                <SiteImage
+                  src="/RM29/cardriving.JPG"
+                  alt="Autocross in the rain"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
-      <Section tone="grey">
-        <div className="mx-auto grid max-w-4xl gap-10 sm:grid-cols-2">
+      <Section tone="black">
+        <div className="grid gap-12 md:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tight text-brand-black dark:text-brand-white">
-              Our Majors
-            </h2>
-            <ul className="mt-4 flex flex-col gap-2 text-sm text-brand-grey-700 dark:text-brand-grey-300">
+            <SectionHeading eyebrow="Who Joins" title="Our Majors" align="left" tone="dark" className="mb-6" />
+            <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
               {site.about.majors.map((major) => (
-                <li key={major}>{major}</li>
+                <li
+                  key={major}
+                  className="flex items-center gap-3 rounded-md border border-brand-grey-800 bg-brand-grey-900 px-4 py-3 text-sm text-brand-grey-100"
+                >
+                  <span className="h-1.5 w-1.5 shrink-0 bg-brand-red" aria-hidden="true" />
+                  {major}
+                </li>
               ))}
             </ul>
           </div>
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tight text-brand-black dark:text-brand-white">
-              Where We've Gone
-            </h2>
-            <p className="mt-2 text-sm text-brand-grey-500">Recent alumni destinations include:</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <SectionHeading eyebrow="Alumni" title="Where We've Gone" align="left" tone="dark" className="mb-6">
+              <p className="text-sm">Recent alumni destinations include:</p>
+            </SectionHeading>
+            <div className="flex flex-wrap gap-2">
               {site.about.alumniEmployers.map((employer) => (
                 <span
                   key={employer}
-                  className="rounded-full border border-brand-grey-200 bg-brand-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-grey-700 dark:border-brand-grey-800 dark:bg-brand-black dark:text-brand-grey-300"
+                  className="rounded-full border border-brand-grey-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-brand-white transition-colors hover:border-brand-red hover:bg-brand-red"
                 >
                   {employer}
                 </span>

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { ContactForm } from "@/components/sections/ContactForm";
-import { Reveal } from "@/components/ui/Reveal";
+import { MeetingCards } from "@/components/sections/MeetingCards";
 
 export const metadata: Metadata = {
   title: `Contact | ${site.meta.name}`,
@@ -25,22 +27,35 @@ const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(shopAddress)}
 export default function ContactPage() {
   return (
     <>
-      <Section tone="black" className="py-10">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">Contact Us</h1>
-            <p className="mt-2 max-w-xl text-sm text-brand-grey-300">{site.contact.intro}</p>
-          </div>
+      <PageHero
+        image={{ src: "/RM29/DSC02050.JPG", alt: "Car #86 rounding a corner on the competition track" }}
+        imageClassName="object-[center_45%]"
+        contentPosition="top"
+        eyebrow="Get in Touch"
+        title="Contact Us"
+      >
+        <p>{site.contact.intro}</p>
+      </PageHero>
 
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-            <a
-              href={`mailto:${site.contact.email}`}
-              className="text-sm font-semibold text-brand-white hover:text-brand-red"
-            >
+      <div className="bg-brand-black">
+        <div className="mx-auto grid max-w-6xl gap-px overflow-hidden border-y border-brand-grey-800 bg-brand-grey-800 sm:grid-cols-3">
+          <a
+            href={`mailto:${site.contact.email}`}
+            className="group flex flex-col gap-1 bg-brand-black px-6 py-6 transition-colors hover:bg-brand-grey-900"
+          >
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Email</span>
+            <span className="break-all text-sm font-semibold text-brand-white group-hover:text-brand-red">
               {site.contact.email}
-            </a>
-            <span className="text-sm text-brand-grey-300">{site.contact.address}</span>
-            <div className="flex items-center gap-3">
+            </span>
+          </a>
+          <div className="flex flex-col gap-1 bg-brand-black px-6 py-6">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Shop</span>
+            <span className="text-sm font-semibold text-brand-white">{shopAddress}</span>
+            <span className="text-xs text-brand-grey-400">{site.contact.address}</span>
+          </div>
+          <div className="flex flex-col gap-3 bg-brand-black px-6 py-6">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Follow</span>
+            <div className="flex items-center gap-4">
               {socialLinks
                 .filter((link) => link.href)
                 .map((link) => (
@@ -56,42 +71,15 @@ export default function ContactPage() {
                   </a>
                 ))}
             </div>
-            <Button href={site.donateCta.href} variant="outline-light">
-              {site.donateCta.label}
-            </Button>
           </div>
         </div>
-      </Section>
+      </div>
 
       <Section tone="white">
-        <div className="mb-8">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">Come By</p>
-          <h2 className="mt-1 text-2xl font-black uppercase tracking-tight text-brand-black sm:text-3xl dark:text-brand-white">
-            Weekly Schedule
-          </h2>
-        </div>
+        <SectionHeading eyebrow="Come By" title="Weekly Schedule" align="left" />
+        <MeetingCards />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {site.contact.meetings.map((meeting, index) => (
-            <Reveal key={meeting.title} delay={index * 75}>
-              <div className="flex flex-col gap-2 rounded-sm border border-brand-grey-100 border-t-4 border-t-brand-red bg-brand-white p-5 shadow-sm dark:border-brand-grey-800 dark:bg-brand-black">
-                <p className="text-xs font-bold uppercase tracking-widest text-brand-red">
-                  {meeting.day}
-                </p>
-                <h3 className="text-base font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
-                  {meeting.title}
-                </h3>
-                <p className="text-sm text-brand-grey-500">{meeting.description}</p>
-                <div className="mt-1 flex flex-col gap-1 border-t border-brand-grey-100 pt-2 text-sm font-semibold text-brand-black dark:border-brand-grey-800 dark:text-brand-white">
-                  <span>{meeting.time}</span>
-                  <span className="text-brand-grey-500">{meeting.location}</span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="mt-8 overflow-hidden rounded-lg border border-brand-grey-100 dark:border-brand-grey-800">
+        <div className="mt-10 overflow-hidden rounded-lg border border-brand-grey-100 shadow-sm">
           <iframe
             title="Rensselaer Motorsport shop location"
             src={mapSrc}
@@ -106,15 +94,26 @@ export default function ContactPage() {
 
       <Section tone="grey">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
-            <h2 className="text-2xl font-black uppercase tracking-tight text-brand-black sm:text-3xl dark:text-brand-white">
-              Send Us a Message
-            </h2>
-            <p className="mt-2 text-sm text-brand-grey-500">
-              Let us know whether you're interested in joining or looking to sponsor the team.
+          <SectionHeading eyebrow="Reach Out" title="Send Us a Message" className="mb-8">
+            <p className="text-sm">
+              Let us know whether you&apos;re interested in joining or looking to sponsor the team.
             </p>
+          </SectionHeading>
+          <div className="rounded-xl border border-brand-grey-100 bg-brand-white p-6 shadow-sm sm:p-8">
+            <ContactForm />
           </div>
-          <ContactForm />
+        </div>
+      </Section>
+
+      <Section tone="red">
+        <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tight sm:text-3xl">Want to Support the Team?</h2>
+            <p className="mt-2 text-brand-white/90">Every gift goes straight into building the next car.</p>
+          </div>
+          <Button href={site.donateCta.href} variant="light">
+            {site.donateCta.label}
+          </Button>
         </div>
       </Section>
     </>

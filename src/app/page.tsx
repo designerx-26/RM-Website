@@ -1,10 +1,15 @@
 import { site } from "@/content/site";
+import { getStats } from "@/content/stats";
 import { Hero } from "@/components/sections/Hero";
 import { VideoSection } from "@/components/sections/VideoSection";
 import { HomeCards } from "@/components/sections/HomeCards";
 import { SponsorMarquee } from "@/components/sponsors/SponsorMarquee";
 import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SiteImage } from "@/components/ui/SiteImage";
+import { StatBand } from "@/components/ui/StatBand";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 
 export default function Home() {
   return (
@@ -12,15 +17,33 @@ export default function Home() {
       <Hero />
 
       <Section tone="white" id="about" className="scroll-mt-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">Who We Are</p>
-          <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl">
-            {site.meta.name}
-          </h2>
-          <p className="mt-6 text-lg text-brand-grey-700">{site.about.intro[0]}</p>
-          <Button href="/about" variant="outline" className="mt-8">
-            Learn More
-          </Button>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <SectionHeading eyebrow="Who We Are" title={site.meta.name} align="left" className="">
+              <p className="text-lg">{site.about.intro[0]}</p>
+            </SectionHeading>
+            <Button href="/about" variant="outline" className="mt-8">
+              Learn More
+            </Button>
+          </div>
+          <Reveal>
+            <div className="relative">
+              <div className="absolute -bottom-3 -right-3 h-full w-full rounded-lg border-2 border-brand-red" aria-hidden="true" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
+                <SiteImage
+                  src="/RM29/FD1A8003.jpg"
+                  alt="The team with car #86 at FSAE Michigan"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-16 border-t border-brand-grey-100 pt-12">
+          <StatBand stats={getStats()} />
         </div>
       </Section>
 
@@ -29,35 +52,29 @@ export default function Home() {
       </div>
 
       <Section tone="white">
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl">
-            Explore the Team
-          </h2>
-        </div>
+        <SectionHeading eyebrow="Get to Know Us" title="Explore the Team" />
         <HomeCards />
       </Section>
 
       <Section tone="grey">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand-red">
-            Thank You to Our Sponsors
-          </p>
-          <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-brand-black sm:text-4xl dark:text-brand-white">
-            Our Partners
-          </h2>
-        </div>
+        <SectionHeading eyebrow="Thank You to Our Sponsors" title="Our Partners" />
         <SponsorMarquee />
       </Section>
 
       <Section tone="red">
         <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-black uppercase tracking-tight sm:text-5xl">
             Interested in Joining?
           </h2>
           <p className="max-w-xl text-brand-white/90">{site.join.intro}</p>
-          <Button href={site.joinCta.href} variant="outline-light">
-            {site.joinCta.label}
-          </Button>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button href={site.joinCta.href} variant="outline-light">
+              {site.joinCta.label}
+            </Button>
+            <Button href="/contact" variant="light">
+              Contact Us
+            </Button>
+          </div>
         </div>
       </Section>
     </>

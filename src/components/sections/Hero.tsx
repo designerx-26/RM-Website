@@ -16,18 +16,20 @@ export function Hero() {
         priority
         labelAlign="top"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/55 to-brand-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/65 to-brand-black/25" />
 
       <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-16 text-center sm:pt-24">
         {hero.eyebrow && (
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red [text-shadow:0_1px_6px_rgb(0_0_0/0.8)]">
             {hero.eyebrow}
           </p>
         )}
         <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] tracking-tight text-brand-white sm:text-7xl lg:text-8xl">
           {hero.headline}
         </h1>
-        <p className="mt-4 max-w-xl text-base text-brand-grey-300 sm:text-lg">{hero.subheadline}</p>
+        <p className="mt-4 max-w-xl text-base font-medium text-brand-white [text-shadow:0_1px_8px_rgb(0_0_0/0.9)] sm:text-lg">
+          {hero.subheadline}
+        </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button href={hero.primaryCta.href} variant="primary">

@@ -10,6 +10,7 @@ interface SiteImageProps {
   height?: number;
   sizes?: string;
   priority?: boolean;
+  loading?: "eager" | "lazy";
   /** Where the placeholder caption sits — "top" avoids collisions with bottom-anchored overlay content (e.g. a hero headline). */
   labelAlign?: "center" | "top";
   /** Inline style forwarded to the underlying <Image>, e.g. a per-photo zoom/pan transform. */
@@ -29,6 +30,7 @@ export function SiteImage({
   height,
   sizes,
   priority,
+  loading,
   labelAlign = "center",
   imgStyle,
 }: SiteImageProps) {
@@ -56,6 +58,7 @@ export function SiteImage({
         fill
         sizes={sizes}
         priority={priority}
+        loading={loading}
         className={className}
         style={imgStyle}
       />
@@ -70,6 +73,7 @@ export function SiteImage({
       height={height ?? 600}
       sizes={sizes}
       priority={priority}
+      loading={loading}
       className={className}
       style={imgStyle}
     />

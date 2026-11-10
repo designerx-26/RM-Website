@@ -166,13 +166,14 @@ export const site = {
   social,
 
   hero: {
-    eyebrow: "Rensselaer Polytechnic Institute - Formula SAE",
+    eyebrow: "Rensselaer Polytechnic Institute Formula SAE",
     headline: "RENSSELAER MOTORSPORT",
     subheadline:
-      "A student-run engineering team designing, building, and racing a formula-style car from scratch - every year, from the ground up.",
+      "A student run engineering team designing, building, and racing a formula style car from scratch - every year, from the ground up.",
     primaryCta: { label: "Join the Team", href: "/join" } satisfies NavLink,
     secondaryCta: { label: "Meet the Car", href: "/the-car" } satisfies NavLink,
-    image: { src: "/background.png", alt: "Rensselaer Motorsport car on track, hero shot" },
+    // TEMP preview: original was "/background.png"
+    image: { src: "/RM29/car.jpg", alt: "Rensselaer Motorsport car on track, hero shot" },
   },
 
   video: {
@@ -188,6 +189,7 @@ export const site = {
       description:
         "A student-run engineering team designing, building, and racing a formula-style car from the ground up every season.",
       href: "/about",
+      image: "/RM29/team.jpg",
       cta: "About the Team",
     },
     {
@@ -195,6 +197,7 @@ export const site = {
       description:
         "See the specs, systems, and engineering decisions behind this year's competition car.",
       href: "/the-car",
+      image: "/RM29/DSC01663.JPG",
       cta: "View the Car",
     },
     {
@@ -202,6 +205,7 @@ export const site = {
       description:
         "No experience required. Engineering, business, and manufacturing roles are open to all majors and class years.",
       href: "/join",
+      image: "/RM29/DSC04831.JPG",
       cta: "Get Involved",
     },
     {
@@ -209,6 +213,7 @@ export const site = {
       description:
         "Rensselaer Motorsport runs on the generous support of 40+ industry partners and sponsors.",
       href: "/sponsors",
+      image: "/RM29/car.jpg",
       cta: "View Sponsors",
     },
     {
@@ -216,12 +221,13 @@ export const site = {
       description:
         "Moments from the shop, the track, and everywhere in between - see the build come together.",
       href: "/gallery",
+      image: "/RM29/FD1A1699.jpg",
       cta: "View Gallery",
     },
-  ] satisfies { title: string; description: string; href: string; cta: string }[],
+  ] satisfies { title: string; description: string; href: string; cta: string; image: string }[],
 
   sponsorPacket: {
-    url: "/sponsor-packet.pdf",
+    url: "/RM29 Sponsor Packet.pdf",
     label: "View Sponsor Packet",
   },
 
@@ -286,15 +292,15 @@ export const site = {
   },
 
   about: {
-    heroImage: { src: "/team-background.jpg", alt: "The Rensselaer Motorsport team with car #27" },
-    memberCount: "32+",
+    heroImage: { src: "/RM29/team-background.jpg", alt: "The Rensselaer Motorsport team with car #27" },
     intro: [
       "Rensselaer Motorsport is a student-run engineering team at Rensselaer Polytechnic Institute competing in Formula SAE, an international collegiate design competition where teams design, build, and race a small formula-style race car.",
       "Beyond the car itself, members run every part of the operation - engineering, manufacturing, business, and sponsorship - giving students hands-on experience they can't get in a classroom.",
     ],
     // Condensed synopsis for the About page hero/intro block.
+    // "{members}" is filled in with the current roster size from `team` below.
     aboutUs:
-      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of 32+ undergraduate engineers and business students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone can't provide.",
+      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of {members} undergraduate engineers and business students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone can't provide.",
     whatIsFsae: {
       title: "What is FSAE?",
       body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, test, and race a small formula-style race car, then bring it to competition to be evaluated against other schools. Cars are judged on a mix of static events - cost, engineering design, and a business/sponsorship presentation - and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. It's a full product-development cycle compressed into a single school year: design, manufacture, validate, and race.",
@@ -374,7 +380,7 @@ export const site = {
   stats: [
     { label: "Cars Built", value: "29" },
     { label: "Years Competing", value: "-" },
-    { label: "Active Members", value: "32+" },
+    { label: "Active Members", value: "-" },
     { label: "Sponsors & Partners", value: "-" },
   ] satisfies Stat[],
 
@@ -660,6 +666,7 @@ export const site = {
           major: "Aerospace Engineering",
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
+          linkedin: "https://www.linkedin.com/in/aidentprice/",
         },
         {
           name: "Ethan Chen",
@@ -685,8 +692,8 @@ export const site = {
       category: "Formula SAE Electric",
       tagline:
         "RM29 marks our third year competing as a rear-wheel-drive electric vehicle. The team placed 21st overall and won 2nd place in efficiency at FSAE Michigan.",
-      photo: "/rollout.jpg",
-      heroPhoto: "/Gallery/cardriving2.jpg",
+      photo: "/RM29/rollout.jpg",
+      heroPhoto: "/RM29/cardriving2.jpg",
       specs: [
         { label: "Powertrain", value: "107 HP PMSM, 4000 RPM @ 400V" },
         { label: "Horsepower", value: "107 HP" },
@@ -753,6 +760,32 @@ export const site = {
         },
       ] satisfies CompetitionGoal[],
     },
+    {
+      id: "rm28",
+      name: "RM28",
+      year: "2024-2025",
+      category: "Formula SAE Electric",
+      tagline: "RM28 was our second year competing as a rear-wheel-drive electric vehicle.",
+      photo: "/RM28/DSCF9921.JPG",
+      specs: [
+        { label: "Motor", value: "EMRAX 228, combined-cooled" },
+        { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
+        { label: "Chassis", value: "4130 steel tube-frame" },
+        { label: "Brakes", value: "ISR & Wilwood calipers, custom rotors" },
+        { label: "Aerodynamics", value: "Custom aero package" },
+      ],
+      features: [],
+      goals: [
+        {
+          result: "7th Place Overall",
+          competition: "Formula Hybrid + Electric 2025",
+        },
+        {
+          result: "3rd in Endurance, 6th in Autocross",
+          competition: "Formula Hybrid + Electric 2025 dynamic events",
+        },
+      ] satisfies CompetitionGoal[],
+    },
   ] satisfies Car[],
 
   upcomingCar: {
@@ -764,7 +797,7 @@ export const site = {
     {
       tier: "Title",
       sponsors: [
-        { name: "Hondata", logo: "/sponsors/hondata.webp", url: "https://www.hondata.com/" },
+        { name: "Hondata", logo: "/sponsors/hondata-dark.webp", url: "https://www.hondata.com/" },
         { name: "Dana", logo: "/sponsors/dana.webp", url: "https://www.dana.com/" },
         {
           name: "BAE Systems",
@@ -773,11 +806,12 @@ export const site = {
         },
         {
           name: "Markforged",
-          logo: "/sponsors/markforged.webp",
+          logo: "/sponsors/markforged-dark.webp",
           url: "https://markforged.com/",
         },
-        { name: "Fearless Racing", logo: "/sponsors/fearless racing.webp", url: "" },
+        { name: "Fearless Racing", logo: "/sponsors/fearless racing-dark.webp", url: "" },
         { name: "ANSYS", logo: "/sponsors/ansys.png", url: "https://www.ansys.com/" },
+        { name: "Legacy EV", logo: "/sponsors/legacy ev-dark.webp", url: "https://legacyev.com/" },
       ],
     },
     {
@@ -785,10 +819,10 @@ export const site = {
       sponsors: [
         {
           name: "Ice Cutting Edge Metals",
-          logo: "/sponsors/ice cutting edge.webp",
+          logo: "/sponsors/ice cutting edge-dark.webp",
           url: "",
         },
-        { name: "Rapid Harness", logo: "/sponsors/rapidharness.webp", url: "" },
+        { name: "Rapid Harness", logo: "/sponsors/rapidharness-dark.webp", url: "" },
         {
           name: "Griot's Garage",
           logo: "/sponsors/griots garage.webp",
@@ -796,14 +830,14 @@ export const site = {
         },
         {
           name: "Beast Branch Engineering and Manufacturing",
-          logo: "/sponsors/beast branch.webp",
+          logo: "/sponsors/beast branch-dark.webp",
           url: "",
         },
         { name: "NSH USA", logo: "/sponsors/nsh usa.webp", url: "" },
-        { name: "Noel's CNC Manufacturing", logo: "/sponsors/noel's cnc.webp", url: "" },
+        { name: "Noel's CNC Manufacturing", logo: "/sponsors/noel's cnc-dark.webp", url: "" },
         {
           name: "Kaman Composites",
-          logo: "/sponsors/kaman.webp",
+          logo: "/sponsors/kaman-dark.webp",
           url: "https://www.kaman.com/",
         },
         {
@@ -811,8 +845,8 @@ export const site = {
           logo: "/sponsors/saint gobain.webp",
           url: "https://www.saint-gobain.com/",
         },
-        { name: "Tektronix", logo: "/sponsors/tektronix.webp", url: "https://www.tek.com/" },
-        { name: "TI64 Titanium", logo: "/sponsors/ti64.webp", url: "" },
+        { name: "Tektronix", logo: "/sponsors/tektronix-dark.webp", url: "https://www.tek.com/" },
+        { name: "TI64 Titanium", logo: "/sponsors/ti64-dark.webp", url: "" },
         {
           name: "XCA Advanced Composites Design and Manufacturing",
           logo: "/sponsors/xca.webp",
@@ -825,13 +859,13 @@ export const site = {
     {
       tier: "Level 2",
       sponsors: [
-        { name: "Ducommun", logo: "/sponsors/ducommun.webp", url: "https://www.ducommun.com/" },
-        { name: "AMGIO", logo: "/sponsors/amgio.webp", url: "" },
+        { name: "Ducommun", logo: "/sponsors/ducommun-dark.webp", url: "https://www.ducommun.com/" },
+        { name: "AMGIO", logo: "/sponsors/amgio-dark.webp", url: "" },
         { name: "Acronis", logo: "/sponsors/acronis.webp", url: "https://www.acronis.com/" },
         { name: "Axcel", logo: "/sponsors/axcel.webp", url: "" },
         {
           name: "Oakwood Bible Church",
-          logo: "/sponsors/oakwood bible church.webp",
+          logo: "/sponsors/oakwood bible church-dark.webp",
           url: "",
         },
         {
@@ -839,12 +873,12 @@ export const site = {
           logo: "/sponsors/lockheed martin.webp",
           url: "https://www.lockheedmartin.com/",
         },
-        { name: "Cartesian", logo: "/sponsors/cartesian.webp", url: "" },
+        { name: "Cartesian", logo: "/sponsors/cartesian-dark.webp", url: "" },
         { name: "Holley", logo: "/sponsors/holley.webp", url: "https://www.holley.com/" },
-        { name: "PMC Race Cars", logo: "/sponsors/pmc race cars.webp", url: "" },
+        { name: "PMC Race Cars", logo: "/sponsors/pmc race cars-dark.webp", url: "" },
         {
           name: "Powder Tech Custom Powder-Coated Finishes",
-          logo: "/sponsors/powdertech.webp",
+          logo: "/sponsors/powdertech-dark.webp",
           url: "",
         },
         {
@@ -862,7 +896,7 @@ export const site = {
           logo: "/sponsors/gene haas foundation.webp",
           url: "https://www.genehaasfoundation.org/",
         },
-        { name: "SimScale", logo: "/sponsors/simscale.webp", url: "https://www.simscale.com/" },
+        { name: "SimScale", logo: "/sponsors/simscale-dark.webp", url: "https://www.simscale.com/" },
         {
           name: "Simpson",
           logo: "/sponsors/simpson.webp",
@@ -877,6 +911,7 @@ export const site = {
         },
         { name: "VI-Grade", logo: "/sponsors/vi-grade.webp", url: "https://www.vi-grade.com/" },
         { name: "About Energy", logo: "/sponsors/aboutenergy.png", url: "" },
+        { name: "OSH Cut", logo: "/sponsors/osh cut.webp", url: "https://www.oshcut.com/" },
       ],
     },
     {
@@ -887,12 +922,21 @@ export const site = {
           logo: "/sponsors/rock krawler.webp",
           url: "https://www.rockkrawler.com/",
         },
-        { name: "ProSpeed RS683", logo: "/sponsors/prospeed rs683.webp", url: "" },
-        { name: "Tilton", logo: "/sponsors/tilton.webp", url: "https://www.tiltonracing.com/" },
+        { name: "ProSpeed RS683", logo: "/sponsors/prospeed rs683-dark.webp", url: "" },
+        { name: "Tilton", logo: "/sponsors/tilton-dark.webp", url: "https://www.tiltonracing.com/" },
         {
           name: "HGSI Harold G. Schaevitz Industries",
           logo: "/sponsors/hgsi.png",
           url: "",
+        },
+        { name: "MoTeC", logo: "/sponsors/motec-dark.webp", url: "https://www.motec.com.au/" },
+        { name: "Bender", logo: "/sponsors/bender.webp", url: "https://www.bender.de/en/" },
+        { name: "Kennametal", logo: "/sponsors/kennametal.webp", url: "https://www.kennametal.com/" },
+        { name: "Fabbro Industries", logo: "/sponsors/fabbro.webp", url: "https://www.fabbroindustries.com/" },
+        {
+          name: "Quail Financial Group",
+          logo: "/sponsors/quail financial group-dark.webp",
+          url: "https://www.quailfinancialgroup.com/",
         },
       ],
     },
@@ -901,69 +945,75 @@ export const site = {
   // Every school year shown in the Gallery page's year picker, oldest first.
   // Add a year here before adding its photos below and it'll show up in the
   // picker (even with no photos yet); years with photos get a populated section.
+  // Wide banner photo at the top of the Gallery page.
+  galleryHero: "/RM29/DSC01951.JPG",
+
   galleryYears: ["17-18", "22-23", "23-24", "24-25", "25-26"],
 
   gallery: [
-    { caption: "Car #86 on the RPI quad", year: "25-26", photo: "/Gallery/car.jpg", width: 4897, height: 3266 },
-    {
-      caption: "Car #86 with the team's competition awards", year: "25-26",
-      photo: "/Gallery/car1.jpg",
-      width: 8192,
-      height: 5464,
-    },
-    {
-      caption: "Autocross in the rain", year: "25-26",
-      photo: "/Gallery/cardriving.JPG",
-      width: 6000,
-      height: 4000,
-    },
-    { caption: "On course", year: "25-26", photo: "/Gallery/cardriving1.JPG", width: 6000, height: 4000 },
-    { caption: "On track", year: "25-26", photo: "/Gallery/cardriving2.jpg", width: 4892, height: 3270 },
-    {
-      caption: "Taking the corner", year: "25-26",
-      photo: "/Gallery/cardriving3.jpg",
-      width: 2048,
-      height: 1366,
-    },
-    { caption: "Trackside", year: "25-26", photo: "/Gallery/DSC00834.JPG", width: 6000, height: 4000 },
-    { caption: "Competition weekend", year: "25-26", photo: "/Gallery/DSC01951.JPG", width: 6000, height: 4000 },
-    { caption: "In the paddock", year: "25-26", photo: "/Gallery/DSC02166.JPG", width: 6000, height: 4000 },
-    { caption: "Pit lane", year: "25-26", photo: "/Gallery/DSC02384.JPG", width: 6000, height: 4000 },
-    { caption: "Tech inspection", year: "25-26", photo: "/Gallery/DSC03563.JPG", width: 6000, height: 4000 },
-    { caption: "Race day", year: "25-26", photo: "/Gallery/DSC03778.JPG", width: 6000, height: 4000 },
-    { caption: "The team at the track", year: "25-26", photo: "/Gallery/DSC04827.JPG", width: 6000, height: 4000 },
-    { caption: "Getting ready to run", year: "25-26", photo: "/Gallery/DSC04831.JPG", width: 6000, height: 4000 },
-    { caption: "On the grid", year: "25-26", photo: "/Gallery/DSC04867.JPG", width: 6000, height: 4000 },
-    { caption: "Final checks", year: "25-26", photo: "/Gallery/FD1A4349.jpg", width: 2048, height: 1366 },
-    {
-      caption: "Pre-run safety check", year: "25-26",
-      photo: "/Gallery/FD1A4452.jpg",
-      width: 1366,
-      height: 2048,
-    },
-    { caption: "Setup in the paddock", year: "25-26", photo: "/Gallery/FD1A4492.jpg", width: 2048, height: 1365 },
-    { caption: "Rolling to the grid", year: "25-26", photo: "/Gallery/FD1A6523.jpg", width: 1366, height: 2048 },
-    {
-      caption: "Buckled in and ready to drive", year: "25-26",
-      photo: "/Gallery/FD1A6543.jpg",
-      width: 4897,
-      height: 3266,
-    },
-    { caption: "Working in the pits", year: "25-26", photo: "/Gallery/FD1A6998.jpg", width: 2048, height: 1366 },
-    {
-      caption: "Showcasing the car at an expo", year: "25-26",
-      photo: "/Gallery/FD1A9847.jpg",
-      width: 2048,
-      height: 1366,
-    },
-    { caption: "Under the lights", year: "25-26", photo: "/Gallery/IMG_0289.PNG", width: 2001, height: 3000 },
-    {
-      caption: "Pre-run checks in the paddock", year: "25-26",
-      photo: "/Gallery/PHO00053.JPG",
-      width: 4000,
-      height: 2250,
-    },
-    { caption: "The team in the paddock", year: "25-26", photo: "/Gallery/team.jpg", width: 2048, height: 1366 },
+    { caption: "Car #86 on the RPI quad", year: "25-26", photo: "/RM29/car.jpg", width: 4897, height: 3266 },
+    { caption: "Car #86 with the team's competition awards", year: "25-26", photo: "/RM29/car1.jpg", width: 8192, height: 5464 },
+    { caption: "Team photo at FSAE Michigan", year: "25-26", photo: "/RM29/FD1A8003.jpg", width: 2048, height: 1366 },
+    { caption: "Autocross in the rain", year: "25-26", photo: "/RM29/cardriving.JPG", width: 6000, height: 4000 },
+    { caption: "Threading the cones", year: "25-26", photo: "/RM29/cardriving1.JPG", width: 6000, height: 4000 },
+    { caption: "On track", year: "25-26", photo: "/RM29/cardriving2.jpg", width: 4892, height: 3270 },
+    { caption: "Taking the corner", year: "25-26", photo: "/RM29/cardriving3.jpg", width: 2048, height: 1366 },
+    { caption: "Kicking up dust", year: "25-26", photo: "/RM29/FD1A1699.jpg", width: 2048, height: 1366 },
+    { caption: "Race day", year: "25-26", photo: "/RM29/DSC03778.JPG", width: 6000, height: 4000 },
+    { caption: "Weaving through the slalom", year: "25-26", photo: "/RM29/DSC04102.JPG", width: 6000, height: 4000 },
+    { caption: "Car #86 trackside", year: "25-26", photo: "/RM29/IMG_2406.jpg", width: 4032, height: 3024 },
+    { caption: "Out on the circuit", year: "25-26", photo: "/RM29/DSC02050.JPG", width: 6000, height: 4000 },
+    { caption: "Rolling out at FSAE Michigan", year: "25-26", photo: "/RM29/FD1A6514.jpg", width: 2048, height: 1366 },
+    { caption: "Walking the car to the track", year: "25-26", photo: "/RM29/FD1A6998.jpg", width: 2048, height: 1366 },
+    { caption: "Buckled in and ready to drive", year: "25-26", photo: "/RM29/FD1A6543.jpg", width: 4897, height: 3266 },
+    { caption: "Tilt test at technical inspection", year: "25-26", photo: "/RM29/FD1A4452.jpg", width: 1366, height: 2048 },
+    { caption: "Final checks", year: "25-26", photo: "/RM29/FD1A4349.jpg", width: 2048, height: 1366 },
+    { caption: "Wrenching on the suspension", year: "25-26", photo: "/RM29/FD1A7128.jpg", width: 4897, height: 3266 },
+    { caption: "Electrical work in the pits", year: "25-26", photo: "/RM29/FD1A7204.jpg", width: 2048, height: 1366 },
+    { caption: "Setup in the paddock", year: "25-26", photo: "/RM29/FD1A4492.jpg", width: 2048, height: 1365 },
+    { caption: "Working in the pits", year: "25-26", photo: "/RM29/DSC02384.JPG", width: 6000, height: 4000 },
+    { caption: "Pit garage at competition", year: "25-26", photo: "/RM29/DSC03563.JPG", width: 6000, height: 4000 },
+    { caption: "Show me your data", year: "25-26", photo: "/RM29/FD1A6237.jpg", width: 2048, height: 1366 },
+    { caption: "The team in the paddock", year: "25-26", photo: "/RM29/team.jpg", width: 2048, height: 1366 },
+    { caption: "Lifting the car in celebration", year: "25-26", photo: "/RM29/team-pic.jpg", width: 4897, height: 3266 },
+    { caption: "Car #27 at the overlook", year: "25-26", photo: "/RM29/DSC01951.JPG", width: 6000, height: 4000 },
+    { caption: "Car #27 on campus", year: "25-26", photo: "/RM29/DSC01959.JPG", width: 6000, height: 4000 },
+    { caption: "Shakedown run on campus", year: "25-26", photo: "/RM29/DSC01966.JPG", width: 4000, height: 6000 },
+    { caption: "Car #27 testing on campus", year: "25-26", photo: "/RM29/DSC01663.JPG", width: 6000, height: 4000 },
+    { caption: "Filming at the overlook", year: "25-26", photo: "/RM29/DSC02105.JPG", width: 6000, height: 4000 },
+    { caption: "Autocross practice", year: "25-26", photo: "/RM29/DSC02166.JPG", width: 6000, height: 4000 },
+    { caption: "Pre-run checks in the paddock", year: "25-26", photo: "/RM29/PHO00053.JPG", width: 4000, height: 2250 },
+    { caption: "Late night in the shop garage", year: "25-26", photo: "/RM29/DSC00834.JPG", width: 6000, height: 4000 },
+    { caption: "The crew in the shop", year: "25-26", photo: "/RM29/PHO00034.JPG", width: 4000, height: 2250 },
+    { caption: "Showing off the car on campus", year: "25-26", photo: "/RM29/DSC04827.JPG", width: 6000, height: 4000 },
+    { caption: "Meeting new members at a campus event", year: "25-26", photo: "/RM29/DSC04831.JPG", width: 6000, height: 4000 },
+    { caption: "Car display under the tents", year: "25-26", photo: "/RM29/DSC04867.JPG", width: 6000, height: 4000 },
+    { caption: "Showcasing the car at an expo", year: "25-26", photo: "/RM29/FD1A9847.jpg", width: 2048, height: 1366 },
+    { caption: "RM29 rollout", year: "25-26", photo: "/RM29/rollout.jpg", width: 4897, height: 3266 },
+    { caption: "The team at rollout", year: "25-26", photo: "/RM29/team-background.jpg", width: 4897, height: 3266 },
+    { caption: "Under the lights", year: "25-26", photo: "/RM29/IMG_0289.PNG", width: 2001, height: 3000 },
+    { caption: "RM28 outside EMPAC", year: "24-25", photo: "/RM28/DSCF9921.JPG", width: 4896, height: 3264 },
+    { caption: "Full speed down the straight", year: "24-25", photo: "/RM28/_G5D8237.jpg", width: 4898, height: 3265 },
+    { caption: "Cornering hard", year: "24-25", photo: "/RM28/_G5D8407.jpg", width: 4898, height: 3265 },
+    { caption: "RM28 at speed", year: "24-25", photo: "/RM28/DSCF0266.JPG", width: 4896, height: 3264 },
+    { caption: "Pushing through the slalom", year: "24-25", photo: "/RM28/DSCF0786.JPG", width: 4896, height: 3264 },
+    { caption: "Autocross testing", year: "24-25", photo: "/RM28/DSCF0530.JPG", width: 4896, height: 3264 },
+    { caption: "Turn-in", year: "24-25", photo: "/RM28/_G5D8884.jpg", width: 4898, height: 3265 },
+    { caption: "Head-on approach", year: "24-25", photo: "/RM28/_G5D8910.jpg", width: 4898, height: 3265 },
+    { caption: "Testing in the wet", year: "24-25", photo: "/RM28/IMG_8083.JPG", width: 6000, height: 4000 },
+    { caption: "Team photo with RM28", year: "24-25", photo: "/RM28/IMG_7677.jpg", width: 2048, height: 1152 },
+    { caption: "The team at competition", year: "24-25", photo: "/RM28/IMG_7669.jpg", width: 2048, height: 1365 },
+    { caption: "Team photo on the lawn", year: "24-25", photo: "/RM28/IMG_8624.JPG", width: 3744, height: 2496 },
+    { caption: "Walking the track", year: "24-25", photo: "/RM28/IMG_3918.JPG", width: 4032, height: 3024 },
+    { caption: "RM28 and its sponsor board", year: "24-25", photo: "/RM28/PA031748.JPG", width: 5184, height: 2920 },
+    { caption: "On display on the lawn", year: "24-25", photo: "/RM28/PA031710.JPG", width: 5184, height: 2920 },
+    { caption: "RM28 on the lawn", year: "24-25", photo: "/RM28/_G5D8701.jpg", width: 3265, height: 4898 },
+    { caption: "Showing RM28 to students", year: "24-25", photo: "/RM28/DSCF9705.JPG", width: 4896, height: 3264 },
+    { caption: "Talking with students under the tent", year: "24-25", photo: "/RM28/PA031715.JPG", width: 5184, height: 2920 },
+    { caption: "Campus showcase", year: "24-25", photo: "/RM28/DSCF9811.JPG", width: 4896, height: 3264 },
+    { caption: "Rolling out of the trailer", year: "24-25", photo: "/RM28/IMG_9016.jpg", width: 2048, height: 1365 },
+    { caption: "Working by the trailer", year: "24-25", photo: "/RM28/P9071610.JPG", width: 5184, height: 2920 },
+    { caption: "RM28 with Rensselaer Public Safety", year: "24-25", photo: "/RM28/DSCF0037.JPG", width: 4896, height: 3264 },
   ] satisfies GalleryItem[],
 
   join: {

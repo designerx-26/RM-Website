@@ -87,7 +87,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
         <h3 className="text-lg font-bold uppercase tracking-wide text-brand-black dark:text-brand-white">
           Message Sent
         </h3>
-        <p className="text-sm text-brand-grey-500">Thanks for reaching out - we'll get back to you soon.</p>
+        <p className="text-sm text-brand-grey-500">Thanks for reaching out - we&apos;ll get back to you soon.</p>
       </div>
     );
   }

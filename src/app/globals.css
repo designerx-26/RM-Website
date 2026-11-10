@@ -22,9 +22,13 @@
   --color-brand-white: #ffffff;
   --color-brand-grey-50: #f5f5f5;
   --color-brand-grey-100: #e5e5e5;
+  --color-brand-grey-200: #d4d4d4;
   --color-brand-grey-300: #b3b3b3;
+  --color-brand-grey-400: #949494;
   --color-brand-grey-500: #737373;
+  --color-brand-grey-600: #575757;
   --color-brand-grey-700: #404040;
+  --color-brand-grey-800: #262626;
   --color-brand-grey-900: #1a1a1a;
 
   --color-brand-blue: #0a3d91;
@@ -43,9 +47,13 @@
   --color-brand-white: var(--color-brand-white);
   --color-brand-grey-50: var(--color-brand-grey-50);
   --color-brand-grey-100: var(--color-brand-grey-100);
+  --color-brand-grey-200: var(--color-brand-grey-200);
   --color-brand-grey-300: var(--color-brand-grey-300);
+  --color-brand-grey-400: var(--color-brand-grey-400);
   --color-brand-grey-500: var(--color-brand-grey-500);
+  --color-brand-grey-600: var(--color-brand-grey-600);
   --color-brand-grey-700: var(--color-brand-grey-700);
+  --color-brand-grey-800: var(--color-brand-grey-800);
   --color-brand-grey-900: var(--color-brand-grey-900);
 
   --color-brand-blue: var(--color-brand-blue);
@@ -77,4 +85,39 @@ body {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 400ms ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 250ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none;
+  }
 }
