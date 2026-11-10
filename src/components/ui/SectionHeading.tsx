@@ -41,7 +41,7 @@ export function SectionHeading({
       </h2>
       {children && (
         <div
-          className={`mt-4 leading-relaxed ${tone === "dark" ? "text-brand-grey-300" : "text-brand-grey-700"}`}
+          className={`mt-4 text-lg leading-relaxed ${tone === "dark" ? "text-brand-grey-100" : "text-brand-grey-800"}`}
         >
           {children}
         </div>

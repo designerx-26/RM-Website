@@ -22,8 +22,8 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
               <div
                 className={
                   useFourColumns
-                    ? "flex flex-wrap justify-center gap-6"
-                    : "flex flex-wrap justify-center gap-6 lg:mx-auto lg:w-[calc(75%-0.375rem)]"
+                    ? "grid grid-cols-1 gap-4 sm:flex sm:flex-wrap sm:justify-center sm:gap-6"
+                    : "grid grid-cols-1 gap-4 sm:flex sm:flex-wrap sm:justify-center sm:gap-6 lg:mx-auto lg:w-[calc(75%-0.375rem)]"
                 }
               >
                 {subteam.members.map((member) => (
@@ -31,8 +31,8 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
                     key={`${subteam.name}-${member.name}`}
                     className={
                       useFourColumns
-                        ? "flex-[0_0_calc(50%-0.75rem)] sm:flex-[0_0_calc(33.333%-1rem)] lg:flex-[0_0_calc(25%-1.125rem)]"
-                        : "flex-[0_0_calc(50%-0.75rem)] sm:flex-[0_0_calc(33.333%-1rem)]"
+                        ? "sm:flex-[0_0_calc(33.333%-1rem)] lg:flex-[0_0_calc(25%-1.125rem)]"
+                        : "sm:flex-[0_0_calc(33.333%-1rem)]"
                     }
                   >
                     <TeamMemberCard member={member} />

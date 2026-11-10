@@ -71,7 +71,7 @@ export default function JoinPage() {
                       <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </h2>
-                  <p className="mt-2 text-sm text-brand-grey-300">{path.description}</p>
+                  <p className="mt-2 text-base text-brand-grey-200">{path.description}</p>
                 </div>
               </Link>
             </Reveal>
@@ -99,7 +99,7 @@ export default function JoinPage() {
                     <h3 className="mt-5 text-lg font-black uppercase tracking-tight text-brand-black">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-brand-grey-500">{step.description}</p>
+                    <p className="mt-2 text-base leading-relaxed text-brand-grey-700">{step.description}</p>
                   </div>
                 </div>
               </Reveal>

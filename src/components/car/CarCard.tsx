@@ -24,7 +24,7 @@ export function CarCard({ car }: { car: Car }) {
             <h3 className="mt-2 text-4xl font-black uppercase tracking-tight text-brand-black sm:text-5xl">
               {car.name}
             </h3>
-            {car.tagline && <p className="mt-3 leading-relaxed text-brand-grey-500">{car.tagline}</p>}
+            {car.tagline && <p className="mt-3 text-lg leading-relaxed text-brand-grey-700">{car.tagline}</p>}
           </div>
 
           {car.goals && car.goals.length > 0 && (

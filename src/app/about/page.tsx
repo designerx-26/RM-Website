@@ -21,8 +21,9 @@ export default function AboutPage() {
         image={site.about.heroImage}
         eyebrow={site.meta.name}
         title="About Us"
-        className="h-[clamp(420px,38vw,80vh)]"
+        className="lg:h-[clamp(420px,38vw,80vh)]"
         imageClassName="object-[center_88%]"
+        mobileAspect="aspect-[16/7]"
       />
 
       <Section tone="white">
@@ -74,7 +75,7 @@ export default function AboutPage() {
                 <h3 className="mt-3 text-lg font-black uppercase tracking-tight text-brand-black">
                   {value.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-grey-500">{value.description}</p>
+                <p className="mt-2 text-base leading-relaxed text-brand-grey-700">{value.description}</p>
               </div>
             </Reveal>
           ))}
@@ -92,7 +93,7 @@ export default function AboutPage() {
                 <h3 className="text-base font-black uppercase tracking-tight text-brand-black">
                   {subsystem.name}
                 </h3>
-                <p className="mt-2 text-sm text-brand-grey-500">{subsystem.description}</p>
+                <p className="mt-2 text-base text-brand-grey-700">{subsystem.description}</p>
               </div>
             </Reveal>
           ))}

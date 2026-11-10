@@ -20,7 +20,7 @@ export default function TheCarPage() {
         image={{ src: car?.heroPhoto ?? "", alt: `${car?.name ?? site.meta.name} on track` }}
         eyebrow={`${car?.category} · ${car?.year}`}
         title="The Car"
-        className="h-[clamp(420px,38vw,80vh)]"
+        className="lg:h-[clamp(420px,38vw,80vh)]"
       />
 
       <Section tone="grey">
@@ -47,7 +47,7 @@ export default function TheCarPage() {
                 <h3 className="mt-4 text-5xl font-black uppercase tracking-tight text-brand-white sm:text-7xl">
                   {site.upcomingCar.name}
                 </h3>
-                <p className="mt-4 text-brand-grey-300">
+                <p className="mt-4 text-lg text-brand-grey-200">
                   Currently in design. Follow along as the team takes the next car from a blank sheet to
                   the track.
                 </p>

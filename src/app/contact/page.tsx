@@ -41,21 +41,21 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-px overflow-hidden border-y border-brand-grey-800 bg-brand-grey-800 sm:grid-cols-3">
           <a
             href={`mailto:${site.contact.email}`}
-            className="group flex flex-col gap-1 bg-brand-black px-6 py-6 transition-colors hover:bg-brand-grey-900"
+            className="group flex flex-col gap-2 bg-brand-black px-6 py-8 transition-colors hover:bg-brand-grey-900"
           >
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Email</span>
-            <span className="break-all text-sm font-semibold text-brand-white group-hover:text-brand-red">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Email</span>
+            <span className="break-all text-lg font-semibold sm:text-xl text-brand-white group-hover:text-brand-red">
               {site.contact.email}
             </span>
           </a>
-          <div className="flex flex-col gap-1 bg-brand-black px-6 py-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Shop</span>
-            <span className="text-sm font-semibold text-brand-white">{shopAddress}</span>
-            <span className="text-xs text-brand-grey-400">{site.contact.address}</span>
+          <div className="flex flex-col gap-2 bg-brand-black px-6 py-8">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Shop</span>
+            <span className="text-lg font-semibold text-brand-white sm:text-xl">{shopAddress}</span>
+            <span className="text-base text-brand-grey-400">{site.contact.address}</span>
           </div>
-          <div className="flex flex-col gap-3 bg-brand-black px-6 py-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">Follow</span>
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-3 bg-brand-black px-6 py-8">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Follow</span>
+            <div className="flex items-center gap-6">
               {socialLinks
                 .filter((link) => link.href)
                 .map((link) => (
@@ -67,7 +67,7 @@ export default function ContactPage() {
                     aria-label={link.platform}
                     className="text-brand-grey-300 transition-colors hover:text-brand-red"
                   >
-                    <SocialIcon platform={link.platform} className="h-5 w-5" />
+                    <SocialIcon platform={link.platform} className="h-7 w-7" />
                   </a>
                 ))}
             </div>

@@ -28,7 +28,7 @@ export function SponsorGrid({ tiers }: { tiers: SponsorTier[] }) {
                 {tier.sponsors.length} partner{tier.sponsors.length === 1 ? "" : "s"}
               </span>
             </div>
-            {tier.blurb && <p className="mb-4 text-sm text-brand-grey-500">{tier.blurb}</p>}
+            {tier.blurb && <p className="mb-4 text-base text-brand-grey-700">{tier.blurb}</p>}
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {tier.sponsors.map((sponsor) => (
                 <SponsorCard key={sponsor.name} sponsor={sponsor} />

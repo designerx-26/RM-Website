@@ -16,7 +16,7 @@ export function MeetingCards() {
             </div>
             <div className="flex flex-1 flex-col gap-2 p-5">
               <h3 className="text-base font-black uppercase tracking-tight text-brand-black">{meeting.title}</h3>
-              <p className="text-sm text-brand-grey-500">{meeting.description}</p>
+              <p className="text-base text-brand-grey-700">{meeting.description}</p>
               <div className="mt-auto flex flex-col gap-1.5 border-t border-brand-grey-100 pt-4 text-sm font-semibold text-brand-black">
                 <span className="flex items-center gap-2">
                   <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-brand-red" aria-hidden="true">

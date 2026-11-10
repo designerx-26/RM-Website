@@ -20,7 +20,9 @@ export default function GalleryPage() {
       <PageHero
         image={{ src: site.galleryHero, alt: "Car #27 at the overlook" }}
         title="Gallery"
-        imageClassName="object-[center_72%]"
+        // The car sits left of center in this shot: on mobile trim the sides so it lands centered.
+        mobileAspect="aspect-[9/7]"
+        imageClassName="object-[8%_50%] lg:object-[center_72%]"
         contentPosition="top"
       >
         <p>Moments from the shop, the track, and everywhere in between.</p>

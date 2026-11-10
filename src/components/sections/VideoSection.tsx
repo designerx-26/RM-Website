@@ -1,18 +1,60 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
+
+// How long after the player reports "ready" before a still-paused video counts as blocked.
+const AUTOPLAY_GRACE_MS = 3000;
 
 export function VideoSection() {
   const { video } = site;
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  // iOS (e.g. Low Power Mode) can refuse muted autoplay; background mode has no play
+  // button, so fall back to the regular player with controls when that happens.
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
-  const embedUrl = video.url
-    ? `${video.url}?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0`
-    : "";
+  const embedUrl = !video.url
+    ? ""
+    : autoplayBlocked
+      ? `${video.url}?muted=1&loop=1&playsinline=1&title=0&byline=0&portrait=0`
+      : `${video.url}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&controls=0&title=0&byline=0&portrait=0`;
+
+  useEffect(() => {
+    if (!video.url || autoplayBlocked) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const send = (method: string) =>
+      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ method }), "https://player.vimeo.com");
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== "https://player.vimeo.com" || e.source !== iframeRef.current?.contentWindow) return;
+      let data: { event?: string; method?: string; value?: unknown };
+      try {
+        data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+      if (data.event === "ready") {
+        clearTimeout(timer);
+        timer = setTimeout(() => send("getPaused"), AUTOPLAY_GRACE_MS);
+      } else if (data.method === "getPaused" && data.value === true) {
+        setAutoplayBlocked(true);
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+    return () => {
+      window.removeEventListener("message", onMessage);
+      clearTimeout(timer);
+    };
+  }, [video.url, autoplayBlocked]);
 
   return (
     <div className="aspect-video w-full overflow-hidden bg-brand-grey-900">
       {video.url ? (
         <iframe
+          key={embedUrl}
+          ref={iframeRef}
           src={embedUrl}
           title={video.title}
           className="h-full w-full"

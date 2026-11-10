@@ -16,7 +16,7 @@ export default function TeamPage() {
         image={{ src: "/RM29/team-pic.jpg", alt: "The Rensselaer Motorsport team celebrating with the car" }}
         eyebrow={site.meta.name}
         title="Our Team"
-        className="h-[calc(100vh-88px)] min-h-[480px]"
+        className="lg:h-[calc(100vh-88px)] lg:min-h-[480px]"
         imageClassName="object-[center_38%]"
       >
         <p>Meet the students designing, building, and racing our car.</p>

@@ -62,7 +62,7 @@ export default function DonatePage() {
                   <h2 className="flex items-center gap-2 text-2xl font-black uppercase tracking-tight text-brand-white">
                     Give Now <Arrow />
                   </h2>
-                  <p className="text-sm text-brand-grey-400">Make an individual gift through RPI&apos;s secure giving page.</p>
+                  <p className="text-base text-brand-grey-200">Make an individual gift through RPI&apos;s secure giving page.</p>
                 </a>
               ) : (
                 <div className="flex h-full flex-col gap-2 rounded-lg border border-dashed border-brand-grey-700 p-7 text-brand-grey-500">
@@ -78,7 +78,7 @@ export default function DonatePage() {
                 <h2 className="flex items-center gap-2 text-2xl font-black uppercase tracking-tight text-brand-white">
                   Become a Sponsor <Arrow />
                 </h2>
-                <p className="text-sm text-brand-grey-400">Partner with the team as a company or organization.</p>
+                <p className="text-base text-brand-grey-200">Partner with the team as a company or organization.</p>
               </Link>
             </Reveal>
           </div>
@@ -104,7 +104,7 @@ export default function DonatePage() {
                   </svg>
                 </span>
                 <h3 className="mt-5 text-lg font-black uppercase tracking-tight text-brand-black">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-grey-500">{item.description}</p>
+                <p className="mt-2 text-base leading-relaxed text-brand-grey-700">{item.description}</p>
               </div>
             </Reveal>
           ))}

@@ -17,7 +17,7 @@ export function SponsorStrip({ tiers, compact = false }: SponsorStripProps) {
                 {tier.tier} Sponsors
               </h3>
               {tier.blurb && (
-                <p className="mt-1 text-sm text-brand-grey-500">{tier.blurb}</p>
+                <p className="mt-1 text-base text-brand-grey-700">{tier.blurb}</p>
               )}
             </div>
           )}

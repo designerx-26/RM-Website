@@ -35,7 +35,7 @@ export function HomeCards() {
                 <h3 className="text-xl font-black uppercase tracking-tight text-brand-white sm:text-2xl">
                   {card.title}
                 </h3>
-                <p className="mt-2 max-w-md text-sm text-brand-grey-300">{card.description}</p>
+                <p className="mt-2 max-w-md text-base text-brand-grey-100">{card.description}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-wide text-brand-white transition-colors group-hover:text-brand-red">
                   {card.cta}
                   <svg

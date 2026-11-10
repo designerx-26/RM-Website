@@ -6,19 +6,24 @@ export function Hero() {
   const { hero } = site;
 
   return (
-    <div className="relative flex h-[72svh] min-h-[480px] items-start justify-center overflow-hidden bg-brand-black sm:h-[80svh] md:h-[88svh] lg:h-[100svh]">
-      <SiteImage
-        src={hero.image.src}
-        alt={hero.image.alt}
-        fill
-        className="object-cover"
-        sizes="100vw"
-        priority
-        labelAlign="top"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/65 to-brand-black/25" />
+    // Below lg the screen is too narrow for a full-bleed 3:2 photo without cropping the car,
+    // so the text stacks above the photo shown at its natural shape; lg+ overlays the text.
+    <div className="relative flex flex-col overflow-hidden bg-brand-black lg:h-[100svh] lg:min-h-[480px]">
+      <div className="relative order-2 aspect-[3/2] w-full lg:absolute lg:inset-0 lg:aspect-auto">
+        <SiteImage
+          src={hero.image.src}
+          alt={hero.image.alt}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+          labelAlign="top"
+        />
+        <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-brand-black to-transparent lg:hidden" />
+      </div>
+      <div className="absolute inset-0 hidden bg-gradient-to-b from-brand-black/90 via-brand-black/65 to-brand-black/25 lg:block" />
 
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-16 text-center sm:pt-24">
+      <div className="relative order-1 mx-auto flex w-full max-w-5xl flex-col items-center px-6 pb-6 pt-12 text-center sm:pt-16 lg:pb-0 lg:pt-24">
         {hero.eyebrow && (
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-red [text-shadow:0_1px_6px_rgb(0_0_0/0.8)]">
             {hero.eyebrow}
@@ -46,7 +51,7 @@ export function Hero() {
       <a
         href="#about"
         aria-label="Scroll to learn more"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-brand-white/70 transition-colors hover:text-brand-white"
+        className="absolute bottom-8 left-1/2 hidden lg:block -translate-x-1/2 animate-bounce text-brand-white/70 transition-colors hover:text-brand-white"
       >
         <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" aria-hidden="true">
           <path
