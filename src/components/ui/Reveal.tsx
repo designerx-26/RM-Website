@@ -17,14 +17,17 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
     const el = ref.current;
     if (!el) return;
 
+    // Trigger as soon as the top edge enters the viewport (not a % of the element), so tall
+    // wrappers like a whole team roster don't stay hidden until they're mostly on screen.
+    // Anything already scrolled past (fast scroll, jump link) is shown immediately.
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
           setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
     );
 
     observer.observe(el);
