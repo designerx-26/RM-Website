@@ -80,6 +80,12 @@ export interface Car {
   heroPhoto?: string;
   /** CSS object-position for the lineup card photo, e.g. "left center" when the car runs to one edge. */
   photoPosition?: string;
+  /**
+   * Box around the car in the card photo, as fractions of the image (0-1), plus the image's
+   * width/height ratio. The card zooms so this box fills as much of the frame as it can while
+   * staying fully visible. Overrides photoPosition.
+   */
+  photoCrop?: { x: number; y: number; w: number; h: number; aspect: number };
   specs: CarSpec[];
   features: string[];
   systems?: CarSystem[];
@@ -868,8 +874,9 @@ export const site = {
       year: "2024-2025",
       category: "Formula SAE Electric",
       tagline: "RM28 was our third electric car, built around a new battery pack assembled from prepackaged power modules.",
-      // Wingless shot: RM28 ran RM26's wings, so photos with the "226" wing are avoided here.
-      photo: "/RM28/IMG_8083.JPG",
+      photo: "/RM28/_G5D8407.jpg",
+      // Extra room on the left so the diagonal edge of the (reversed) card doesn't clip the rear wing.
+      photoCrop: { x: 0.075, y: 0.28, w: 0.7, h: 0.44, aspect: 4898 / 3265 },
       specs: [
         { label: "Motor", value: "EMRAX 228, combined-cooled" },
         { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
@@ -918,7 +925,9 @@ export const site = {
       category: "Formula SAE Electric",
       tagline:
         "RM26 was our first electric car, taking the team from combustion to EV and racing as car #226 at Formula SAE Electric in June 2023.",
-      photo: "/RM26/IMG_1640.JPG",
+      photo: "/RM26/IMG_4654.jpg",
+      // Portrait shot with the car small at the bottom; the crop zooms in on just the car.
+      photoCrop: { x: 0.27, y: 0.7, w: 0.445, h: 0.15, aspect: 3024 / 4032 },
       specs: [],
       features: [],
       results: [

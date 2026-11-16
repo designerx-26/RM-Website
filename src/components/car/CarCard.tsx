@@ -1,5 +1,27 @@
+import type { CSSProperties } from "react";
 import type { Car } from "@/content/site";
 import { SiteImage } from "@/components/ui/SiteImage";
+
+/**
+ * Sizes and positions the photo so car.photoCrop's box is as large as possible while staying fully
+ * in frame, centered, with the rest of the photo filling the frame (never leaving blank edges).
+ * Uses container query units, so the photo wrapper must be a size container. The image can't use
+ * next/image's `fill` here (it forbids a custom width), so it's absolutely positioned by hand.
+ */
+function cropStyle({ x, y, w, h, aspect }: NonNullable<Car["photoCrop"]>): CSSProperties {
+  // Rendered image width: big enough to fit the box (the smaller of the width/height fits), but
+  // never smaller than what's needed to cover the frame.
+  const width = `max(min(100cqw / ${w}, 100cqh * ${aspect / h}), 100cqw, 100cqh * ${aspect})`;
+  const height = `calc(${width} / ${aspect})`;
+  return {
+    position: "absolute",
+    width,
+    height,
+    maxWidth: "none",
+    left: `clamp(100cqw - ${width}, 50cqw - ${x + w / 2} * ${width}, 0px)`,
+    top: `clamp(100cqh - ${height}, 50cqh - ${y + h / 2} * ${height}, 0px)`,
+  };
+}
 
 /**
  * Dark "livery" card for the car lineup: photo with a diagonal cut into the details panel,
@@ -16,6 +38,8 @@ export function CarCard({ car, reverse = false }: { car: Car; reverse?: boolean 
       >
         <div
           className={`relative aspect-[3/2] overflow-hidden bg-brand-black md:aspect-auto ${
+            car.photoCrop ? "[container-type:size] " : ""
+          }${
             reverse
               ? "md:order-2 md:[clip-path:polygon(8%_0,100%_0,100%_100%,0_100%)]"
               : "md:[clip-path:polygon(0_0,100%_0,92%_100%,0_100%)]"
@@ -24,10 +48,24 @@ export function CarCard({ car, reverse = false }: { car: Car; reverse?: boolean 
           <SiteImage
             src={car.photo}
             alt={`Photo of ${car.name}`}
-            fill
+            fill={!car.photoCrop}
+            // Intrinsic size for a cropped photo: only the ratio matters, CSS sets the real size.
+            width={car.photoCrop ? 1600 : undefined}
+            height={car.photoCrop ? Math.round(1600 / car.photoCrop.aspect) : undefined}
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            sizes="(min-width: 768px) 60vw, 100vw"
-            imgStyle={car.photoPosition ? { objectPosition: car.photoPosition } : undefined}
+            // A crop zooms in, so request a proportionally larger file to stay sharp.
+            sizes={
+              car.photoCrop
+                ? `(min-width: 768px) ${Math.round(60 / car.photoCrop.w)}vw, ${Math.round(100 / car.photoCrop.w)}vw`
+                : "(min-width: 768px) 60vw, 100vw"
+            }
+            imgStyle={
+              car.photoCrop
+                ? cropStyle(car.photoCrop)
+                : car.photoPosition
+                  ? { objectPosition: car.photoPosition }
+                  : undefined
+            }
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-transparent md:from-brand-black/30" />
           <span
