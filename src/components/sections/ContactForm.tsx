@@ -18,9 +18,18 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
   const [organization, setOrganization] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  // Honeypot: hidden from people, but form-filling spam bots tick it. Web3Forms also rejects
+  // any submission where it's set.
+  const [botcheck, setBotcheck] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Pretend it worked so the bot moves on, without sending anything.
+    if (botcheck) {
+      setStatus("success");
+      return;
+    }
 
     const subject =
       audience === "student"
@@ -59,6 +68,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
           email,
           organization: audience === "sponsor" ? organization : undefined,
           message,
+          botcheck,
         }),
       });
 
@@ -121,6 +131,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
           <input
             id="name"
             required
+            maxLength={100}
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={`mt-1.5 ${inputClasses}`}
@@ -134,6 +145,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
             id="email"
             type="email"
             required
+            maxLength={254}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={`mt-1.5 ${inputClasses}`}
@@ -151,6 +163,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
           </label>
           <input
             id="organization"
+            maxLength={150}
             value={organization}
             onChange={(e) => setOrganization(e.target.value)}
             className={`mt-1.5 ${inputClasses}`}
@@ -166,6 +179,7 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
           id="message"
           required
           rows={5}
+          maxLength={5000}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={
@@ -176,6 +190,18 @@ export function ContactForm({ defaultAudience = "student", lockAudience = false 
           className={`mt-1.5 resize-none ${inputClasses}`}
         />
       </div>
+
+      {/* Off-screen rather than display:none, which some bots know to skip. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        checked={botcheck}
+        onChange={(e) => setBotcheck(e.target.checked)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px opacity-0"
+      />
 
       {status === "error" && (
         <p className="text-sm font-medium text-brand-red">

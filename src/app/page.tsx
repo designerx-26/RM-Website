@@ -35,7 +35,8 @@ export default function Home() {
                   alt="The team with car #86 at Formula SAE Electric"
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  // Half of the max-w-6xl content column on wide screens, not half the viewport.
+                  sizes="(min-width: 1152px) 520px, (min-width: 1024px) 50vw, 100vw"
                 />
               </div>
             </div>

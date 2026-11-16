@@ -191,8 +191,13 @@ export const site = {
   },
 
   video: {
-    // Paste a YouTube/Vimeo embed URL here (e.g. "https://www.youtube.com/embed/VIDEO_ID").
-    // Leave blank and the homepage will show a clearly labeled placeholder instead.
+    // Self-hosted MP4 in /public (e.g. "/video/recap-1080.mp4"). Preferred over the embed below:
+    // it starts much faster on phones and autoplays without Vimeo's player. srcMobile is an
+    // optional smaller encode served below the lg breakpoint. Leave src blank to use the embed.
+    src: "",
+    srcMobile: "",
+    // Vimeo embed URL, used only when src is blank. If both are blank the homepage shows a
+    // clearly labeled placeholder instead.
     url: "https://player.vimeo.com/video/1137944844",
     title: "Rensselaer Motorsport - Season Recap",
     // Still frame shown until the player loads (it only loads once scrolled near).
