@@ -4,8 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { site } from "@/content/site";
 
-// How long after the player reports "ready" before a still-paused video counts as blocked.
-const AUTOPLAY_GRACE_MS = 3000;
+// How long after the player reports "ready" before a video that still hasn't started counts as
+// blocked. Long enough for a slow phone connection to buffer the first segment; a "play" event
+// before then cancels the check.
+const AUTOPLAY_GRACE_MS = 10000;
+
+/** Sends a Vimeo player API call (e.g. "play") to the embed. */
+function postToPlayer(iframe: HTMLIFrameElement | null, method: string, value?: string) {
+  iframe?.contentWindow?.postMessage(JSON.stringify(value ? { method, value } : { method }), "https://player.vimeo.com");
+}
 
 export function VideoSection() {
   const { video } = site;
@@ -34,7 +41,8 @@ export function VideoSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px 0px" },
+      // Start loading well before the section is on screen so phones have time to buffer.
+      { rootMargin: "1000px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -43,9 +51,6 @@ export function VideoSection() {
   useEffect(() => {
     if (!video.url || autoplayBlocked || !inView) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
-
-    const send = (method: string) =>
-      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ method }), "https://player.vimeo.com");
 
     const onMessage = (e: MessageEvent) => {
       if (e.origin !== "https://player.vimeo.com" || e.source !== iframeRef.current?.contentWindow) return;
@@ -57,7 +62,12 @@ export function VideoSection() {
       }
       if (data.event === "ready") {
         clearTimeout(timer);
-        timer = setTimeout(() => send("getPaused"), AUTOPLAY_GRACE_MS);
+        postToPlayer(iframeRef.current, "addEventListener", "play");
+        // Start right away rather than waiting for Vimeo's own on-screen check.
+        postToPlayer(iframeRef.current, "play");
+        timer = setTimeout(() => postToPlayer(iframeRef.current, "getPaused"), AUTOPLAY_GRACE_MS);
+      } else if (data.event === "play") {
+        clearTimeout(timer);
       } else if (data.method === "getPaused" && data.value === true) {
         setAutoplayBlocked(true);
       }
@@ -70,11 +80,26 @@ export function VideoSection() {
     };
   }, [video.url, autoplayBlocked, inView]);
 
+  // Vimeo's background player pauses itself while off screen and only resumes once it's
+  // visible, which shows a frozen frame for a moment. Resume it just before it scrolls in.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || !inView || autoplayBlocked) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) postToPlayer(iframeRef.current, "play");
+      },
+      { rootMargin: "300px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [inView, autoplayBlocked]);
+
   return (
     <div ref={containerRef} className="relative aspect-video w-full overflow-hidden bg-brand-grey-900">
       {video.url ? (
         <>
-          {inView && <Image src={video.poster} alt="" fill sizes="100vw" className="object-cover" />}
+          <Image src={video.poster} alt="" fill sizes="100vw" className="object-cover" />
           {inView && (
             <iframe
               key={embedUrl}

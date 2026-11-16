@@ -7,6 +7,8 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
     ? member.role.split(",").map((r) => r.trim()).filter(Boolean)
     : [];
 
+  const degrees = [{ major: member.major, gradYear: member.gradYear }, ...(member.additionalDegrees ?? [])];
+
   const scale = member.photoScale ?? 1;
   const position = member.photoPosition ?? "50% 20%";
   const photoBg = member.photoBg;
@@ -59,26 +61,47 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
             ))}
           </div>
         )}
-        <p className="text-sm leading-tight text-brand-grey-500">
-          {member.major} &apos;{member.gradYear.slice(-2)}
-          {member.additionalDegrees?.map((degree) => (
-            <span key={degree.major}>
-              <br />
-              {degree.major} &apos;{degree.gradYear.slice(-2)}
-            </span>
-          ))}
-        </p>
-        {member.linkedin && (
-          <div className="mt-auto pt-2">
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-4 py-1.5 text-sm font-semibold text-brand-white transition-colors hover:bg-brand-blue/90 sm:flex sm:py-2"
+        {/* One row per degree: major wrapping on the left, class-year tag pinned to the right, so
+            long majors and second degrees stay aligned instead of running together. */}
+        <ul className="flex flex-col gap-1.5">
+          {degrees.map((degree) => (
+            <li
+              key={degree.major}
+              className="flex items-start justify-between gap-3 text-sm leading-snug text-brand-grey-600 dark:text-brand-grey-300"
             >
-              <SocialIcon platform="linkedin" className="h-4 w-4" />
-              LinkedIn
-            </a>
+              <span>{degree.major}</span>
+              <span className="mt-px shrink-0 rounded bg-brand-grey-100 px-1.5 py-px text-xs font-bold tabular-nums text-brand-grey-700 dark:bg-brand-grey-800 dark:text-brand-grey-200">
+                &apos;{degree.gradYear.slice(-2)}
+              </span>
+            </li>
+          ))}
+        </ul>
+        {(member.linkedin || member.email) && (
+          <div className="mt-auto flex gap-2 pt-2">
+            {member.linkedin && (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-4 py-1.5 text-sm font-semibold text-brand-white transition-colors hover:bg-brand-blue/90 sm:flex-1 sm:py-2"
+              >
+                <SocialIcon platform="linkedin" className="h-4 w-4" />
+                LinkedIn
+              </a>
+            )}
+            {member.email && (
+              <a
+                href={`mailto:${member.email}`}
+                aria-label={`Email ${member.name}`}
+                title={member.email}
+                className={`inline-flex items-center justify-center gap-2 rounded-full border border-brand-grey-200 text-sm font-semibold text-brand-black transition-colors hover:border-brand-red hover:text-brand-red ${
+                  member.linkedin ? "h-8 w-8 shrink-0 sm:h-9 sm:w-9" : "px-4 py-1.5 sm:flex-1 sm:py-2"
+                }`}
+              >
+                <SocialIcon platform="email" className="h-4 w-4" />
+                {!member.linkedin && "Email"}
+              </a>
+            )}
           </div>
         )}
       </div>

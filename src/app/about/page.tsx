@@ -16,6 +16,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
+// Engineering majors are listed without the repeated "Engineering" under one heading;
+// everything else (business, media, design) gets its own group.
+const majorGroups = [
+  {
+    label: "Engineering",
+    majors: site.about.majors.filter((m) => m.endsWith(" Engineering")).map((m) => m.replace(/ Engineering$/, "")),
+    compact: true,
+  },
+  {
+    label: "Business, Media & Design",
+    majors: site.about.majors.filter((m) => !m.endsWith(" Engineering")),
+    compact: false,
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
@@ -30,7 +45,7 @@ export default function AboutPage() {
 
       <Section tone="white">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-lg leading-relaxed text-brand-grey-700 sm:text-xl">{site.about.aboutUs.replace("{members}", `${memberCount}+`)}</p>
+          <p className="text-lg leading-relaxed text-brand-grey-700 sm:text-xl">{site.about.aboutUs.replace("{members}", `${memberCount}`)}</p>
         </div>
       </Section>
 
@@ -50,7 +65,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
               <SiteImage
                 src="/RM29/FD1A6514.jpg"
-                alt="Rolling the car out at FSAE Michigan"
+                alt="Rolling the car out at Formula SAE Electric"
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 45vw, 100vw"
@@ -125,35 +140,43 @@ export default function AboutPage() {
       </Section>
 
       <Section tone="black">
-        <div className="grid gap-12 md:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading eyebrow="Who Joins" title="Our Majors" align="left" tone="dark" className="mb-6" />
-            <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-              {site.about.majors.map((major) => (
-                <li
-                  key={major}
-                  className="flex items-center gap-3 rounded-md border border-brand-grey-800 bg-brand-grey-900 px-4 py-3 text-sm text-brand-grey-100"
-                >
-                  <span className="h-1.5 w-1.5 shrink-0 bg-brand-red" aria-hidden="true" />
-                  {major}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <SectionHeading eyebrow="Alumni" title="Where We've Gone" align="left" tone="dark" className="mb-6">
-              <p className="text-sm">Recent alumni destinations include:</p>
-            </SectionHeading>
-            <div className="flex flex-wrap gap-2">
-              {site.about.alumniEmployers.map((employer) => (
-                <span
-                  key={employer}
-                  className="rounded-full border border-brand-grey-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-brand-white transition-colors hover:border-brand-red hover:bg-brand-red"
-                >
-                  {employer}
-                </span>
+            <SectionHeading eyebrow="Who Joins" title="Our Fields of Study" align="left" tone="dark" className="mb-8" />
+            <div className="flex flex-col gap-4">
+              {majorGroups.map((group) => (
+                <div key={group.label} className="rounded-xl border border-brand-grey-800 bg-brand-grey-900 p-6">
+                  <h3 className="mb-5 border-b border-brand-grey-800 pb-3 text-sm font-bold uppercase tracking-[0.2em] text-brand-red-light">
+                    {group.label}
+                  </h3>
+                  <ul className={`grid gap-x-6 gap-y-3 ${group.compact ? "grid-cols-2" : "grid-cols-1"}`}>
+                    {group.majors.map((major) => (
+                      <li key={major} className="flex items-baseline gap-3 text-base font-bold text-brand-white sm:text-lg">
+                        <span className="h-3 w-1 shrink-0 -skew-x-12 bg-brand-red" aria-hidden="true" />
+                        {major}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
+          </div>
+          <div>
+            <SectionHeading eyebrow="Alumni" title="Where We've Gone" align="left" tone="dark" className="mb-8">
+              <p>Our alumni have gone on to careers at companies including:</p>
+            </SectionHeading>
+            <ul className="flex flex-wrap gap-2 sm:gap-3">
+              {site.about.alumniEmployers.map((employer) => (
+                <li
+                  key={employer}
+                  className="flex min-h-14 grow items-center justify-center rounded-lg border border-brand-grey-800 bg-brand-grey-900 px-5 py-3 text-center text-sm font-black uppercase tracking-wide text-brand-white transition-colors hover:border-brand-red hover:text-brand-red-light"
+                >
+                  {employer}
+                </li>
+              ))}
+              {/* Soaks up the leftover space on the last row so its tiles don't stretch full width. */}
+              <li className="grow-[999] basis-0" aria-hidden="true" />
+            </ul>
           </div>
         </div>
       </Section>

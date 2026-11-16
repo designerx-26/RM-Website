@@ -3,10 +3,10 @@ import { SponsorCard } from "@/components/sponsors/SponsorCard";
 import { Reveal } from "@/components/ui/Reveal";
 
 const tierBadgeStyles: Record<string, string> = {
-  Title: "bg-brand-red text-brand-white",
-  "Level 3": "bg-brand-grey-700 text-brand-white",
-  "Level 2": "bg-blue-700 text-brand-white",
-  "Level 1": "bg-amber-700 text-brand-white",
+  Platinum: "bg-gradient-to-r from-slate-200 to-slate-400 text-brand-black",
+  Gold: "bg-gradient-to-r from-amber-300 to-yellow-500 text-brand-black",
+  Silver: "bg-gradient-to-r from-zinc-300 to-zinc-500 text-brand-black",
+  Bronze: "bg-gradient-to-r from-orange-700 to-amber-800 text-brand-white",
 };
 
 export function SponsorGrid({ tiers }: { tiers: SponsorTier[] }) {
@@ -24,9 +24,6 @@ export function SponsorGrid({ tiers }: { tiers: SponsorTier[] }) {
                 {tier.tier} Sponsors
               </span>
               <div className="h-px flex-1 bg-brand-grey-100 dark:bg-brand-grey-800" />
-              <span className="text-sm text-brand-grey-500">
-                {tier.sponsors.length} partner{tier.sponsors.length === 1 ? "" : "s"}
-              </span>
             </div>
             {tier.blurb && <p className="mb-4 text-base text-brand-grey-700">{tier.blurb}</p>}
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">

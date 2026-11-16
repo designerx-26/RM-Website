@@ -14,18 +14,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/sponsors" },
 };
 
-const totalPartners = site.sponsors.reduce((sum, tier) => sum + tier.sponsors.length, 0);
-
 export default function SponsorsPage() {
   return (
     <>
       <PageHero
         image={{ src: "/RM29/car1.jpg", alt: "Car #86 and its sponsor livery with the team's competition awards" }}
         imageClassName="object-[center_82%]"
-        eyebrow={`${totalPartners}+ Partners`}
+        eyebrow="Our Partners"
         title="Our Sponsors"
       >
-        <p>{`Thank you to the ${totalPartners}+ sponsors and partners whose generous support makes ${site.meta.name} possible.`}</p>
+        <p>{`Thank you to the sponsors and partners whose generous support makes ${site.meta.name} possible.`}</p>
       </PageHero>
 
       <Section tone="white">
@@ -62,9 +60,9 @@ export default function SponsorsPage() {
       <Section tone="grey">
         <SectionHeading eyebrow="Our Partners" title="Thank You" className="mb-12">
           <p>
-            Every part on our car, every trip to competition, and every hour in the shop is made
-            possible by the companies and organizations below. We&apos;re proud to build alongside
-            partners who believe in student engineering.
+            Every part of our car, every trip to competition, and every hour in the shop is made
+            possible by the companies and organizations below. We are proud to partner and grow
+            alongside these organizations who believe in student engineering.
           </p>
         </SectionHeading>
         <SponsorGrid tiers={site.sponsors} />

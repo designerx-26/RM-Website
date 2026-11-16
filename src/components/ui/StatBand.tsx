@@ -5,7 +5,9 @@ import type { Stat } from "@/content/site";
 
 function AnimatedStat({ value }: { value: string }) {
   const match = value.match(/^(\d+)(.*)$/);
-  const target = match ? parseInt(match[1], 10) : null;
+  // A year like "1992" (the Founded stat) shows as-is instead of counting up from 0.
+  const isYear =/^(19|20)\d\d$/.test(value);
+  const target = match && !isYear ? parseInt(match[1], 10) : null;
   const suffix = match ? match[2] : "";
 
   const [display, setDisplay] = useState(target === null ? value : "0");
@@ -50,9 +52,10 @@ function AnimatedStat({ value }: { value: string }) {
 
 export function StatBand({ stats }: { stats: Stat[] }) {
   return (
-    <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+    // Wraps and centers so any number of stats balances: 5 across on desktop, 3 + 2 on tablets, 2 + 2 + 1 on phones.
+    <div className="flex flex-wrap justify-center gap-y-8">
       {stats.map((stat) => (
-        <div key={stat.label} className="text-center">
+        <div key={stat.label} className="w-1/2 px-2 text-center sm:w-1/3 lg:w-1/5">
           <AnimatedStat value={stat.value} />
           <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-brand-grey-600">
             {stat.label}

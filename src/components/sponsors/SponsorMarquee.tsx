@@ -2,8 +2,8 @@ import { site } from "@/content/site";
 import { SponsorCard } from "@/components/sponsors/SponsorCard";
 
 export function SponsorMarquee() {
-  const topSponsors = site.sponsors[0]?.sponsors ?? [];
-  const track = [...topSponsors, ...topSponsors];
+  const allSponsors = site.sponsors.flatMap((tier) => tier.sponsors);
+  const track = [...allSponsors, ...allSponsors];
 
   return (
     <div className="flex flex-col gap-8">

@@ -38,6 +38,8 @@ export interface TeamMember {
   additionalDegrees?: { major: string; gradYear: string }[];
   photo: string;
   linkedin?: string;
+  /** RPI email, shown as an Email button on the team card. */
+  email?: string;
   bio?: string;
   /** Zoom multiplier applied to the photo so every subject reads at a consistent size. Defaults to 1. */
   photoScale?: number;
@@ -62,11 +64,10 @@ export interface CarSystem {
   description: string;
 }
 
-export interface CompetitionGoal {
-  result: string;
+/** One competition's results for a car, e.g. "Formula SAE Electric 2026" -> 21st Place Overall, ... */
+export interface CompetitionResult {
   competition: string;
-  date?: string;
-  location?: string;
+  results: { title: string; detail?: string }[];
 }
 
 export interface Car {
@@ -82,7 +83,7 @@ export interface Car {
   specs: CarSpec[];
   features: string[];
   systems?: CarSystem[];
-  goals?: CompetitionGoal[];
+  results?: CompetitionResult[];
 }
 
 export interface Sponsor {
@@ -176,7 +177,7 @@ export const site = {
     eyebrow: "Rensselaer Polytechnic Institute Formula SAE",
     headline: "RENSSELAER MOTORSPORT",
     subheadline:
-      "A student run engineering team designing, building, and racing a formula style car from scratch - every year, from the ground up.",
+      "A student-run engineering team designing, building, and racing an electric formula-style race car - from scratch, every year.",
     primaryCta: { label: "Join the Team", href: "/join" } satisfies NavLink,
     secondaryCta: { label: "Meet the Car", href: "/the-car" } satisfies NavLink,
     // TEMP preview: original was "/background.png"
@@ -219,8 +220,8 @@ export const site = {
     },
     {
       title: "Our Sponsors",
-      description:
-        "Rensselaer Motorsport runs on the generous support of 40+ industry partners and sponsors.",
+      // "{sponsors}" is filled in with the live sponsor count, matching the stat above it.
+      description: "Rensselaer Motorsport runs on the generous support of {sponsors} industry partners and sponsors.",
       href: "/sponsors",
       image: "/RM29/car.jpg",
       cta: "View Sponsors",
@@ -247,7 +248,7 @@ export const site = {
       "Logo placement on our race car and website",
       "Invitations to team events and competitions",
       "Logo on team merchandise",
-      "Access to our student engineering resume pool",
+      "Access to our student resume pool",
       "Featured recognition on social media",
       "Access to our monthly newsletter",
     ],
@@ -255,7 +256,7 @@ export const site = {
 
   contact: {
     intro:
-      "Have a question, want to sponsor the team, or just want to say hello? Reach out - we'd love to hear from you.",
+      "Have a question, want to sponsor the team, or just want to say hello? Reach out, we'd love to hear from you!",
     email: "admin@rensselaermotorsport.com",
     address: "Rensselaer Polytechnic Institute, Troy, NY",
     // Web3Forms access key (from web3forms.com, confirmed to the email above).
@@ -268,7 +269,7 @@ export const site = {
         day: "Every Tuesday",
         title: "General Team Meeting",
         description:
-          "Our weekly meeting, where we update the entire team about admin, business, and engineering updates.",
+          "Our weekly meeting where we update the entire team about admin, business, and engineering progress.",
         time: "7:00 PM – 8:00 PM",
         location: "Sage 3101",
       },
@@ -294,8 +295,8 @@ export const site = {
   donate: {
     intro:
       "Rensselaer Motorsport is a student-funded team - every donation goes directly toward materials, manufacturing, and competition travel.",
-    // RPI's official giving portal. Verify this is still the correct fund/URL before relying on it.
-    url: "https://giving.rpi.edu/",
+    // Rensselaer giving form for the team.
+    url: "https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=10302&cid=23465",
     instructions:
       "When you give through the Rensselaer giving site, use the comments/designation field at checkout and write \"Rensselaer Motorsport\" (RPI Formula SAE) so your gift is directed to our team.",
   },
@@ -309,14 +310,14 @@ export const site = {
     // Condensed synopsis for the About page hero/intro block.
     // "{members}" is filled in with the current roster size from `team` below.
     aboutUs:
-      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of {members} undergraduate engineers and business students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone can't provide.",
+      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of {members} full members including both undergraduate and graduate students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone cannot provide.",
     whatIsFsae: {
       title: "What is FSAE?",
-      body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, test, and race a small formula-style race car, then bring it to competition to be evaluated against other schools. Cars are judged on a mix of static events - cost, engineering design, and a business/sponsorship presentation - and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. It's a full product-development cycle compressed into a single school year: design, manufacture, validate, and race.",
+      body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, and test small formula-style race cars, then bring them to competition to be evaluated against other schools. Cars are judged on a mix of static events—cost, engineering design, and a business/sponsorship presentation—and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. Essentially, the student teams go through the full product-development cycle each school year: design, manufacture, validate, and race.",
     },
     ourWork: {
       title: "Our Work",
-      body: "Every year, Rensselaer Motorsport designs and manufactures a new competition car from a blank sheet - running the full engineering cycle of concept, CAD, analysis, manufacturing, and testing, while the business team secures sponsorship, manages budget, and prepares the cost and presentation events that are judged alongside the car itself.",
+      body: "Every year, Rensselaer Motorsport designs and manufactures a new competition car from a blank sheet. The team focuses on maintaining excellent engineering practices, establishing a hands-on learning environment, and emphasizing a collaborative “one team” approach to project management.",
     },
     values: [
       {
@@ -332,43 +333,53 @@ export const site = {
       {
         title: "One Team",
         description:
-          "Engineering and business members work side by side, because a competitive car needs both a strong design and a strong program behind it.",
+          "Our engineering and business members work side by side, fostering a collaborative community and allowing everyone to get experience dealing with both the technical and logistical aspects of building a race car.",
       },
     ] satisfies ValueCard[],
     subsystems: [
-      {
-        name: "Vehicle Dynamics & Suspension",
-        description: "Suspension geometry, kinematics, and handling balance.",
-      },
+      { name: "Suspension", description: "Suspension geometry, kinematics, and handling balance." },
       { name: "Chassis", description: "Structural frame design, safety, and manufacturing." },
-      { name: "Aerodynamics", description: "Aero packages for downforce and cooling." },
       {
-        name: "EV & High Voltage",
-        description: "Motor, inverter, and high-voltage system integration.",
+        name: "Aerodynamics",
+        description: "Aerodynamic packages for increased downforce and cornering speeds.",
+      },
+      {
+        name: "High Voltage",
+        description: "High-voltage system integration within the tractive battery.",
       },
       {
         name: "Tractive Battery",
         description: "Battery pack design, cell selection, and accumulator safety.",
       },
       { name: "Low Voltage", description: "Vehicle electronics, sensors, and data acquisition." },
-      { name: "Drivetrain", description: "Power delivery from motor to wheels." },
+      { name: "Drivetrain", description: "Power delivery from the tractive battery to the wheels." },
       { name: "Ergonomics", description: "Driver interface, cockpit layout, and controls." },
       {
-        name: "Business & Sponsorship",
-        description: "Budget, partnerships, and the cost/business competition events.",
+        name: "Business",
+        description:
+          "Budgeting, sponsor outreach and management, purchasing, and the cost/business competition events.",
       },
     ] satisfies Subsystem[],
     foundingYear: 1992,
+    // First Formula SAE competition (Michigan 1994, 32nd of 58). The team was founded in 1992.
+    firstCompetitionYear: 1994,
+    // Seasons with no in-person Formula SAE result (per the FS-Elo results database): no entry in
+    // 2010, RM20 broke before Michigan 2013, and 2020-2021 were virtual-only during COVID.
+    // "Years Competing" counts every other year from 1994 through the latest result on a car card.
+    missedCompetitionYears: [2010, 2013, 2020, 2021],
     history:
-      "Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1992, evolving over more than 30 years from an internal-combustion platform to today's electric race car. At the 2025 Formula Hybrid + Electric competition, the team placed 7th overall - 16th in design and 10th in business among static events, and 9th in acceleration, 6th in autocross, and 3rd in endurance among dynamic events. At FSAE Electric, the team finished 50th overall in 2025, 47th in 2024, and 42nd in 2023.",
+      "Founded in 1992, Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1994. After nearly three successful decades competing in the internal-combustion category of the competition, the team transitioned to an all electric powertrain for the 2022-2023 academic year.",
     majors: [
       "Aeronautical Engineering",
-      "Computer Science",
+      "Aerospace Engineering",
+      "Business Administration",
+      "Chemical Engineering",
+      "Civil Engineering",
+      "Communication, Media, and Design",
       "Computer Systems Engineering",
       "Design, Innovation, and Society",
       "Electrical Engineering",
       "Materials Engineering",
-      "Mathematics",
       "Mechanical Engineering",
     ],
     alumniEmployers: [
@@ -383,12 +394,21 @@ export const site = {
       "SpaceX",
       "Lockheed Martin",
       "Amazon",
+      "Roadster Shop",
+      "Sonnax",
+      "Nyobolt",
+      "Atlas Copco",
+      "Multimatic",
+      "P&G",
+      "IBM",
+      "GE Vernova",
     ],
   },
 
   stats: [
-    { label: "Cars Built", value: "29" },
+    { label: "Founded", value: "-" },
     { label: "Years Competing", value: "-" },
+    { label: "Cars Built", value: "-" },
     { label: "Active Members", value: "-" },
     { label: "Sponsors & Partners", value: "-" },
   ] satisfies Stat[],
@@ -400,43 +420,49 @@ export const site = {
         {
           name: "Cameron Quail",
           role: "Team Lead",
-          major: "Aeronautical/Aerospace & Mechanical Engineering",
+          major: "Aerospace & Mechanical Engineering",
           gradYear: "2028",
           photo: "/Headshots/cam1.jpg",
           linkedin: "https://www.linkedin.com/in/cameronquail/",
+          email: "quailc@rpi.edu",
         },
         {
           name: "Abel Arellano",
-          role: "Vehicle Dynamics Lead",
-          major: "Aeronautical/Aerospace Engineering",
+          role: "Co-Vehicle Dynamics Lead",
+          major: "Aerospace Engineering",
           gradYear: "2028",
           photo: "/Headshots/abel.jpg",
           linkedin: "https://www.linkedin.com/in/abel-arellano-a3a3a4339/",
+          email: "arella2@rpi.edu",
+        },
+        {
+          name: "Zayd Farjo",
+          role: "Co-Vehicle Dynamics Lead",
+          major: "Mechanical Engineering",
+          gradYear: "2026",
+          additionalDegrees: [{ major: "Master of Business Administration", gradYear: "2027" }],
+          photo: "/Headshots/zayd.jpg",
+          linkedin: "https://www.linkedin.com/in/zayd-farjo-a2a983254/",
+          email: "farjoz@rpi.edu",
         },
         {
           name: "Alexander Ethier",
-          role: "EV Lead, High Voltage Lead",
-          major: "Electrical & Computer Science Engineering",
+          role: "Electric Vehicle Lead",
+          major: "Electrical & Computer Systems Engineering",
           gradYear: "2028",
           photo: "/Headshots/alex e.jpg",
           linkedin: "https://www.linkedin.com/in/alexanderjethier/",
+          email: "ethiea@rpi.edu",
         },
         {
           name: "Alexander Weiss",
-          role: "Safety Officer, Junior Suspension Lead",
-          major: "Aeronautical/Aerospace & Mechanical Engineering",
+          role: "Safety Officer",
+          major: "Aerospace & Mechanical Engineering",
           gradYear: "2028",
           photo: "/Headshots/alex w.jpg",
           linkedin: "https://www.linkedin.com/in/alexander-weiss-ct/",
+          email: "weissa9@rpi.edu",
           photoScale: 1.35,
-        },
-        {
-          name: "Ben Dingman",
-          role: "Business Lead",
-          major: "Design Innovation and Society & Communication, Media, and Design",
-          gradYear: "2028",
-          photo: "/Headshots/ben.jpg",
-          linkedin: "https://www.linkedin.com/in/benjamin-dingman-509570357/",
         },
         {
           name: "Nicholas Cummings",
@@ -445,14 +471,30 @@ export const site = {
           gradYear: "2027",
           photo: "/Headshots/nick.jpg",
           linkedin: "https://www.linkedin.com/in/nicholas--cummings/",
+          email: "cummin2@rpi.edu",
         },
         {
           name: "Arfan Shikder",
           role: "Shop Manager",
-          major: "Mechanical Engineering",
+          major: "Civil Engineering",
           gradYear: "2029",
           photo: "/Headshots/arfan.jpg",
           linkedin: "https://www.linkedin.com/in/arfan-shikder-029b1a280/",
+          email: "shikda@rpi.edu",
+        },
+      ],
+    },
+    {
+      name: "Business Team",
+      members: [
+        {
+          name: "Ben Dingman",
+          role: "Business Lead",
+          major: "Design, Innovation, and Society & Communication, Media, and Design",
+          gradYear: "2028",
+          photo: "/Headshots/ben.jpg",
+          linkedin: "https://www.linkedin.com/in/benjamin-dingman-509570357/",
+          email: "dingmb@rpi.edu",
         },
       ],
     },
@@ -462,35 +504,11 @@ export const site = {
         {
           name: "Emma Platts",
           role: "Senior Tractive Battery Lead",
-          major: "Materials Engineering & Chemistry",
+          major: "Materials Engineering",
           gradYear: "2028",
           photo: "/Headshots/emma.jpg",
           linkedin: "https://www.linkedin.com/in/emma-m-platts/",
-        },
-        {
-          name: "Henry Blount",
-          role: "Low Voltage Lead",
-          major: "Electrical Engineering",
-          gradYear: "2029",
-          photo: "/Headshots/henry.jpg",
-          linkedin: "https://www.linkedin.com/in/henry-blount-978a59348/",
-          photoScale: 1.15,
-        },
-        {
-          name: "Joey Marchand",
-          role: "All Wheel Drive R&D Lead",
-          major: "Mechanical Engineering",
-          gradYear: "2027",
-          photo: "/Headshots/joey.jpg",
-          linkedin: "https://www.linkedin.com/in/joey-marchand/",
-        },
-        {
-          name: "Yulin Du",
-          role: "Drivetrain Lead",
-          major: "Mechanical Engineering",
-          gradYear: "2029",
-          photo: "/Headshots/yulin.jpg",
-          linkedin: "https://www.linkedin.com/in/yulin-du/",
+          email: "platte@rpi.edu",
         },
         {
           name: "Colby Giunta",
@@ -499,6 +517,44 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/colby.jpg",
           linkedin: "https://www.linkedin.com/in/colby-giunta-658296371/",
+          email: "giuntc2@rpi.edu",
+        },
+        {
+          name: "Alexander Ethier",
+          role: "High Voltage Lead",
+          major: "Electrical & Computer Systems Engineering",
+          gradYear: "2028",
+          photo: "/Headshots/alex e.jpg",
+          linkedin: "https://www.linkedin.com/in/alexanderjethier/",
+          email: "ethiea@rpi.edu",
+        },
+        {
+          name: "Henry Blount",
+          role: "Low Voltage Lead",
+          major: "Electrical Engineering",
+          gradYear: "2029",
+          photo: "/Headshots/henry.jpg",
+          linkedin: "https://www.linkedin.com/in/henry-blount-978a59348/",
+          email: "blounh@rpi.edu",
+          photoScale: 1.15,
+        },
+        {
+          name: "Joey Marchand",
+          role: "All Wheel Drive R&D Manager",
+          major: "Mechanical Engineering",
+          gradYear: "2027",
+          photo: "/Headshots/joey.jpg",
+          linkedin: "https://www.linkedin.com/in/joey-marchand/",
+          email: "marchj5@rpi.edu",
+        },
+        {
+          name: "Yulin Du",
+          role: "Drivetrain Lead",
+          major: "Mechanical Engineering",
+          gradYear: "2029",
+          photo: "/Headshots/yulin.jpg",
+          linkedin: "https://www.linkedin.com/in/yulin-du/",
+          email: "duy6@rpi.edu",
         },
       ],
     },
@@ -508,27 +564,50 @@ export const site = {
         {
           name: 'Jonathan "JB" Brooks',
           role: "Senior Chassis Lead",
-          major: "Mechanical Engineering & Design Innovation and Society",
+          major: "Mechanical Engineering & Design, Innovation, and Society",
           gradYear: "2028",
           photo: "/Headshots/jb.jpg",
           linkedin: "https://www.linkedin.com/in/jbooks06/",
+          email: "brookj12@rpi.edu",
         },
         {
-          name: "Theodore Racz",
-          role: "Aero Lead",
+          name: "Imran Siraj",
+          role: "Junior Chassis Lead",
           major: "Mechanical Engineering",
-          gradYear: "2027",
-          photo: "/Headshots/theo.jpg",
-          linkedin: "https://www.linkedin.com/in/theodore-racz-560605293/",
+          gradYear: "2028",
+          photo: "/Headshots/driver.jpg",
+          linkedin: "https://www.linkedin.com/in/imran-siraj-me/",
+          email: "siraji2@rpi.edu",
         },
         {
           name: "Zayd Farjo",
           role: "Senior Suspension Lead",
           major: "Mechanical Engineering",
           gradYear: "2026",
-          additionalDegrees: [{ major: "Master of Business Administration", gradYear: "2028" }],
+          additionalDegrees: [{ major: "Master of Business Administration", gradYear: "2027" }],
           photo: "/Headshots/zayd.jpg",
           linkedin: "https://www.linkedin.com/in/zayd-farjo-a2a983254/",
+          email: "farjoz@rpi.edu",
+        },
+        {
+          name: "Alexander Weiss",
+          role: "Junior Suspension Lead",
+          major: "Aerospace & Mechanical Engineering",
+          gradYear: "2028",
+          photo: "/Headshots/alex w.jpg",
+          linkedin: "https://www.linkedin.com/in/alexander-weiss-ct/",
+          email: "weissa9@rpi.edu",
+          photoScale: 1.35,
+        },
+        {
+          name: "Theodore Racz",
+          role: "Aerodynamics Lead",
+          major: "Mechanical & Aeronautical Engineering",
+          gradYear: "2026",
+          additionalDegrees: [{ major: "Master of Engineering in Mechanical Engineering", gradYear: "2027" }],
+          photo: "/Headshots/theo.jpg",
+          linkedin: "https://www.linkedin.com/in/theodore-racz-560605293/",
+          email: "raczt@rpi.edu",
         },
         {
           name: "Amalan Narashimman",
@@ -537,6 +616,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/amalan.jpg",
           linkedin: "https://www.linkedin.com/in/amalannarashimman/",
+          email: "narasa2@rpi.edu",
           photoScale: 1.15,
         },
       ],
@@ -550,13 +630,15 @@ export const site = {
           gradYear: "2027",
           photo: "/Headshots/matt r1.jpg",
           linkedin: "https://www.linkedin.com/in/matthew-riccobono-645a20313/",
+          email: "riccom@rpi.edu",
         },
         {
           name: "Maya Gorse",
-          major: "Mechanical Engineering & Design Innovation and Society",
+          major: "Mechanical Engineering & Design, Innovation, and Society",
           gradYear: "2027",
           photo: "/Headshots/maya.jpg",
           linkedin: "https://www.linkedin.com/in/maya-gorse/",
+          email: "gorsem@rpi.edu",
         },
         {
           name: "Aaron Wang",
@@ -564,6 +646,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/aaron.jpg",
           linkedin: "https://www.linkedin.com/in/aaron-wang-aa6bba388/",
+          email: "wanga16@rpi.edu",
         },
         {
           name: "Alexander Singer",
@@ -571,6 +654,7 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/alex s.jpg",
           linkedin: "https://www.linkedin.com/in/alexander-singer-5ba391289/",
+          email: "singea@rpi.edu",
         },
         {
           name: "Jay Sen",
@@ -578,6 +662,7 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/jay.jpg",
           linkedin: "https://www.linkedin.com/in/jaymsen/",
+          email: "senj2@rpi.edu",
         },
         {
           name: "Blake Hopper",
@@ -585,6 +670,7 @@ export const site = {
           gradYear: "2026",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/bhopper/",
+          email: "hoppeb@rpi.edu",
         },
         {
           name: "Matthew Sgritta",
@@ -592,6 +678,7 @@ export const site = {
           gradYear: "2027",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/matthew-sgritta-5454aa238/",
+          email: "sgritm@rpi.edu",
         },
         {
           name: "Joshua Levy",
@@ -599,6 +686,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/joshua-g-levy/",
+          email: "levyj2@rpi.edu",
         },
         {
           name: "Debarshi Sen",
@@ -606,6 +694,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/debarshisen/",
+          email: "send@rpi.edu",
         },
         {
           name: "Satvik Mathur",
@@ -613,6 +702,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/satvik-mathur/",
+          email: "mathus3@rpi.edu",
         },
         {
           name: "Louisa Ersenkal",
@@ -620,13 +710,7 @@ export const site = {
           gradYear: "2028",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/louisa-ersenkal/",
-        },
-        {
-          name: "Imran Siraj",
-          major: "Mechanical Engineering",
-          gradYear: "2028",
-          photo: "/Headshots/driver.jpg",
-          linkedin: "https://www.linkedin.com/in/imran-siraj-me/",
+          email: "ersenl@rpi.edu",
         },
         {
           name: "Bennet Strong Sarmiento",
@@ -634,6 +718,7 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/bennet-strong-ba551a3a7/",
+          email: "stronb@rpi.edu",
         },
         {
           name: "Kimberly Pascual",
@@ -641,6 +726,7 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/kimberly-pascual-14929843a/",
+          email: "pascuk2@rpi.edu",
         },
         {
           name: "Amelie Peterson",
@@ -648,6 +734,7 @@ export const site = {
           gradYear: "2029",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/amelie-peterson-b69680400/",
+          email: "petera17@rpi.edu",
         },
         {
           name: "Charlotte \"Charlie\" Marino",
@@ -655,6 +742,7 @@ export const site = {
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/charlotte-marino2030/",
+          email: "marinc10@rpi.edu",
         },
         {
           name: "Ian Stambaugh",
@@ -662,6 +750,7 @@ export const site = {
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/ian-stambaugh-213849375/",
+          email: "stambi@rpi.edu",
         },
         {
           name: "Ryan Dey",
@@ -669,6 +758,7 @@ export const site = {
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/ryan-dey/",
+          email: "deyr@rpi.edu",
         },
         {
           name: "Aiden Price",
@@ -676,18 +766,21 @@ export const site = {
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/aidentprice/",
+          email: "pricea7@rpi.edu",
         },
         {
           name: "Ethan Chen",
           major: "Mechanical Engineering",
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
+          email: "chene13@rpi.edu",
         },
         {
           name: "Gennaro Marino",
           major: "Chemical Engineering",
           gradYear: "2030",
           photo: "/Headshots/driver.jpg",
+          email: "maring3@rpi.edu",
         },
       ],
     },
@@ -700,7 +793,7 @@ export const site = {
       year: "2025-2026",
       category: "Formula SAE Electric",
       tagline:
-        "RM29 is our fourth electric car, and the first to finish every dynamic event at FSAE Michigan, including the 22 km endurance race, since 2018.",
+        "RM29 is our fourth electric car, and the first to finish every dynamic event at Formula SAE Electric, including the 22 km endurance event.",
       photo: "/RM29/rollout.jpg",
       heroPhoto: "/RM29/cardriving2.jpg",
       specs: [
@@ -746,28 +839,28 @@ export const site = {
           description: "A custom vehicle control unit (VCU) built on an STM32F7 chip.",
         },
       ] satisfies CarSystem[],
-      goals: [
+      results: [
         {
-          result: "21st Overall, 2nd Place Efficiency",
-          competition: "FSAE Michigan",
+          competition: "Formula Hybrid + Electric 2026",
+          results: [
+            { title: "5th Place Overall" },
+            { title: "Scrutineer's Award", detail: "Most prepared team for mechanical inspection" },
+            { title: "Test Equity Award", detail: "Superior preparation during electrical inspection" },
+            {
+              title: "IEEE Engineering the Future Award",
+              detail: "Recognized for excellence in engineering design and vehicle testing",
+            },
+          ],
         },
         {
-          result: "5th Place Overall",
-          competition: "Formula Hybrid + Electric",
+          competition: "Formula SAE Electric 2026",
+          results: [{ title: "21st Place Overall" }, { title: "2nd Place in Efficiency" }],
         },
         {
-          result: "Scrutineer's Award",
-          competition: "Most prepared team for mechanical inspection",
+          competition: "Toronto Shootout 2026",
+          results: [{ title: "10th Place Overall" }, { title: "6th Place in Electric Category" }],
         },
-        {
-          result: "Test Equity Award",
-          competition: "Superior preparation during electrical inspection",
-        },
-        {
-          result: "IEEE Engineering the Future Award",
-          competition: "Recognized for excellence in engineering design and vehicle testing",
-        },
-      ] satisfies CompetitionGoal[],
+      ] satisfies CompetitionResult[],
     },
     {
       id: "rm28",
@@ -775,7 +868,8 @@ export const site = {
       year: "2024-2025",
       category: "Formula SAE Electric",
       tagline: "RM28 was our third electric car, built around a new battery pack assembled from prepackaged power modules.",
-      photo: "/RM28/_G5D8407.jpg",
+      // Wingless shot: RM28 ran RM26's wings, so photos with the "226" wing are avoided here.
+      photo: "/RM28/IMG_8083.JPG",
       specs: [
         { label: "Motor", value: "EMRAX 228, combined-cooled" },
         { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
@@ -784,16 +878,20 @@ export const site = {
         { label: "Aerodynamics", value: "Custom aero package" },
       ],
       features: [],
-      goals: [
+      results: [
         {
-          result: "7th Place Overall",
           competition: "Formula Hybrid + Electric 2025",
+          results: [
+            { title: "7th Place Overall" },
+            { title: "3rd Place in Endurance" },
+            { title: "6th Place in Autocross" },
+          ],
         },
         {
-          result: "3rd in Endurance, 6th in Autocross",
-          competition: "Formula Hybrid + Electric 2025 dynamic events",
+          competition: "Formula SAE Electric 2025",
+          results: [{ title: "50th Place Overall" }],
         },
-      ] satisfies CompetitionGoal[],
+      ] satisfies CompetitionResult[],
     },
     {
       id: "rm27",
@@ -806,18 +904,12 @@ export const site = {
       photoPosition: "left center",
       specs: [{ label: "Car Number", value: "#251" }],
       features: [],
-      // Only results we could verify. Official per-event placings for 2024 weren't publicly
-      // reachable; add them here (e.g. overall place, endurance) once confirmed by the team.
-      goals: [
+      results: [
         {
-          result: "47th Overall",
-          competition: "FSAE Electric, Michigan, June 2024",
+          competition: "Formula SAE Electric 2024",
+          results: [{ title: "47th Place Overall" }],
         },
-        {
-          result: "Entered Formula Hybrid + Electric",
-          competition: "Electric class, 2024",
-        },
-      ] satisfies CompetitionGoal[],
+      ] satisfies CompetitionResult[],
     },
     {
       id: "rm26",
@@ -829,21 +921,12 @@ export const site = {
       photo: "/RM26/IMG_1640.JPG",
       specs: [],
       features: [],
-      // Results from the "Recent Formula SAE Michigan Competition Results" table in the RM28 sponsor packet.
-      goals: [
+      results: [
         {
-          result: "42nd Overall",
-          competition: "FSAE Electric, Michigan, June 2023",
+          competition: "Formula SAE Electric 2023",
+          results: [{ title: "42nd Place Overall" }],
         },
-        {
-          result: "22nd in Cost, Tied 35th in Design",
-          competition: "FSAE Electric 2023 static events",
-        },
-        {
-          result: "Entered Formula Hybrid + Electric",
-          competition: "Electric class, 2023",
-        },
-      ] satisfies CompetitionGoal[],
+      ] satisfies CompetitionResult[],
     },
   ] satisfies Car[],
 
@@ -854,144 +937,38 @@ export const site = {
 
   sponsors: [
     {
-      tier: "Title",
+      tier: "Platinum",
       sponsors: [
-        { name: "Hondata", logo: "/sponsors/hondata-dark.webp", url: "https://www.hondata.com/" },
-        { name: "Dana", logo: "/sponsors/dana.webp", url: "https://www.dana.com/" },
-        {
-          name: "BAE Systems",
-          logo: "/sponsors/bae systems.webp",
-          url: "https://www.baesystems.com/",
-        },
-        {
-          name: "Markforged",
-          logo: "/sponsors/markforged-dark.webp",
-          url: "https://markforged.com/",
-        },
-        { name: "Fearless Racing", logo: "/sponsors/fearless racing-dark.webp", url: "" },
-        { name: "ANSYS", logo: "/sponsors/ansys.png", url: "https://www.ansys.com/" },
         { name: "Legacy EV", logo: "/sponsors/legacy ev-dark.webp", url: "https://legacyev.com/" },
       ],
     },
     {
-      tier: "Level 3",
+      tier: "Gold",
       sponsors: [
-        {
-          name: "Ice Cutting Edge Metals",
-          logo: "/sponsors/ice cutting edge-dark.webp",
-          url: "",
-        },
-        { name: "Rapid Harness", logo: "/sponsors/rapidharness-dark.webp", url: "" },
-        {
-          name: "Griot's Garage",
-          logo: "/sponsors/griots garage.webp",
-          url: "https://www.griotsgarage.com/",
-        },
-        {
-          name: "Beast Branch Engineering and Manufacturing",
-          logo: "/sponsors/beast branch-dark.webp",
-          url: "",
-        },
-        { name: "NSH USA", logo: "/sponsors/nsh usa.webp", url: "" },
-        { name: "Noel's CNC Manufacturing", logo: "/sponsors/noel's cnc-dark.webp", url: "" },
-        {
-          name: "Kaman Composites",
-          logo: "/sponsors/kaman-dark.webp",
-          url: "https://www.kaman.com/",
-        },
-        {
-          name: "Saint-Gobain",
-          logo: "/sponsors/saint gobain.webp",
-          url: "https://www.saint-gobain.com/",
-        },
-        { name: "Tektronix", logo: "/sponsors/tektronix-dark.webp", url: "https://www.tek.com/" },
-        { name: "TI64 Titanium", logo: "/sponsors/ti64-dark.webp", url: "" },
-        {
-          name: "XCA Advanced Composites Design and Manufacturing",
-          logo: "/sponsors/xca.webp",
-          url: "",
-        },
-        { name: "Boeing", logo: "/sponsors/boeing.webp", url: "https://www.boeing.com/" },
-        { name: "Atlas Copco", logo: "/sponsors/atlascopco.png", url: "https://www.atlascopco.com/" },
+        { name: "ANSYS", logo: "/sponsors/ansys.png", url: "https://www.ansys.com/" },
       ],
     },
     {
-      tier: "Level 2",
+      tier: "Silver",
       sponsors: [
-        { name: "Ducommun", logo: "/sponsors/ducommun-dark.webp", url: "https://www.ducommun.com/" },
-        { name: "AMGIO", logo: "/sponsors/amgio-dark.webp", url: "" },
-        { name: "Acronis", logo: "/sponsors/acronis.webp", url: "https://www.acronis.com/" },
-        { name: "Axcel", logo: "/sponsors/axcel.webp", url: "" },
-        {
-          name: "Oakwood Bible Church",
-          logo: "/sponsors/oakwood bible church-dark.webp",
-          url: "",
-        },
-        {
-          name: "Lockheed Martin",
-          logo: "/sponsors/lockheed martin.webp",
-          url: "https://www.lockheedmartin.com/",
-        },
-        { name: "Cartesian", logo: "/sponsors/cartesian-dark.webp", url: "" },
-        { name: "Holley", logo: "/sponsors/holley.webp", url: "https://www.holley.com/" },
-        { name: "PMC Race Cars", logo: "/sponsors/pmc race cars-dark.webp", url: "" },
-        {
-          name: "Powder Tech Custom Powder-Coated Finishes",
-          logo: "/sponsors/powdertech-dark.webp",
-          url: "",
-        },
-        {
-          name: "RBC Bearings",
-          logo: "/sponsors/rbc bearings.webp",
-          url: "https://www.rbcbearings.com/",
-        },
-        {
-          name: "Sandvik Coromant",
-          logo: "/sponsors/sandvik.webp",
-          url: "https://www.sandvik.coromant.com/",
-        },
-        {
-          name: "Gene Haas Foundation",
-          logo: "/sponsors/gene haas foundation.webp",
-          url: "https://www.genehaasfoundation.org/",
-        },
-        { name: "SimScale", logo: "/sponsors/simscale-dark.webp", url: "https://www.simscale.com/" },
-        {
-          name: "Simpson",
-          logo: "/sponsors/simpson.webp",
-          url: "https://www.simpsonraceproducts.com/",
-        },
-        { name: "Siemens", logo: "/sponsors/siemens.webp", url: "https://www.siemens.com/" },
-        { name: "SKF", logo: "/sponsors/skf.webp", url: "https://www.skf.com/" },
-        {
-          name: "SOLIDWORKS",
-          logo: "/sponsors/solidworks.webp",
-          url: "https://www.solidworks.com/",
-        },
-        { name: "VI-Grade", logo: "/sponsors/vi-grade.webp", url: "https://www.vi-grade.com/" },
-        { name: "About Energy", logo: "/sponsors/aboutenergy.png", url: "" },
+        { name: "Boeing", logo: "/sponsors/boeing.webp", url: "https://www.boeing.com/" },
+        { name: "Rapid Harness", logo: "/sponsors/rapidharness-dark.webp", url: "" },
         { name: "OSH Cut", logo: "/sponsors/osh cut.webp", url: "https://www.oshcut.com/" },
       ],
     },
     {
-      tier: "Level 1",
+      tier: "Bronze",
       sponsors: [
-        {
-          name: "Rock Krawler Suspension",
-          logo: "/sponsors/rock krawler.webp",
-          url: "https://www.rockkrawler.com/",
-        },
-        { name: "ProSpeed RS683", logo: "/sponsors/prospeed rs683-dark.webp", url: "" },
-        { name: "Tilton", logo: "/sponsors/tilton-dark.webp", url: "https://www.tiltonracing.com/" },
-        {
-          name: "HGSI Harold G. Schaevitz Industries",
-          logo: "/sponsors/hgsi.png",
-          url: "",
-        },
         { name: "MoTeC", logo: "/sponsors/motec-dark.webp", url: "https://www.motec.com.au/" },
         { name: "Bender", logo: "/sponsors/bender.webp", url: "https://www.bender.de/en/" },
-        { name: "Kennametal", logo: "/sponsors/kennametal.webp", url: "https://www.kennametal.com/" },
-        { name: "Fabbro Industries", logo: "/sponsors/fabbro.webp", url: "https://www.fabbroindustries.com/" },
+        { name: "GE Vernova", logo: "/sponsors/ge vernova.svg", url: "https://www.gevernova.com/" },
+      ],
+    },
+    // Sponsors marked "Other" on the team sheet: listed after the four tiers with a neutral badge.
+    {
+      tier: "Supporting",
+      sponsors: [
+        { name: "Atlas Copco", logo: "/sponsors/atlascopco.png", url: "https://www.atlascopco.com/" },
         {
           name: "Quail Financial Group",
           logo: "/sponsors/quail financial group-dark.webp",
@@ -1007,12 +984,12 @@ export const site = {
   // Wide banner photo at the top of the Gallery page.
   galleryHero: "/RM29/DSC01951.JPG",
 
-  galleryYears: ["17-18", "22-23", "23-24", "24-25", "25-26"],
+  galleryYears: ["22-23", "23-24", "24-25", "25-26"],
 
   gallery: [
     { caption: "Car #86 on the RPI quad", year: "25-26", photo: "/RM29/car.jpg", width: 4897, height: 3266 },
     { caption: "Car #86 with the team's competition awards", year: "25-26", photo: "/RM29/car1.jpg", width: 8192, height: 5464 },
-    { caption: "Team photo at FSAE Michigan", year: "25-26", photo: "/RM29/FD1A8003.jpg", width: 2048, height: 1366 },
+    { caption: "Team photo at Formula SAE Electric", year: "25-26", photo: "/RM29/FD1A8003.jpg", width: 2048, height: 1366 },
     { caption: "Autocross in the rain", year: "25-26", photo: "/RM29/cardriving.JPG", width: 6000, height: 4000 },
     { caption: "Threading the cones", year: "25-26", photo: "/RM29/cardriving1.JPG", width: 6000, height: 4000 },
     { caption: "On track", year: "25-26", photo: "/RM29/cardriving2.jpg", width: 4892, height: 3270 },
@@ -1022,7 +999,7 @@ export const site = {
     { caption: "Weaving through the slalom", year: "25-26", photo: "/RM29/DSC04102.JPG", width: 6000, height: 4000 },
     { caption: "Car #86 trackside", year: "25-26", photo: "/RM29/IMG_2406.jpg", width: 4032, height: 3024 },
     { caption: "Out on the circuit", year: "25-26", photo: "/RM29/DSC02050.JPG", width: 6000, height: 4000 },
-    { caption: "Rolling out at FSAE Michigan", year: "25-26", photo: "/RM29/FD1A6514.jpg", width: 2048, height: 1366 },
+    { caption: "Rolling out at Formula SAE Electric", year: "25-26", photo: "/RM29/FD1A6514.jpg", width: 2048, height: 1366 },
     { caption: "Walking the car to the track", year: "25-26", photo: "/RM29/FD1A6998.jpg", width: 2048, height: 1366 },
     { caption: "Buckled in and ready to drive", year: "25-26", photo: "/RM29/FD1A6543.jpg", width: 4897, height: 3266 },
     { caption: "Tilt test at technical inspection", year: "25-26", photo: "/RM29/FD1A4452.jpg", width: 1366, height: 2048 },
@@ -1076,7 +1053,7 @@ export const site = {
     { caption: "RM27 unveiled at rollout", year: "23-24", photo: "/RM27/DSC_0654.jpg", width: 6016, height: 4016 },
     { caption: "The RM27 team at rollout", year: "23-24", photo: "/RM27/DSC_0597.jpg", width: 6016, height: 4016 },
     { caption: "RM27 team photo at Michigan International Speedway", year: "23-24", photo: "/RM27/RMeditedmore.png", width: 2048, height: 1365 },
-    { caption: "Car #251 in the paddock at FSAE Michigan", year: "23-24", photo: "/RM27/20240613_152554.jpg", width: 4000, height: 1848 },
+    { caption: "Car #251 in the paddock at Formula SAE Electric", year: "23-24", photo: "/RM27/20240613_152554.jpg", width: 4000, height: 1848 },
     { caption: "RM27 in technical inspection", year: "23-24", photo: "/RM27/OCT05979.jpg", width: 2048, height: 1365 },
     { caption: "Car #251 heading out with the crew", year: "23-24", photo: "/RM27/OCT05917.jpg", width: 1365, height: 2048 },
     { caption: "The team gathered around car #251", year: "23-24", photo: "/RM27/OCT06026.jpg", width: 2048, height: 1365 },

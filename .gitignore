@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Team roster spreadsheet (emails) - keep out of the repo and the public folder
+*.xlsx
+~$*

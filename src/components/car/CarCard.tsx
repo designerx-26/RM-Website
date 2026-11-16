@@ -40,10 +40,13 @@ export function CarCard({ car, reverse = false }: { car: Car; reverse?: boolean 
         </div>
 
         <div className="relative flex flex-col justify-center gap-5 overflow-hidden p-7 sm:p-9">
-          {/* Oversized outlined name as a backdrop, matching the "Next Up" teaser. */}
+          {/* Oversized outlined name as a backdrop, matching the "Next Up" teaser. The font's letters
+              are built from overlapping shapes, so a plain text stroke traces the overlaps too; painting
+              the stroke first and then filling with the card color hides those inner lines. The stroke
+              is twice the visible width because the fill covers its inner half. */}
           <span
-            className="pointer-events-none absolute -bottom-6 -right-3 select-none text-[7rem] font-black leading-none tracking-tighter text-transparent sm:text-[8.5rem]"
-            style={{ WebkitTextStroke: "1.5px rgba(200, 16, 46, 0.3)" }}
+            className="pointer-events-none absolute -bottom-6 -right-3 select-none text-[7rem] font-black leading-none tracking-tighter text-brand-grey-900 sm:text-[8.5rem]"
+            style={{ WebkitTextStroke: "3px rgba(200, 16, 46, 0.3)", paintOrder: "stroke fill" }}
             aria-hidden="true"
           >
             {car.name}
@@ -60,22 +63,29 @@ export function CarCard({ car, reverse = false }: { car: Car; reverse?: boolean 
             {car.tagline && <p className="mt-3 text-lg leading-relaxed text-brand-grey-200">{car.tagline}</p>}
           </div>
 
-          {car.goals && car.goals.length > 0 && (
+          {car.results && car.results.length > 0 && (
             <div className="relative border-t border-brand-grey-800 pt-5">
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-grey-400">
-                Notable Achievements
+                Results and Achievements
               </h4>
-              <ul className="mt-3 flex flex-col gap-2">
-                {car.goals.map((goal) => (
-                  <li key={goal.competition} className="flex items-baseline gap-3 text-sm leading-snug">
-                    <span className="h-3 w-1 shrink-0 -skew-x-12 self-center bg-brand-red" aria-hidden="true" />
-                    <span>
-                      <span className="font-bold text-brand-white">{goal.result}</span>
-                      <span className="text-brand-grey-300"> &middot; {goal.competition}</span>
-                    </span>
-                  </li>
+              <div className="mt-3 flex flex-col gap-4">
+                {car.results.map((event) => (
+                  <div key={event.competition}>
+                    <p className="text-sm font-bold text-brand-red-light">{event.competition}</p>
+                    <ul className="mt-1.5 flex flex-col gap-1.5">
+                      {event.results.map((item) => (
+                        <li key={item.title} className="flex items-baseline gap-3 text-sm leading-snug">
+                          <span className="h-3 w-1 shrink-0 -skew-x-12 self-center bg-brand-red" aria-hidden="true" />
+                          <span>
+                            <span className="font-bold text-brand-white">{item.title}</span>
+                            {item.detail && <span className="text-brand-grey-300"> &middot; {item.detail}</span>}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
         </div>

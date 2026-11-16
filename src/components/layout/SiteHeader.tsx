@@ -3,16 +3,24 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Clicking the link for the page you're already on doesn't navigate, so scroll back to the top.
+  const handleNavClick = (href: string) => {
+    setMenuOpen(false);
+    if (href === pathname) window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-brand-grey-900 bg-brand-black shadow-lg shadow-black/30">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
-        <Link href="/" className="flex shrink-0 items-center" onClick={() => setMenuOpen(false)}>
+        <Link href="/" className="flex shrink-0 items-center" onClick={() => handleNavClick("/")}>
           <Image
             src={site.meta.logoDark}
             alt={site.meta.name}
@@ -29,6 +37,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => handleNavClick(item.href)}
               className="text-sm font-semibold uppercase tracking-wide text-brand-white transition-colors hover:text-brand-red"
             >
               {item.label}
@@ -78,7 +87,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => handleNavClick(item.href)}
               className="border-b border-brand-grey-900 py-3 text-sm font-semibold uppercase tracking-wide text-brand-white last:border-0"
             >
               {item.label}

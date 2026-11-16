@@ -32,7 +32,7 @@ export default function Home() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-brand-grey-900">
                 <DeferredImage
                   src="/RM29/FD1A8003.jpg"
-                  alt="The team with car #86 at FSAE Michigan"
+                  alt="The team with car #86 at Formula SAE Electric"
                   fill
                   className="object-cover"
                   sizes="(min-width: 1024px) 50vw, 100vw"

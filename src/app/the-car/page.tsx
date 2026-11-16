@@ -28,10 +28,11 @@ export default function TheCarPage() {
       <Section tone="grey">
         <Reveal>
           <div className="relative overflow-hidden rounded-2xl bg-brand-black px-8 py-14 sm:px-12 sm:py-20">
-            {/* Oversized outlined name as a backdrop for the teaser. */}
+            {/* Oversized outlined name as a backdrop for the teaser; stroke-then-fill hides the font's
+                overlapping inner contours (see CarCard). */}
             <span
-              className="pointer-events-none absolute -bottom-8 -right-4 select-none text-[9rem] font-black leading-none tracking-tighter text-transparent sm:text-[12rem] lg:text-[14rem]"
-              style={{ WebkitTextStroke: "2px rgba(200, 16, 46, 0.35)" }}
+              className="pointer-events-none absolute -bottom-8 -right-4 select-none text-[9rem] font-black leading-none tracking-tighter text-brand-black sm:text-[12rem] lg:text-[14rem]"
+              style={{ WebkitTextStroke: "4px rgba(200, 16, 46, 0.35)", paintOrder: "stroke fill" }}
               aria-hidden="true"
             >
               {site.upcomingCar.name}
