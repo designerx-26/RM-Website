@@ -13,13 +13,15 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
   const position = member.photoPosition ?? "50% 20%";
   const photoBg = member.photoBg;
 
-  // Phones: one horizontal card per row (photo left, details right) so every card matches.
+  // Phones: one horizontal card per row (photo left, details right) so every card matches. The photo
+  // is a fixed size, not stretched to the text, so every headshot is framed the same (see
+  // scripts/crop-headshots.mjs); cards with longer text just get white space under it.
   // sm+: vertical cards in a grid; h-full + mt-auto keep cards in a row equal height with
   // the LinkedIn buttons lined up along the bottom.
   return (
     <div className="flex h-full flex-row overflow-hidden rounded-2xl bg-brand-white shadow-sm ring-1 ring-brand-grey-100 dark:bg-brand-grey-900 dark:ring-brand-grey-900 sm:flex-col">
       <div
-        className="relative min-h-36 w-28 shrink-0 overflow-hidden bg-brand-grey-100 sm:aspect-square sm:min-h-0 sm:w-full dark:bg-brand-grey-800"
+        className="relative h-36 w-28 shrink-0 self-start overflow-hidden bg-brand-grey-100 sm:aspect-square sm:h-auto sm:w-full sm:self-auto dark:bg-brand-grey-800"
         style={photoBg ? { backgroundColor: photoBg } : undefined}
       >
         {scale < 1 && (
