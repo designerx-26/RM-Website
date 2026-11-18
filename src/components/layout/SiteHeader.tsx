@@ -20,14 +20,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-brand-grey-900 bg-brand-black shadow-lg shadow-black/30">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
-        <Link href="/" className="flex shrink-0 items-center" onClick={() => handleNavClick("/")}>
+        {/* min-h keeps the header bar the same height now that the trimmed logo is shorter. */}
+        <Link href="/" className="flex min-h-11 shrink-0 items-center" onClick={() => handleNavClick("/")}>
           <Image
-            src={site.meta.logoDark}
+            src={site.meta.logoDarkTrimmed}
             alt={site.meta.name}
-            // Intrinsic size matches the rendered h-11 so the srcset stays logo-sized, not 1920px.
-            width={132}
-            height={44}
-            className="h-9 w-auto sm:h-11"
+            // Intrinsic size matches the rendered sm:h-6 so the srcset stays logo-sized, not 1920px.
+            width={176}
+            height={24}
+            className="h-5 w-auto sm:h-6"
             loading="eager"
           />
         </Link>

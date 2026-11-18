@@ -157,6 +157,8 @@ export const site = {
     // "dark" = light wordmark (as shipped) for use on black/dark backgrounds (footer, dark sections)
     logo: "/rm-logo-light.png",
     logoDark: "/rm-logo.png",
+    // logoDark trimmed to the lettering (the full file has wide transparent margins), for the header.
+    logoDarkTrimmed: "/rm-logo-wordmark.png",
     // Public address of the live site, used for the sitemap, robots.txt, canonical URLs and
     // link previews. Update this if the site moves to a custom domain.
     url: "https://rensselaermotorsport.vercel.app",
@@ -231,8 +233,7 @@ export const site = {
     },
     {
       title: "Our Sponsors",
-      // "{sponsors}" is filled in with the live sponsor count, matching the stat above it.
-      description: "Rensselaer Motorsport runs on the generous support of {sponsors} industry partners and sponsors.",
+      description: "Rensselaer Motorsport runs on the generous support of our industry partners and sponsors.",
       href: "/sponsors",
       image: "/RM29/car.jpg",
       cta: "View Sponsors",
@@ -254,7 +255,7 @@ export const site = {
 
   whySponsor: {
     intro:
-      "Building a competition race car would not be possible without the generosity of sponsors and partners like you. We accept cash donations as well as in-kind parts, materials, and tools - all cash donations are tax-deductible, as we are a 501(c)3 organization.",
+      "Building a competition race car would not be possible without the generosity of sponsors and partners like you. We accept cash donations as well as in-kind parts, materials, and tools—all cash donations are tax-deductible, as we are a 501(c)3 organization.",
     benefits: [
       "Logo placement on our race car and website",
       "Invitations to team events and competitions",
@@ -309,7 +310,7 @@ export const site = {
     // Rensselaer giving form for the team.
     url: "https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=10302&cid=23465",
     instructions:
-      "When you give through the Rensselaer giving site, use the comments/designation field at checkout and write \"Rensselaer Motorsport\" (RPI Formula SAE) so your gift is directed to our team.",
+      "When you give through the RPI giving site, select \"Give to the club(s) of your choice\" and choose \"Rensselaer Motorsport\" so your gift is directed to our team.",
   },
 
   about: {
@@ -376,7 +377,8 @@ export const site = {
     firstCompetitionYear: 1994,
     // Seasons with no in-person Formula SAE result (per the FS-Elo results database): no entry in
     // 2010, RM20 broke before Michigan 2013, and 2020-2021 were virtual-only during COVID.
-    // "Years Competing" counts every other year from 1994 through the latest result on a car card.
+    // yearsCompeting in stats.ts counts every other year from 1994 through the latest result on a
+    // car card. It isn't shown right now; add a "Years Competing" stat below to bring it back.
     missedCompetitionYears: [2010, 2013, 2020, 2021],
     history:
       "Founded in 1992, Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1994. After nearly three successful decades competing in the internal-combustion category of the competition, the team transitioned to an all electric powertrain for the 2022-2023 academic year.",
@@ -418,10 +420,8 @@ export const site = {
 
   stats: [
     { label: "Founded", value: "-" },
-    { label: "Years Competing", value: "-" },
     { label: "Cars Built", value: "-" },
     { label: "Active Members", value: "-" },
-    { label: "Sponsors & Partners", value: "-" },
   ] satisfies Stat[],
 
   team: [
@@ -654,7 +654,7 @@ export const site = {
         {
           name: "Aaron Wang",
           major: "Electrical Engineering",
-          gradYear: "2028",
+          gradYear: "2026",
           photo: "/Headshots/aaron.jpg",
           linkedin: "https://www.linkedin.com/in/aaron-wang-aa6bba388/",
           email: "wanga16@rpi.edu",
@@ -678,7 +678,8 @@ export const site = {
         {
           name: "Blake Hopper",
           major: "Electrical Engineering",
-          gradYear: "2026",
+          gradYear: "2025",
+          additionalDegrees: [{ major: "Master of Engineering in Mechanical Engineering", gradYear: "2026" }],
           photo: "/Headshots/driver.jpg",
           linkedin: "https://www.linkedin.com/in/bhopper/",
           email: "hoppeb@rpi.edu",
@@ -879,9 +880,10 @@ export const site = {
       year: "2024-2025",
       category: "Formula SAE Electric",
       tagline: "RM28 was our third electric car, built around a new battery pack assembled from prepackaged power modules.",
-      photo: "/RM28/_G5D8407.jpg",
-      // Extra room on the left so the diagonal edge of the (reversed) card doesn't clip the rear wing.
-      photoCrop: { x: 0.075, y: 0.28, w: 0.7, h: 0.44, aspect: 4898 / 3265 },
+      photo: "/RM28/IMG_6770.jpg",
+      // Unveiling shot: the car sits small at the bottom under the banner. Extra room on the left
+      // so the diagonal edge of the (reversed) card doesn't clip the rear wheel.
+      photoCrop: { x: 0.2, y: 0.58, w: 0.5, h: 0.37, aspect: 4898 / 3265 },
       specs: [
         { label: "Motor", value: "EMRAX 228, combined-cooled" },
         { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
@@ -954,6 +956,9 @@ export const site = {
       tier: "Platinum",
       sponsors: [
         { name: "Legacy EV", logo: "/sponsors/legacy ev-dark.webp", url: "https://legacyev.com/" },
+        { name: "SolidWorks", logo: "/sponsors/solidworks-dark.webp", url: "https://www.solidworks.com/" },
+        { name: "Fabbro Industries", logo: "/sponsors/fabbro-dark.webp", url: "https://www.fabbroindustries.com/" },
+        { name: "KISSsoft", logo: "/sponsors/kisssoft.webp", url: "https://www.kisssoft.com/" },
       ],
     },
     {
@@ -976,6 +981,7 @@ export const site = {
         { name: "MoTeC", logo: "/sponsors/motec-dark.webp", url: "https://www.motec.com.au/" },
         { name: "Bender", logo: "/sponsors/bender.webp", url: "https://www.bender.de/en/" },
         { name: "GE Vernova", logo: "/sponsors/ge vernova.svg", url: "https://www.gevernova.com/" },
+        { name: "Rock Krawler", logo: "/sponsors/rock krawler.webp", url: "https://www.rockkrawler.com/" },
       ],
     },
     // Sponsors marked "Other" on the team sheet: listed after the four tiers with a neutral badge.

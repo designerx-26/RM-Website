@@ -52,10 +52,10 @@ function AnimatedStat({ value }: { value: string }) {
 
 export function StatBand({ stats }: { stats: Stat[] }) {
   return (
-    // Wraps and centers so any number of stats balances: 5 across on desktop, 3 + 2 on tablets, 2 + 2 + 1 on phones.
+    // Three stats in one row at every width. Wraps and centers if more are added.
     <div className="flex flex-wrap justify-center gap-y-8">
       {stats.map((stat) => (
-        <div key={stat.label} className="w-1/2 px-2 text-center sm:w-1/3 lg:w-1/5">
+        <div key={stat.label} className="w-1/3 px-2 text-center">
           <AnimatedStat value={stat.value} />
           <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-brand-grey-600">
             {stat.label}

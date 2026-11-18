@@ -163,7 +163,7 @@ export default function AboutPage() {
           </div>
           <div>
             <SectionHeading eyebrow="Alumni" title="Where We've Gone" align="left" tone="dark" className="mb-8">
-              <p>Our alumni have gone on to careers at companies including:</p>
+              <p>Current members and recent alumni of the team have interned and/or been hired at companies including:</p>
             </SectionHeading>
             <ul className="flex flex-wrap gap-2 sm:gap-3">
               {site.about.alumniEmployers.map((employer) => (

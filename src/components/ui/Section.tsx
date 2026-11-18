@@ -27,17 +27,19 @@ export function Section({ children, tone = "white", className = "", id }: Sectio
 }
 
 /**
- * Sponsor-packet livery: a thick + thin vertical red stripe down the left
- * margin, crossed by a double red rule along the top of the section.
- * Vertical stripes only appear once the page margin is wide enough to hold them.
+ * Sponsor-packet livery: a thick + thin red rule across the top of the section, and, once the page
+ * margin is wide enough, two equal red bars down the left. As in the packet, the bars sit on top
+ * and run unbroken from section to section while the rules pass underneath them edge to edge.
  */
 function RaceStripes() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+      {/* Rules first so the bars paint over them. */}
+      <div className="absolute inset-x-0 top-0 h-2 bg-brand-red" />
+      <div className="absolute inset-x-0 top-3 h-[5px] bg-brand-red" />
+      {/* Two equal bars with a half-width gap, as in the packet. */}
       <div className="absolute inset-y-0 left-4 hidden w-3 bg-brand-red xl:block 2xl:left-8 2xl:w-4" />
-      <div className="absolute inset-y-0 left-9 hidden w-1.5 bg-brand-red xl:block 2xl:left-15 2xl:w-2" />
-      <div className="absolute inset-x-0 top-0 h-1 bg-brand-red" />
-      <div className="absolute inset-x-0 top-2 h-px bg-brand-red" />
+      <div className="absolute inset-y-0 left-8.5 hidden w-3 bg-brand-red xl:block 2xl:left-14 2xl:w-4" />
     </div>
   );
 }

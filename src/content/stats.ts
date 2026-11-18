@@ -6,9 +6,6 @@ import { site } from "@/content/site";
  */
 export const memberCount = new Set(site.team.flatMap((subteam) => subteam.members.map((m) => m.name))).size;
 
-/** Exact sponsor count across every tier, shared by the home stat and home card. */
-export const sponsorCount = site.sponsors.reduce((sum, tier) => sum + tier.sponsors.length, 0);
-
 /**
  * Competition cars built so far. Cars are numbered in order (RM22 was unveiled in 2017 as the
  * team's 22nd competition car), so the newest car's number is the count. Adding RM30 to
@@ -35,10 +32,10 @@ export const yearsCompeting = (() => {
 export function getStats() {
   return site.stats.map((stat) => {
     if (stat.label === "Founded") return { ...stat, value: `${site.about.foundingYear}` };
+    // Not in site.stats right now, but kept so re-adding the stat is a one-line change.
     if (stat.label === "Years Competing") return { ...stat, value: `${yearsCompeting}` };
     if (stat.label === "Cars Built") return { ...stat, value: `${carsBuilt}` };
     if (stat.label === "Active Members") return { ...stat, value: `${memberCount}+` };
-    if (stat.label === "Sponsors & Partners") return { ...stat, value: `${sponsorCount}` };
     return stat;
   });
 }
