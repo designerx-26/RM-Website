@@ -876,10 +876,9 @@ export const site = {
       year: "2024-2025",
       category: "Formula SAE Electric",
       tagline: "RM28 was our third electric car, built around a new battery pack assembled from prepackaged power modules.",
-      photo: "/RM28/IMG_6770.jpg",
-      // Unveiling shot: the car sits small at the bottom under the banner. Extra room on the left
-      // so the diagonal edge of the (reversed) card doesn't clip the rear wheel.
-      photoCrop: { x: 0.2, y: 0.58, w: 0.5, h: 0.37, aspect: 4898 / 3265 },
+      photo: "/RM28/IMG_6957.jpg",
+      // Extra room on the left so the diagonal edge of the (reversed) card doesn't clip the rear wheel.
+      photoCrop: { x: 0.08, y: 0.22, w: 0.82, h: 0.6, aspect: 6000 / 4000 },
       specs: [
         { label: "Motor", value: "EMRAX 228, combined-cooled" },
         { label: "Accumulator", value: "Custom pack from prepackaged power modules" },
@@ -961,6 +960,7 @@ export const site = {
       tier: "Gold",
       sponsors: [
         { name: "ANSYS", logo: "/sponsors/ansys.png", url: "https://www.ansys.com/" },
+        { name: "Gene Haas Foundation", logo: "/sponsors/gene haas foundation.webp", url: "https://ghaasfoundation.org/" },
       ],
     },
     {
