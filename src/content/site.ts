@@ -185,7 +185,7 @@ export const site = {
     eyebrow: "Rensselaer Polytechnic Institute Formula SAE",
     headline: "RENSSELAER MOTORSPORT",
     subheadline:
-      "A student-run engineering team designing, building, and racing an electric formula-style race car - from scratch, every year.",
+      "A student-run engineering team designing, building, and racing an electric formula-style race car—from scratch, every year.",
     primaryCta: { label: "Join the Team", href: "/join" } satisfies NavLink,
     secondaryCta: { label: "Meet the Car", href: "/the-car" } satisfies NavLink,
     // TEMP preview: original was "/background.png"
@@ -241,7 +241,7 @@ export const site = {
     {
       title: "Gallery",
       description:
-        "Moments from the shop, the track, and everywhere in between - see the build come together.",
+        "Moments from the shop, the track, and everywhere in between—see the build come together.",
       href: "/gallery",
       image: "/RM29/FD1A1699.jpg",
       cta: "View Gallery",
@@ -249,7 +249,7 @@ export const site = {
   ] satisfies { title: string; description: string; href: string; cta: string; image: string }[],
 
   sponsorPacket: {
-    url: "/RM29 Sponsor Packet.pdf",
+    url: "/Sponsor Packet RM30.pdf",
     label: "View Sponsor Packet",
   },
 
@@ -306,7 +306,7 @@ export const site = {
 
   donate: {
     intro:
-      "Rensselaer Motorsport is a student-funded team - every donation goes directly toward materials, manufacturing, and competition travel.",
+      "Rensselaer Motorsport is a student-funded team—every donation goes directly toward materials, manufacturing, and competition travel.",
     // Rensselaer giving form for the team.
     url: "https://securelb.imodules.com/s/1225/lg22/form.aspx?sid=1225&gid=1&pgid=10302&cid=23465",
     instructions:
@@ -317,12 +317,12 @@ export const site = {
     heroImage: { src: "/RM29/team-background.jpg", alt: "The Rensselaer Motorsport team with car #27" },
     intro: [
       "Rensselaer Motorsport is a student-run engineering team at Rensselaer Polytechnic Institute competing in Formula SAE, an international collegiate design competition where teams design, build, and race a small formula-style race car.",
-      "Beyond the car itself, members run every part of the operation - engineering, manufacturing, business, and sponsorship - giving students hands-on experience they can't get in a classroom.",
+      "Beyond the car itself, members run every part of the operation—engineering, manufacturing, business, and sponsorship—giving students hands-on experience they can't get in a classroom.",
     ],
     // Condensed synopsis for the About page hero/intro block.
     // "{members}" is filled in with the current roster size from `team` below.
     aboutUs:
-      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of {members} full members including both undergraduate and graduate students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup - every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone cannot provide.",
+      "Rensselaer Motorsport is Rensselaer Polytechnic Institute's student-run Formula SAE team, made up of {members} full members including both undergraduate and graduate students who design, build, and race a formula-style car from the ground up every season. The team operates like a small startup—every subsystem, from the chassis to the electrical system, is designed, manufactured, and validated in-house by students, alongside the business and sponsorship operation that funds it all. Members join with no prior experience required and leave with hands-on engineering, manufacturing, and project-management experience that classroom coursework alone cannot provide.",
     whatIsFsae: {
       title: "What is FSAE?",
       body: "Formula SAE is an international collegiate engineering design competition organized by SAE International. Student teams from universities around the world design, build, and test small formula-style race cars, then bring them to competition to be evaluated against other schools. Cars are judged on a mix of static events—cost, engineering design, and a business/sponsorship presentation—and dynamic events on track, including acceleration, skidpad, autocross, endurance, and efficiency. Essentially, the student teams go through the full product-development cycle each school year: design, manufacture, validate, and race.",
@@ -340,7 +340,7 @@ export const site = {
       {
         title: "Hands-On Learning",
         description:
-          "Members machine parts, wire electronics, and turn wrenches - learning by building, testing, and racing.",
+          "Members machine parts, wire electronics, and turn wrenches—learning by building, testing, and racing.",
       },
       {
         title: "One Team",
@@ -381,7 +381,7 @@ export const site = {
     // car card. It isn't shown right now; add a "Years Competing" stat below to bring it back.
     missedCompetitionYears: [2010, 2013, 2020, 2021],
     history:
-      "Founded in 1992, Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1994. After nearly three successful decades competing in the internal-combustion category of the competition, the team transitioned to an all electric powertrain for the 2022-2023 academic year.",
+      "Founded in 1992, Rensselaer Motorsport has represented RPI in SAE International's Formula SAE competition since 1994. After nearly three successful decades competing in the internal-combustion category of the competition, the team transitioned to an all-electric powertrain for the 2022-2023 academic year.",
     majors: [
       "Aeronautical Engineering",
       "Aerospace Engineering",
@@ -433,7 +433,7 @@ export const site = {
           role: "Team Lead",
           major: "Aerospace & Mechanical Engineering",
           gradYear: "2028",
-          photo: "/Headshots/cards/cam1-a2bae0ca.jpg",
+          photo: "/Headshots/cards/cam-ab9bfabc.jpg",
           linkedin: "https://www.linkedin.com/in/cameronquail/",
           email: "quailc@rpi.edu",
         },
@@ -584,7 +584,7 @@ export const site = {
           role: "Junior Chassis Lead",
           major: "Mechanical Engineering",
           gradYear: "2028",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/imran-6d623daf.jpg",
           linkedin: "https://www.linkedin.com/in/imran-siraj-me/",
           email: "siraji2@rpi.edu",
         },
@@ -635,7 +635,7 @@ export const site = {
           name: "Matthew Riccobono",
           major: "Mechanical Engineering",
           gradYear: "2027",
-          photo: "/Headshots/cards/matt r1-7dac0db8.jpg",
+          photo: "/Headshots/cards/matt r-341b5000.jpg",
           linkedin: "https://www.linkedin.com/in/matthew-riccobono-645a20313/",
           email: "riccom@rpi.edu",
         },
@@ -684,7 +684,7 @@ export const site = {
           name: "Matthew Sgritta",
           major: "Mechanical Engineering",
           gradYear: "2027",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/matt s-4501fe55.jpg",
           linkedin: "https://www.linkedin.com/in/matthew-sgritta-5454aa238/",
           email: "sgritm@rpi.edu",
         },
@@ -724,7 +724,7 @@ export const site = {
           name: "Bennet Strong Sarmiento",
           major: "Mechanical Engineering",
           gradYear: "2029",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/bennet-59afa38e.jpg",
           linkedin: "https://www.linkedin.com/in/bennet-strong-ba551a3a7/",
           email: "stronb@rpi.edu",
         },
@@ -732,7 +732,7 @@ export const site = {
           name: "Kimberly Pascual",
           major: "Mechanical Engineering",
           gradYear: "2029",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/kimmy-c0557081.jpg",
           linkedin: "https://www.linkedin.com/in/kimberly-pascual-14929843a/",
           email: "pascuk2@rpi.edu",
         },
@@ -740,7 +740,7 @@ export const site = {
           name: "Amelie Peterson",
           major: "Mechanical & Aerospace Engineering",
           gradYear: "2029",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/amelie-0517a1c4.jpg",
           linkedin: "https://www.linkedin.com/in/amelie-peterson-b69680400/",
           email: "petera17@rpi.edu",
         },
@@ -748,7 +748,7 @@ export const site = {
           name: "Charlotte \"Charlie\" Marino",
           major: "Mechanical Engineering",
           gradYear: "2030",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/charlie-83b4fffe.jpg",
           linkedin: "https://www.linkedin.com/in/charlotte-marino2030/",
           email: "marinc10@rpi.edu",
         },
@@ -764,7 +764,7 @@ export const site = {
           name: "Ryan Dey",
           major: "Mechanical Engineering",
           gradYear: "2030",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/ryan-885052c0.jpg",
           linkedin: "https://www.linkedin.com/in/ryan-dey/",
           email: "deyr@rpi.edu",
         },
@@ -772,7 +772,7 @@ export const site = {
           name: "Aiden Price",
           major: "Aerospace Engineering",
           gradYear: "2030",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/aiden-c3afc0c9.jpg",
           linkedin: "https://www.linkedin.com/in/aidentprice/",
           email: "pricea7@rpi.edu",
         },
@@ -787,7 +787,8 @@ export const site = {
           name: "Gennaro Marino",
           major: "Chemical Engineering",
           gradYear: "2030",
-          photo: "/Headshots/cards/driver-7d226b30.jpg",
+          photo: "/Headshots/cards/gennaro-d987dc02.jpg",
+          linkedin: "https://www.linkedin.com/in/gennaro-marino-68727344b/",
           email: "maring3@rpi.edu",
         },
       ],
@@ -812,7 +813,7 @@ export const site = {
         { label: "Chassis", value: "4130 steel tube-frame" },
       ],
       features: [
-        "Custom 80kW battery pack - 400V, 200A Li-Ion accumulator",
+        "Custom 80kW battery pack—400V, 200A Li-Ion accumulator",
         "Carbon fiber aero package (Cl = 2.0, Cd = 1.5)",
         "Custom vehicle control unit built on an STM32F7 chip",
       ],
@@ -835,7 +836,7 @@ export const site = {
         {
           name: "Tractive Battery & High Voltage",
           description:
-            "A custom 80kW battery pack - a 400V, 200A Li-Ion accumulator designed and built in-house.",
+            "A custom 80kW battery pack—a 400V, 200A Li-Ion accumulator designed and built in-house.",
         },
         {
           name: "Aerodynamics",
@@ -969,6 +970,7 @@ export const site = {
         { name: "Boeing", logo: "/sponsors/boeing.webp", url: "https://www.boeing.com/" },
         { name: "Rapid Harness", logo: "/sponsors/rapidharness-dark.webp", url: "" },
         { name: "OSH Cut", logo: "/sponsors/osh cut.webp", url: "https://www.oshcut.com/" },
+        { name: "GE Vernova", logo: "/sponsors/ge vernova.svg", url: "https://www.gevernova.com/" },
       ],
     },
     {
@@ -976,8 +978,8 @@ export const site = {
       sponsors: [
         { name: "MoTeC", logo: "/sponsors/motec-dark.webp", url: "https://www.motec.com.au/" },
         { name: "Bender", logo: "/sponsors/bender.webp", url: "https://www.bender.de/en/" },
-        { name: "GE Vernova", logo: "/sponsors/ge vernova.svg", url: "https://www.gevernova.com/" },
         { name: "Rock Krawler", logo: "/sponsors/rock krawler.webp", url: "https://www.rockkrawler.com/" },
+        { name: "Sonnax", logo: "/sponsors/sonnax.svg", url: "https://www.sonnax.com/" },
       ],
     },
     // Sponsors marked "Other" on the team sheet: listed after the four tiers with a neutral badge.
@@ -1095,12 +1097,12 @@ export const site = {
 
   join: {
     intro:
-      "Rensselaer Motorsport is always looking for motivated students - no experience required. Whether your interest is engineering, business, or manufacturing, there's a place for you on the team.",
+      "Rensselaer Motorsport is always looking for motivated students—no experience required. Whether your interest is engineering, business, or manufacturing, there's a place for you on the team.",
     steps: [
       {
         title: "Come to a Meeting",
         description:
-          "Come to a weekly Tuesday general meeting, Wednesday engineering meeting, or stop by the shop on a Friday evening and chat with us - see the full schedule on our Contact page.",
+          "Come to a weekly Tuesday general meeting, Wednesday engineering meeting, or stop by the shop on a Friday evening and chat with us—see the full schedule on our Contact page.",
       },
       {
         title: "Fill Out Our Interest Form",

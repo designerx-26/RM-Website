@@ -1,11 +1,23 @@
-import type { Subteam } from "@/content/site";
+import type { Subteam, TeamMember } from "@/content/site";
 import { TeamMemberCard } from "@/components/team/TeamMemberCard";
 import { Reveal } from "@/components/ui/Reveal";
+
+// Members without a headshot yet show the stand-in driver photo (or nothing).
+const hasPhoto = (member: TeamMember) => member.photo !== "" && !member.photo.startsWith("/Headshots/cards/driver");
+
+// Full Members: everyone with a headshot first, then most senior (earliest grad year) first.
+// The sort is stable, so ties keep their order in site.ts.
+function sortFullMembers(members: TeamMember[]) {
+  return [...members].sort(
+    (a, b) => Number(hasPhoto(b)) - Number(hasPhoto(a)) || Number(a.gradYear) - Number(b.gradYear),
+  );
+}
 
 export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
   return (
     <div className="flex flex-col gap-16">
       {subteams.map((subteam) => {
+        const members = subteam.name === "Full Members" ? sortFullMembers(subteam.members) : subteam.members;
         const useFourColumns =
           subteam.name === "Full Members" ||
           subteam.name === "Team Leadership" ||
@@ -26,7 +38,7 @@ export function TeamGrid({ subteams }: { subteams: Subteam[] }) {
                     : "grid grid-cols-1 gap-4 sm:flex sm:flex-wrap sm:justify-center sm:gap-6 lg:mx-auto lg:w-[calc(75%-0.375rem)]"
                 }
               >
-                {subteam.members.map((member) => (
+                {members.map((member) => (
                   <div
                     key={`${subteam.name}-${member.name}`}
                     className={
